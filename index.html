@@ -174,6 +174,64 @@
   .block.costs   .row.sub .cell.big .v{color:var(--cost);}
   .row.sub .cell.spacer{visibility:hidden;}
 
+  /* ===== allocation ===== */
+
+  .block.alloc .block-head::before{background:linear-gradient(var(--rev) 50%, var(--cost) 50%);}
+
+  .arow{
+    background:var(--card);
+    border:1px solid var(--rule-soft);
+    border-top:none;
+    padding:7px 14px 8px;
+    display:grid;
+    grid-template-columns:1.5fr 0.75fr 0.95fr auto;
+    gap:12px;
+    align-items:center;
+  }
+  .arow .an{min-width:0;}
+  .arow .an .n{font-weight:500;display:block;line-height:1.2;font-size:14px;}
+  .arow .an .n-ar{color:var(--ink-3);font-size:12px;line-height:1.2;}
+  .arow .am,.arow .av{
+    text-align:right;font-variant-numeric:tabular-nums;font-size:13.5px;
+  }
+  .arow .am{color:var(--ink-2);}
+  .arow .av{font-weight:600;}
+
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;}
+  .seg .opt{position:relative;margin:0;}
+  .seg .opt input{position:absolute;opacity:0;width:1px;height:1px;}
+  .seg .opt span{
+    display:block;cursor:pointer;background:var(--shade);color:var(--ink-2);
+    font-size:11px;line-height:1.15;padding:5px 9px;text-align:center;white-space:nowrap;
+  }
+  .seg .opt + .opt span{border-left:1px solid var(--rule);}
+  .seg .opt span .ar{font-size:10px;opacity:.85;}
+  .seg .opt span:hover{background:#e8eff0;}
+  .seg .opt input:checked + span{color:#fff;}
+  .seg .opt.land input:checked + span{background:var(--cost);}
+  .seg .opt.dev  input:checked + span{background:var(--rev);}
+  .seg .opt input:focus-visible + span{outline:2px solid var(--ink);outline-offset:-2px;}
+
+  .alloc-sum{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;
+  }
+  .sumbox{
+    border:1px solid var(--rule);border-radius:var(--radius);
+    padding:13px 15px 14px;
+  }
+  .sumbox.land{background:var(--cost-soft);border-color:#ddd0b2;}
+  .sumbox.dev {background:var(--rev-soft);border-color:#bcdad9;}
+  .sumbox .k{font-size:12.5px;font-weight:500;display:block;}
+  .sumbox .k .ar{color:var(--ink-3);font-size:11.5px;font-weight:400;}
+  .sumbox .v{
+    display:block;margin-top:7px;font-size:23px;font-weight:600;
+    font-variant-numeric:tabular-nums;letter-spacing:-0.02em;
+  }
+  .sumbox .pct{display:block;font-size:14px;font-weight:500;margin-top:1px;}
+  .sumbox.land .v,.sumbox.land .pct{color:var(--cost);}
+  .sumbox.dev  .v,.sumbox.dev  .pct{color:var(--rev);}
+  .sumbox .u{display:block;color:var(--ink-3);font-size:11.5px;margin-top:3px;}
+
   /* ===== net block ===== */
 
   .net{
@@ -281,6 +339,20 @@
 
     .actions{margin-top:16px;}
     .actions button{flex:1;padding:10px 8px;}
+
+    .arow{
+      grid-template-columns:1fr auto;
+      gap:5px 10px;
+      padding:8px 12px 9px;
+    }
+    .arow .an{grid-column:1;grid-row:1;}
+    .arow .av{grid-column:2;grid-row:1;font-size:14px;}
+    .arow .am{grid-column:1;grid-row:2;text-align:left;font-size:11.5px;}
+    .arow .seg{grid-column:2;grid-row:2;justify-self:end;}
+
+    .alloc-sum{grid-template-columns:1fr;gap:9px;margin-top:10px;}
+    .sumbox{padding:11px 13px 12px;}
+    .sumbox .v{font-size:20px;}
   }
 
   @media (max-width:430px){
@@ -475,6 +547,39 @@
       <div class="cell big">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
         <span class="v" id="tSales">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ UNIT ALLOCATION ============ -->
+
+  <div class="block alloc" id="alloc">
+    <div class="block-head">
+      <div>
+        <h2>Unit allocation</h2>
+        <div class="h-ar ar">توزيع الوحدات</div>
+      </div>
+    </div>
+
+    <div class="grp">
+      Tick each unit to assign it to the landowner or the developer
+      <span class="ar">اختر لكل وحدة إن كانت من حصة صاحب الأرض أو حصة المتعهد</span>
+    </div>
+
+    <div id="allocRows"></div>
+
+    <div class="alloc-sum">
+      <div class="sumbox land">
+        <span class="k">Landowner share<span class="ar">حصة صاحب الأرض</span></span>
+        <span class="v" id="aLandV">—</span>
+        <span class="pct" id="aLandP">—</span>
+        <span class="u" id="aLandU">—</span>
+      </div>
+      <div class="sumbox dev">
+        <span class="k">Developer share<span class="ar">حصة المتعهد</span></span>
+        <span class="v" id="aDevV">—</span>
+        <span class="pct" id="aDevP">—</span>
+        <span class="u" id="aDevU">—</span>
       </div>
     </div>
   </div>
@@ -748,6 +853,7 @@
     if (codeIn.value.trim() === CODE) {
       gate.remove();
       app.hidden = false;
+      buildAlloc();
       recalc();
     } else {
       gateErr.innerHTML =
@@ -779,9 +885,95 @@
     return isFinite(v) && v >= 0 ? v : 0;
   }
 
+  // ---- unit list: src = index of the sales line, w = weight within that line ----
+  var UNITS = [
+    {src:0, w:1,  en:"Front shop 1",  ar:"محل أمامي ١", def:"dev"},
+    {src:0, w:1,  en:"Front shop 2",  ar:"محل أمامي ٢", def:"dev"},
+    {src:1, w:1,  en:"Back shop 1",   ar:"محل خلفي ١",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 2",   ar:"محل خلفي ٢",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 3",   ar:"محل خلفي ٣",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 4",   ar:"محل خلفي ٤",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 5",   ar:"محل خلفي ٥",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 6",   ar:"محل خلفي ٦",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 7",   ar:"محل خلفي ٧",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 8",   ar:"محل خلفي ٨",  def:"dev"},
+    {src:1, w:1,  en:"Back shop 9",   ar:"محل خلفي ٩",  def:"dev"},
+    {src:2, w:44, en:"Floor 1 — office A (44 m²)", ar:"الطابق الأول — مكتب أ", def:"land"},
+    {src:2, w:44, en:"Floor 1 — office B (44 m²)", ar:"الطابق الأول — مكتب ب", def:"land"},
+    {src:2, w:40, en:"Floor 1 — office C (40 m²)", ar:"الطابق الأول — مكتب ج", def:"land"},
+    {src:2, w:49, en:"Floor 1 — office D (49 m²)", ar:"الطابق الأول — مكتب د", def:"land"},
+    {src:3, w:44, en:"Floor 2 — office A (44 m²)", ar:"الطابق الثاني — مكتب أ", def:"land"},
+    {src:3, w:44, en:"Floor 2 — office B (44 m²)", ar:"الطابق الثاني — مكتب ب", def:"land"},
+    {src:3, w:40, en:"Floor 2 — office C (40 m²)", ar:"الطابق الثاني — مكتب ج", def:"land"},
+    {src:3, w:49, en:"Floor 2 — office D (49 m²)", ar:"الطابق الثاني — مكتب د", def:"land"}
+  ];
+
+  function buildAlloc(){
+    var host = document.getElementById("allocRows");
+    var html = "";
+    UNITS.forEach(function(u, i){
+      html +=
+        '<div class="arow">' +
+          '<span class="an">' +
+            '<span class="n">' + u.en + '</span>' +
+            '<span class="n-ar ar">' + u.ar + '</span>' +
+          '</span>' +
+          '<span class="am" data-uarea="' + i + '">—</span>' +
+          '<span class="av" data-uval="' + i + '">—</span>' +
+          '<span class="seg">' +
+            '<label class="opt land">' +
+              '<input type="radio" name="own' + i + '" value="land"' +
+                (u.def === "land" ? " checked" : "") + '>' +
+              '<span>Landowner<span class="ar">صاحب الأرض</span></span>' +
+            '</label>' +
+            '<label class="opt dev">' +
+              '<input type="radio" name="own' + i + '" value="dev"' +
+                (u.def === "dev" ? " checked" : "") + '>' +
+              '<span>Developer<span class="ar">المتعهد</span></span>' +
+            '</label>' +
+          '</span>' +
+        '</div>';
+    });
+    host.innerHTML = html;
+  }
+
+  function allocate(lines){
+    // total weight per sales line
+    var wsum = [0,0,0,0];
+    UNITS.forEach(function(u){ wsum[u.src] += u.w; });
+
+    var landV = 0, devV = 0, landA = 0, devA = 0, total = 0;
+
+    UNITS.forEach(function(u, i){
+      var line = lines[u.src] || {sale:0, area:0};
+      var share = wsum[u.src] > 0 ? u.w / wsum[u.src] : 0;
+      var v = line.sale * share;
+      var a = line.area * share;
+
+      document.querySelector('[data-uval="' + i + '"]').textContent = money.format(v);
+      document.querySelector('[data-uarea="' + i + '"]').textContent = area.format(a) + " m\u00B2";
+
+      var picked = document.querySelector('input[name="own' + i + '"]:checked');
+      if (picked && picked.value === "land") { landV += v; landA += a; }
+      else { devV += v; devA += a; }
+
+      total += v;
+    });
+
+    document.getElementById("aLandV").textContent = money.format(landV);
+    document.getElementById("aDevV").textContent  = money.format(devV);
+    document.getElementById("aLandP").textContent =
+      total > 0 ? ((landV / total) * 100).toFixed(1) + "% of sales" : "\u2014";
+    document.getElementById("aDevP").textContent =
+      total > 0 ? ((devV / total) * 100).toFixed(1) + "% of sales" : "\u2014";
+    document.getElementById("aLandU").textContent = area.format(landA) + " m\u00B2 saleable";
+    document.getElementById("aDevU").textContent  = area.format(devA) + " m\u00B2 saleable";
+  }
+
   function recalc(){
     // ----- sales -----
     var sumU = 0, sumL = 0, sumSales = 0;
+    var lines = [];
 
     revRows.forEach(function(row){
       var u = num(row.querySelector("[data-usable]"));
@@ -796,8 +988,11 @@
         ? "loading " + (((l / u) - 1) * 100).toFixed(1) + "%"
         : "";
 
+      lines.push({sale:v, area:l});
       sumU += u; sumL += l; sumSales += v;
     });
+
+    allocate(lines);
 
     document.getElementById("tUsable").textContent = area.format(sumU) + " m\u00B2";
     document.getElementById("tLoaded").textContent = area.format(sumL) + " m\u00B2";
@@ -842,10 +1037,18 @@
     if (e.target.matches(".row input")) recalc();
   });
 
+  document.addEventListener("change", function(e){
+    if (e.target.matches('.seg input[type="radio"]')) recalc();
+  });
+
   document.getElementById("print").addEventListener("click", function(){ window.print(); });
 
   document.getElementById("reset").addEventListener("click", function(){
     document.querySelectorAll(".row input").forEach(function(i){ i.value = i.defaultValue; });
+    UNITS.forEach(function(u, i){
+      var r = document.querySelector('input[name="own' + i + '"][value="' + u.def + '"]');
+      if (r) r.checked = true;
+    });
     recalc();
   });
 })();
