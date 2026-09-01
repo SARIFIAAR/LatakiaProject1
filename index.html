@@ -3,28 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Latakia Building — Area &amp; Sales Calculator</title>
+<title>Latakia Building — Feasibility Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#16232b;
     --ink-2:#4a6270;
-    --ink-3:#7d939e;
-    --paper:#e9eef0;
+    --ink-3:#8298a3;
+    --paper:#e8edef;
     --card:#ffffff;
-    --rule:#c6d2d7;
-    --rule-soft:#dde5e8;
-    --accent:#0b6e75;
-    --accent-soft:#e0eeee;
-    --shade:#f2f6f7;
-    --focus:#0b6e75;
-    --radius:3px;
+    --rule:#c9d4d9;
+    --rule-soft:#dfe6e9;
+    --shade:#f3f7f8;
+
+    --rev:#0b6e75;
+    --rev-soft:#e2efef;
+    --cost:#8a6520;
+    --cost-soft:#f2ebdc;
+    --net:#16232b;
+
+    --radius:4px;
   }
 
   *{box-sizing:border-box;}
-
   html,body{margin:0;padding:0;}
 
   body{
@@ -32,7 +35,7 @@
     color:var(--ink);
     font-family:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,sans-serif;
     font-size:15px;
-    line-height:1.5;
+    line-height:1.45;
     -webkit-font-smoothing:antialiased;
   }
 
@@ -40,246 +43,202 @@
     font-family:"IBM Plex Sans Arabic","IBM Plex Sans",system-ui,sans-serif;
     direction:rtl;
     unicode-bidi:isolate;
+    display:block;
   }
 
-  /* ---------- gate ---------- */
+  /* ===== gate ===== */
 
   #gate{
-    position:fixed;
-    inset:0;
-    background:var(--ink);
-    color:#e9eef0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    z-index:50;
+    position:fixed;inset:0;background:var(--ink);color:#e8edef;
+    display:flex;align-items:center;justify-content:center;padding:24px;z-index:60;
   }
-
   .gate-box{width:100%;max-width:340px;}
-
-  .gate-box h1{
-    font-size:19px;
-    font-weight:500;
-    margin:0 0 4px;
-    letter-spacing:-0.01em;
-  }
-
-  .gate-box p{
-    margin:0 0 28px;
-    color:#8fa8b3;
-    font-size:14px;
-  }
-
+  .gate-box h1{font-size:19px;font-weight:600;margin:0 0 2px;letter-spacing:-0.01em;}
+  .gate-box .h-ar{color:#93aab4;font-size:15px;margin-bottom:20px;}
+  .gate-box p{margin:0 0 22px;color:#93aab4;font-size:13.5px;}
+  .gate-box p .ar{margin-top:1px;}
   .gate-field{display:flex;gap:8px;}
-
   #code{
-    flex:1;
-    background:transparent;
-    border:1px solid #3d5561;
-    border-radius:var(--radius);
-    color:#e9eef0;
-    font:inherit;
-    font-size:19px;
-    letter-spacing:0.35em;
-    padding:11px 14px;
-    text-align:center;
+    flex:1;background:transparent;border:1px solid #3e5763;border-radius:var(--radius);
+    color:#e8edef;font:inherit;font-size:19px;letter-spacing:0.35em;padding:11px 14px;text-align:center;
   }
-
   #code:focus{outline:2px solid #4fb3ba;outline-offset:1px;border-color:transparent;}
-
   #gate button{
-    background:#4fb3ba;
-    border:none;
-    border-radius:var(--radius);
-    color:#0a2126;
-    cursor:pointer;
-    font:inherit;
-    font-weight:600;
-    padding:11px 20px;
+    background:#4fb3ba;border:none;border-radius:var(--radius);color:#0a2126;
+    cursor:pointer;font:inherit;font-weight:600;padding:11px 20px;
   }
-
   #gate button:hover{background:#63c6cd;}
-  #gate button:focus-visible{outline:2px solid #e9eef0;outline-offset:2px;}
+  #gate button:focus-visible{outline:2px solid #e8edef;outline-offset:2px;}
+  #gate-error{color:#e79a7e;font-size:13px;margin-top:12px;min-height:34px;}
 
-  #gate-error{
-    color:#e79a7e;
-    font-size:13px;
-    margin-top:12px;
-    min-height:18px;
+  /* ===== shell ===== */
+
+  .wrap{max-width:1080px;margin:0 auto;padding:38px 22px 64px;}
+
+  header{margin-bottom:30px;}
+  header h1{font-size:24px;font-weight:600;letter-spacing:-0.015em;margin:0 0 1px;}
+  header .h-ar{color:var(--ink-2);font-size:18px;margin-bottom:12px;}
+  header .sub{color:var(--ink-2);font-size:13.5px;margin:0;max-width:64ch;}
+  header .sub .ar{color:var(--ink-3);margin-top:1px;}
+
+  /* ===== blocks ===== */
+
+  .block{margin-bottom:30px;}
+
+  .block-head{
+    display:flex;align-items:center;gap:11px;
+    padding:0 0 9px 12px;
+    border-bottom:2px solid var(--rule);
+    position:relative;
   }
-
-  /* ---------- shell ---------- */
-
-  .wrap{
-    max-width:1080px;
-    margin:0 auto;
-    padding:40px 24px 160px;
+  .block-head::before{
+    content:"";position:absolute;left:0;top:2px;bottom:11px;width:4px;border-radius:2px;
   }
+  .block.revenue .block-head::before{background:var(--rev);}
+  .block.costs   .block-head::before{background:var(--cost);}
 
-  header{
-    border-bottom:1px solid var(--rule);
-    padding-bottom:22px;
-    margin-bottom:34px;
+  .block-head h2{font-size:16.5px;font-weight:600;margin:0;}
+  .block-head .h-ar{color:var(--ink-3);font-size:14px;font-weight:400;margin-top:0;}
+
+  .grp{
+    color:var(--ink-2);
+    font-size:12.5px;
+    font-weight:500;
+    padding:15px 14px 5px;
+    background:var(--card);
+    border-left:1px solid var(--rule-soft);
+    border-right:1px solid var(--rule-soft);
   }
-
-  header h1{
-    font-size:23px;
-    font-weight:600;
-    letter-spacing:-0.015em;
-    margin:0 0 3px;
-  }
-
-  header .sub{color:var(--ink-2);font-size:14px;margin:0;}
-  header .sub-ar{color:var(--ink-3);font-size:13px;margin:2px 0 0;}
-
-  .layout{display:grid;grid-template-columns:132px 1fr;gap:34px;align-items:start;}
-
-  /* ---------- schematic ---------- */
-
-  .schematic{position:sticky;top:34px;}
-  .schematic svg{width:100%;height:auto;display:block;}
-  .band{fill:var(--card);stroke:var(--rule);stroke-width:1;transition:fill .18s ease;}
-  .band.on{fill:var(--accent-soft);stroke:var(--accent);}
-  .band-label{fill:var(--ink-2);font-size:9px;font-family:"IBM Plex Sans",sans-serif;}
-  .band-label.on{fill:var(--accent);font-weight:600;}
-  .ground-rule{stroke:var(--ink-2);stroke-width:1;stroke-dasharray:2 3;}
-
-  /* ---------- sections ---------- */
-
-  section{margin-bottom:30px;}
-
-  .sec-head{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:14px;
-    border-bottom:1px solid var(--rule);
-    padding-bottom:7px;
-    margin-bottom:2px;
-  }
-
-  .sec-head h2{font-size:16px;font-weight:600;margin:0;}
-  .sec-head .h-ar{color:var(--ink-3);font-size:14px;}
+  .grp .ar{color:var(--ink-3);font-weight:400;}
+  .block-head + .grp{border-top:none;padding-top:14px;}
 
   .row{
     background:var(--card);
     border:1px solid var(--rule-soft);
     border-top:none;
-    padding:16px 18px;
+    padding:13px 14px 15px;
     display:grid;
-    grid-template-columns:1.15fr repeat(3,1fr) 1.25fr;
-    gap:16px;
+    grid-template-columns:1.35fr repeat(3,1fr) 1.2fr;
+    gap:14px;
     align-items:end;
   }
+  .grp + .row{border-top:none;}
+  .block-head + .row{border-top:none;}
 
-  .row:first-of-type{border-top:1px solid var(--rule-soft);}
-  .row + .row{border-top:none;}
-
-  .row-name{padding-bottom:9px;}
-  .row-name .n{font-weight:500;display:block;}
-  .row-name .n-ar{color:var(--ink-3);font-size:13px;display:block;}
-  .row-name .load{color:var(--accent);font-size:12px;display:block;margin-top:3px;}
-
-  .field label{
-    color:var(--ink-2);
-    display:block;
-    font-size:12px;
-    margin-bottom:5px;
+  .row-name{padding-bottom:7px;}
+  .row-name .n{font-weight:500;display:block;line-height:1.25;}
+  .row-name .n-ar{color:var(--ink-3);font-size:13px;line-height:1.35;}
+  .row-name .tag{
+    display:inline-block;margin-top:5px;font-size:11.5px;
+    padding:1px 6px;border-radius:2px;
   }
+  .block.revenue .row-name .tag{background:var(--rev-soft);color:var(--rev);}
+  .block.costs   .row-name .tag{background:var(--cost-soft);color:var(--cost);}
 
+  .field label{color:var(--ink-2);display:block;font-size:12px;margin-bottom:4px;line-height:1.25;}
+  .field label .ar{color:var(--ink-3);font-size:11.5px;}
   .field label .u{color:var(--ink-3);}
-
   .field input{
-    background:var(--shade);
-    border:1px solid var(--rule);
-    border-radius:var(--radius);
-    color:var(--ink);
-    font:inherit;
-    font-variant-numeric:tabular-nums;
-    padding:8px 10px;
-    text-align:right;
-    width:100%;
+    background:var(--shade);border:1px solid var(--rule);border-radius:var(--radius);
+    color:var(--ink);font:inherit;font-variant-numeric:tabular-nums;
+    padding:8px 10px;text-align:right;width:100%;
   }
-
   .field input:hover{border-color:var(--ink-3);}
-  .field input:focus{outline:2px solid var(--focus);outline-offset:-1px;border-color:transparent;background:#fff;}
+  .field input:focus{outline:2px solid var(--rev);outline-offset:-1px;border-color:transparent;background:#fff;}
+  .block.costs .field input:focus{outline-color:var(--cost);}
 
-  .out{text-align:right;padding-bottom:2px;}
-  .out .lab{color:var(--ink-2);display:block;font-size:12px;margin-bottom:5px;}
-  .out .val{
-    font-size:19px;
-    font-weight:600;
-    font-variant-numeric:tabular-nums;
-    letter-spacing:-0.01em;
+  .out{text-align:right;padding-bottom:1px;}
+  .out .lab{color:var(--ink-2);display:block;font-size:12px;margin-bottom:4px;}
+  .out .lab .ar{color:var(--ink-3);font-size:11.5px;}
+  .out .val{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;}
+  .block.costs .out .val{color:var(--cost);}
+  .block.revenue .out .val{color:var(--rev);}
+
+  /* ===== subtotal rows ===== */
+
+  .row.sub{
+    border:1px solid var(--rule);
+    margin-top:10px;
+    padding:15px 14px 16px;
   }
+  .block.revenue .row.sub{background:var(--rev-soft);border-color:#bcdad9;}
+  .block.costs   .row.sub{background:var(--cost-soft);border-color:#ddd0b2;}
+  .row.sub .row-name .n{font-weight:600;}
+  .row.sub .cell{text-align:right;padding-bottom:1px;}
+  .row.sub .cell .lab{color:var(--ink-2);display:block;font-size:12px;margin-bottom:4px;}
+  .row.sub .cell .lab .ar{color:var(--ink-3);font-size:11.5px;}
+  .row.sub .cell .v{font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;}
+  .row.sub .cell.big .v{font-size:22px;font-weight:600;letter-spacing:-0.02em;}
+  .block.revenue .row.sub .cell.big .v{color:var(--rev);}
+  .block.costs   .row.sub .cell.big .v{color:var(--cost);}
+  .row.sub .cell.spacer{visibility:hidden;}
 
-  /* ---------- totals bar ---------- */
+  /* ===== net block ===== */
 
-  .totals{
-    position:fixed;
-    left:0;right:0;bottom:0;
-    background:var(--ink);
-    color:#e9eef0;
-    border-top:1px solid #2c4048;
-    z-index:20;
-  }
-
-  .totals-inner{
-    max-width:1080px;
-    margin:0 auto;
-    padding:15px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:22px;
-    flex-wrap:wrap;
-  }
-
-  .tot-item .k{color:#8fa8b3;display:block;font-size:12px;margin-bottom:2px;}
-  .tot-item .v{font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;}
-  .tot-item.grand .v{font-size:27px;font-weight:600;letter-spacing:-0.02em;color:#7fd4da;}
-
-  .actions{display:flex;gap:8px;}
-
-  .actions button{
-    background:transparent;
-    border:1px solid #3d5561;
+  .net{
+    background:var(--net);
+    color:#e8edef;
     border-radius:var(--radius);
-    color:#c3d4db;
-    cursor:pointer;
-    font:inherit;
-    font-size:13px;
-    padding:7px 14px;
+    padding:24px 24px 26px;
+    margin-top:34px;
   }
-
-  .actions button:hover{background:#22343d;color:#e9eef0;}
-  .actions button:focus-visible{outline:2px solid #4fb3ba;outline-offset:1px;}
-
-  .note{
-    color:var(--ink-3);
-    font-size:12.5px;
-    margin-top:26px;
-    max-width:62ch;
+  .net h2{font-size:16.5px;font-weight:600;margin:0;}
+  .net .h-ar{color:#93aab4;font-size:14px;font-weight:400;margin-bottom:20px;}
+  .net-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    border-top:1px solid #2d414b;
+    padding-top:19px;
   }
+  .net-item .k{color:#93aab4;display:block;font-size:12px;margin-bottom:4px;}
+  .net-item .k .ar{font-size:11.5px;}
+  .net-item .v{font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;}
+  .net-item.main .v{font-size:31px;font-weight:600;letter-spacing:-0.025em;color:#7fd4da;}
+  .net-item.neg .v{color:#e0b478;}
 
-  @media (max-width:820px){
-    .layout{grid-template-columns:1fr;gap:18px;}
-    .schematic{display:none;}
-    .row{grid-template-columns:1fr 1fr;gap:13px;}
+  /* ===== actions & note ===== */
+
+  .actions{display:flex;gap:8px;margin-top:22px;}
+  .actions button{
+    background:transparent;border:1px solid var(--rule);border-radius:var(--radius);
+    color:var(--ink-2);cursor:pointer;font:inherit;font-size:13px;padding:8px 15px;line-height:1.2;
+  }
+  .actions button .ar{font-size:11.5px;color:var(--ink-3);}
+  .actions button:hover{background:#fff;color:var(--ink);border-color:var(--ink-3);}
+  .actions button:focus-visible{outline:2px solid var(--rev);outline-offset:1px;}
+
+  .note{color:var(--ink-3);font-size:12.5px;margin-top:22px;max-width:70ch;}
+  .note strong{color:var(--ink-2);font-weight:500;}
+  .note .ar{margin-top:6px;}
+
+  /* ===== responsive ===== */
+
+  @media (max-width:900px){
+    .net-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:780px){
+    .row{grid-template-columns:1fr 1fr;gap:12px;}
     .row-name{grid-column:1/-1;padding-bottom:0;}
     .out{grid-column:1/-1;text-align:left;border-top:1px solid var(--rule-soft);padding-top:11px;}
-    .wrap{padding:28px 16px 190px;}
+    .row.sub .cell.big{grid-column:1/-1;text-align:left;padding-top:11px;}
+    .row.sub .cell.spacer{display:none;}
+    .wrap{padding:26px 15px 48px;}
+    .net{padding:20px 18px 22px;}
+  }
+  @media (max-width:520px){
+    .net-grid{grid-template-columns:1fr;gap:15px;}
   }
 
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none !important;}
-  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
 
   @media print{
     #gate,.actions{display:none !important;}
-    .totals{position:static;}
     body{background:#fff;}
+    .net{background:#fff;color:var(--ink);border:2px solid var(--ink);}
+    .net .h-ar,.net-item .k{color:var(--ink-2);}
+    .net-item.main .v,.net-item.neg .v{color:var(--ink);}
+    .net-grid{border-top-color:var(--rule);}
   }
 </style>
 </head>
@@ -287,8 +246,12 @@
 
 <div id="gate">
   <div class="gate-box">
-    <h1>Latakia building — calculator</h1>
-    <p>Enter the access code to open the sheet.</p>
+    <h1>Latakia building — feasibility calculator</h1>
+    <div class="h-ar ar">مبنى اللاذقية — دراسة الجدوى</div>
+    <p>
+      Enter the access code to open the sheet.
+      <span class="ar">أدخل رمز الدخول لفتح الملف</span>
+    </p>
     <div class="gate-field">
       <input id="code" type="password" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="Access code">
       <button id="enter" type="button">Open</button>
@@ -300,183 +263,410 @@
 <div class="wrap" id="app" hidden>
 
   <header>
-    <h1>Latakia building — area and sales calculator</h1>
-    <p class="sub">Enter usable area, saleable (loaded) area and price per m². Totals update as you type.</p>
-    <p class="sub-ar ar">أدخل المساحة الصافية والمساحة البيعية وسعر المتر — يتم حساب الإجمالي تلقائياً</p>
+    <h1>Latakia building — feasibility calculator</h1>
+    <div class="h-ar ar">مبنى اللاذقية — حاسبة دراسة الجدوى</div>
+    <p class="sub">
+      Areas are taken from the ground floor and typical floor plans. Every figure is editable and all totals recalculate as you type.
+      <span class="ar">المساحات مأخوذة من مخططات الطابق الأرضي والطابق المتكرر. جميع القيم قابلة للتعديل ويعاد الحساب تلقائياً</span>
+    </p>
   </header>
 
-  <div class="layout">
+  <!-- ============ SALES ============ -->
 
-    <div class="schematic" aria-hidden="true">
-      <svg viewBox="0 0 120 190" role="presentation">
-        <rect class="band" id="bandF2" x="16" y="12" width="88" height="44" rx="1"/>
-        <text class="band-label" id="labF2" x="60" y="38" text-anchor="middle">2nd floor</text>
-
-        <rect class="band" id="bandF1" x="16" y="58" width="88" height="44" rx="1"/>
-        <text class="band-label" id="labF1" x="60" y="84" text-anchor="middle">1st floor</text>
-
-        <rect class="band" id="bandGF" x="16" y="104" width="88" height="30" rx="1"/>
-        <text class="band-label" id="labGF" x="60" y="122" text-anchor="middle">Front shops</text>
-
-        <rect class="band" id="bandGB" x="16" y="136" width="88" height="30" rx="1"/>
-        <text class="band-label" id="labGB" x="60" y="154" text-anchor="middle">Back shops</text>
-
-        <line class="ground-rule" x1="6" y1="170" x2="114" y2="170"/>
-      </svg>
+  <div class="block revenue" id="revenue">
+    <div class="block-head">
+      <div>
+        <h2>Sales value</h2>
+        <div class="h-ar ar">قيمة المبيعات</div>
+      </div>
     </div>
 
-    <div>
+    <div class="grp">
+      Ground floor — shops
+      <span class="ar">الطابق الأرضي — المحلات</span>
+    </div>
 
-      <section data-band="bandGF bandGB">
-        <div class="sec-head">
-          <h2>Ground floor — shops</h2>
-          <span class="h-ar ar">الطابق الأرضي — المحلات</span>
-        </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Front shops</span>
+        <span class="n-ar ar">المحلات الأمامية</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="field">
+        <label for="u1">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <input id="u1" type="number" min="0" step="0.01" value="70.45" data-usable>
+      </div>
+      <div class="field">
+        <label for="l1">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
+        <input id="l1" type="number" min="0" step="0.01" value="111.01" data-loaded>
+      </div>
+      <div class="field">
+        <label for="p1">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+        <input id="p1" type="number" min="0" step="10" value="3000" data-price>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
 
-        <div class="row" data-band="bandGF">
-          <div class="row-name">
-            <span class="n">Front shops</span>
-            <span class="n-ar ar">المحلات الأمامية</span>
-            <span class="load" data-load></span>
-          </div>
-          <div class="field">
-            <label for="u1">Usable area <span class="u">m²</span></label>
-            <input id="u1" type="number" min="0" step="0.01" value="70.42" data-usable>
-          </div>
-          <div class="field">
-            <label for="l1">Saleable area <span class="u">m²</span></label>
-            <input id="l1" type="number" min="0" step="0.01" value="100.88" data-loaded>
-          </div>
-          <div class="field">
-            <label for="p1">Price <span class="u">$ / m²</span></label>
-            <input id="p1" type="number" min="0" step="10" value="3000" data-price>
-          </div>
-          <div class="out">
-            <span class="lab">Total</span>
-            <span class="val" data-total>—</span>
-          </div>
-        </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Back shops</span>
+        <span class="n-ar ar">المحلات الخلفية</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="field">
+        <label for="u2">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <input id="u2" type="number" min="0" step="0.01" value="70.37" data-usable>
+      </div>
+      <div class="field">
+        <label for="l2">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
+        <input id="l2" type="number" min="0" step="0.01" value="110.90" data-loaded>
+      </div>
+      <div class="field">
+        <label for="p2">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+        <input id="p2" type="number" min="0" step="10" value="1000" data-price>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
 
-        <div class="row" data-band="bandGB">
-          <div class="row-name">
-            <span class="n">Back shops</span>
-            <span class="n-ar ar">المحلات الخلفية</span>
-            <span class="load" data-load></span>
-          </div>
-          <div class="field">
-            <label for="u2">Usable area <span class="u">m²</span></label>
-            <input id="u2" type="number" min="0" step="0.01" value="72.48" data-usable>
-          </div>
-          <div class="field">
-            <label for="l2">Saleable area <span class="u">m²</span></label>
-            <input id="l2" type="number" min="0" step="0.01" value="103.83" data-loaded>
-          </div>
-          <div class="field">
-            <label for="p2">Price <span class="u">$ / m²</span></label>
-            <input id="p2" type="number" min="0" step="10" value="1000" data-price>
-          </div>
-          <div class="out">
-            <span class="lab">Total</span>
-            <span class="val" data-total>—</span>
-          </div>
-        </div>
-      </section>
+    <div class="grp">
+      First floor — offices
+      <span class="ar">الطابق الأول — مكاتب</span>
+    </div>
 
-      <section>
-        <div class="sec-head">
-          <h2>First floor — offices</h2>
-          <span class="h-ar ar">الطابق الأول — مكاتب</span>
-        </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Offices</span>
+        <span class="n-ar ar">المكاتب</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="field">
+        <label for="u3">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <input id="u3" type="number" min="0" step="0.01" value="177" data-usable>
+      </div>
+      <div class="field">
+        <label for="l3">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
+        <input id="l3" type="number" min="0" step="0.01" value="192" data-loaded>
+      </div>
+      <div class="field">
+        <label for="p3">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+        <input id="p3" type="number" min="0" step="10" value="500" data-price>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
 
-        <div class="row" data-band="bandF1">
-          <div class="row-name">
-            <span class="n">Offices</span>
-            <span class="n-ar ar">المكاتب</span>
-            <span class="load" data-load></span>
-          </div>
-          <div class="field">
-            <label for="u3">Usable area <span class="u">m²</span></label>
-            <input id="u3" type="number" min="0" step="0.01" value="177" data-usable>
-          </div>
-          <div class="field">
-            <label for="l3">Saleable area <span class="u">m²</span></label>
-            <input id="l3" type="number" min="0" step="0.01" value="211" data-loaded>
-          </div>
-          <div class="field">
-            <label for="p3">Price <span class="u">$ / m²</span></label>
-            <input id="p3" type="number" min="0" step="10" value="500" data-price>
-          </div>
-          <div class="out">
-            <span class="lab">Total</span>
-            <span class="val" data-total>—</span>
-          </div>
-        </div>
-      </section>
+    <div class="grp">
+      Second floor — offices
+      <span class="ar">الطابق الثاني — مكاتب</span>
+    </div>
 
-      <section>
-        <div class="sec-head">
-          <h2>Second floor — offices</h2>
-          <span class="h-ar ar">الطابق الثاني — مكاتب</span>
-        </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Offices</span>
+        <span class="n-ar ar">المكاتب</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="field">
+        <label for="u4">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <input id="u4" type="number" min="0" step="0.01" value="177" data-usable>
+      </div>
+      <div class="field">
+        <label for="l4">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
+        <input id="l4" type="number" min="0" step="0.01" value="192" data-loaded>
+      </div>
+      <div class="field">
+        <label for="p4">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+        <input id="p4" type="number" min="0" step="10" value="500" data-price>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
 
-        <div class="row" data-band="bandF2">
-          <div class="row-name">
-            <span class="n">Offices</span>
-            <span class="n-ar ar">المكاتب</span>
-            <span class="load" data-load></span>
-          </div>
-          <div class="field">
-            <label for="u4">Usable area <span class="u">m²</span></label>
-            <input id="u4" type="number" min="0" step="0.01" value="177" data-usable>
-          </div>
-          <div class="field">
-            <label for="l4">Saleable area <span class="u">m²</span></label>
-            <input id="l4" type="number" min="0" step="0.01" value="211" data-loaded>
-          </div>
-          <div class="field">
-            <label for="p4">Price <span class="u">$ / m²</span></label>
-            <input id="p4" type="number" min="0" step="10" value="500" data-price>
-          </div>
-          <div class="out">
-            <span class="lab">Total</span>
-            <span class="val" data-total>—</span>
-          </div>
-        </div>
-      </section>
-
-      <p class="note">
-        Totals are calculated on saleable area × price per m². Usable area is recorded for reference and
-        sets the loading percentage shown beside each line. All areas and prices are editable — change any
-        figure and the totals update immediately.
-      </p>
-
+    <div class="row sub">
+      <div class="row-name">
+        <span class="n">Total sales</span>
+        <span class="n-ar ar">إجمالي المبيعات</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Usable area<span class="ar">المساحة الصافية</span></span>
+        <span class="v" id="tUsable">—</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Saleable area<span class="ar">المساحة البيعية</span></span>
+        <span class="v" id="tLoaded">—</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Average price<span class="ar">متوسط سعر المتر</span></span>
+        <span class="v" id="tAvg">—</span>
+      </div>
+      <div class="cell big">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="v" id="tSales">—</span>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="totals" id="bar" hidden>
-  <div class="totals-inner">
-    <div class="tot-item">
-      <span class="k">Usable area</span>
-      <span class="v" id="tUsable">—</span>
+  <!-- ============ COSTS ============ -->
+
+  <div class="block costs" id="costs">
+    <div class="block-head">
+      <div>
+        <h2>Project costs</h2>
+        <div class="h-ar ar">تكاليف المشروع</div>
+      </div>
     </div>
-    <div class="tot-item">
-      <span class="k">Saleable area</span>
-      <span class="v" id="tLoaded">—</span>
+
+    <div class="grp">
+      Construction
+      <span class="ar">الإنشاءات</span>
     </div>
-    <div class="tot-item">
-      <span class="k">Average price</span>
-      <span class="v" id="tAvg">—</span>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Concrete structure &amp; shell</span>
+        <span class="n-ar ar">الهيكل الخرساني والعظم</span>
+        <span class="tag">m²</span>
+      </div>
+      <div class="field">
+        <label for="cq1">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
+        <input id="cq1" type="number" min="0" step="0.01" value="690.15" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr1">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr1" type="number" min="0" step="1" value="130" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn1">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn1" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
     </div>
-    <div class="tot-item grand">
-      <span class="k">Total sales value</span>
-      <span class="v" id="tGrand">—</span>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Facade finishing</span>
+        <span class="n-ar ar">تشطيب الواجهة</span>
+        <span class="tag">m²</span>
+      </div>
+      <div class="field">
+        <label for="cq2">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
+        <input id="cq2" type="number" min="0" step="0.01" value="220" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr2">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr2" type="number" min="0" step="1" value="60" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn2">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn2" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
     </div>
-    <div class="actions">
-      <button id="reset" type="button">Reset</button>
-      <button id="print" type="button">Print</button>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Corridors &amp; staircase finishing</span>
+        <span class="n-ar ar">تشطيب الممرات والدرج</span>
+        <span class="tag">m²</span>
+      </div>
+      <div class="field">
+        <label for="cq3">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
+        <input id="cq3" type="number" min="0" step="0.01" value="85" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr3">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr3" type="number" min="0" step="1" value="80" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn3">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn3" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Main MEP (electrical, water, drainage)</span>
+        <span class="n-ar ar">التمديدات الرئيسية — كهرباء ومياه وصرف</span>
+        <span class="tag">m²</span>
+      </div>
+      <div class="field">
+        <label for="cq4">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
+        <input id="cq4" type="number" min="0" step="0.01" value="690.15" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr4">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr4" type="number" min="0" step="1" value="35" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn4">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn4" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+
+    <div class="grp">
+      Fees &amp; permits
+      <span class="ar">الرسوم والتراخيص</span>
+    </div>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Licensing &amp; municipality permits</span>
+        <span class="n-ar ar">الرخص ورسوم البلدية</span>
+        <span class="tag">lump sum</span>
+      </div>
+      <div class="field">
+        <label for="cq5">Quantity<span class="ar">الكمية</span></label>
+        <input id="cq5" type="number" min="0" step="1" value="1" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr5">Rate <span class="u">$</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr5" type="number" min="0" step="100" value="8000" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn5">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn5" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Legal &amp; registration</span>
+        <span class="n-ar ar">الأتعاب القانونية والتسجيل العقاري</span>
+        <span class="tag">lump sum</span>
+      </div>
+      <div class="field">
+        <label for="cq6">Quantity<span class="ar">الكمية</span></label>
+        <input id="cq6" type="number" min="0" step="1" value="1" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr6">Rate <span class="u">$</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr6" type="number" min="0" step="100" value="4000" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn6">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn6" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+
+    <div class="row" data-kind="cost">
+      <div class="row-name">
+        <span class="n">Supervising engineer</span>
+        <span class="n-ar ar">الإشراف الهندسي</span>
+        <span class="tag">lump sum</span>
+      </div>
+      <div class="field">
+        <label for="cq7">Quantity<span class="ar">الكمية</span></label>
+        <input id="cq7" type="number" min="0" step="1" value="1" data-qty>
+      </div>
+      <div class="field">
+        <label for="cr7">Rate <span class="u">$</span><span class="ar">سعر الوحدة</span></label>
+        <input id="cr7" type="number" min="0" step="100" value="10000" data-rate>
+      </div>
+      <div class="field">
+        <label for="cn7">Contingency <span class="u">%</span><span class="ar">احتياطي</span></label>
+        <input id="cn7" type="number" min="0" step="0.5" value="0" data-cont>
+      </div>
+      <div class="out">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+
+    <div class="row sub">
+      <div class="row-name">
+        <span class="n">Total costs</span>
+        <span class="n-ar ar">إجمالي التكاليف</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Construction<span class="ar">الإنشاءات</span></span>
+        <span class="v" id="cConstruction">—</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Fees &amp; permits<span class="ar">الرسوم والتراخيص</span></span>
+        <span class="v" id="cFees">—</span>
+      </div>
+      <div class="cell">
+        <span class="lab">Cost per built m²<span class="ar">التكلفة لكل متر مبني</span></span>
+        <span class="v" id="cPerM">—</span>
+      </div>
+      <div class="cell big">
+        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="v" id="tCosts">—</span>
+      </div>
     </div>
   </div>
+
+  <!-- ============ NET ============ -->
+
+  <div class="net">
+    <h2>Net project result</h2>
+    <div class="h-ar ar">صافي نتيجة المشروع</div>
+    <div class="net-grid">
+      <div class="net-item">
+        <span class="k">Total sales<span class="ar">إجمالي المبيعات</span></span>
+        <span class="v" id="nSales">—</span>
+      </div>
+      <div class="net-item neg">
+        <span class="k">Total costs<span class="ar">إجمالي التكاليف</span></span>
+        <span class="v" id="nCosts">—</span>
+      </div>
+      <div class="net-item main">
+        <span class="k">Net profit<span class="ar">صافي الربح</span></span>
+        <span class="v" id="nProfit">—</span>
+      </div>
+      <div class="net-item">
+        <span class="k">Margin on sales<span class="ar">هامش الربح</span></span>
+        <span class="v" id="nMargin">—</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="reset" type="button">Reset<span class="ar">إعادة تعيين</span></button>
+    <button id="print" type="button">Print<span class="ar">طباعة</span></button>
+  </div>
+
+  <p class="note">
+    Sales totals are saleable area × price per m². Cost totals are quantity × rate, plus contingency.
+    Usable area is the net internal area from the plans; the loading percentage shown on each sales line is
+    the difference between usable and saleable.
+    <strong>Ground floor saleable area includes the central passage and structural walls, which is why its
+    loading is high — the supervising engineer should confirm this allocation matches local practice.</strong>
+    <span class="ar">تشمل المساحة البيعية للطابق الأرضي الممر المركزي والجدران، لذلك نسبة المشاع مرتفعة — يرجى من المهندس المشرف تأكيد طريقة التوزيع</span>
+  </p>
+
 </div>
 
 <script>
@@ -487,7 +677,6 @@
 
   var gate    = document.getElementById("gate");
   var app     = document.getElementById("app");
-  var bar     = document.getElementById("bar");
   var codeIn  = document.getElementById("code");
   var enterBt = document.getElementById("enter");
   var gateErr = document.getElementById("gate-error");
@@ -496,10 +685,11 @@
     if (codeIn.value.trim() === CODE) {
       gate.remove();
       app.hidden = false;
-      bar.hidden = false;
       recalc();
     } else {
-      gateErr.textContent = "That code is not correct. Try again.";
+      gateErr.innerHTML =
+        'That code is not correct. Try again.' +
+        '<span class="ar">الرمز غير صحيح، حاول مرة أخرى</span>';
       codeIn.value = "";
       codeIn.focus();
     }
@@ -509,22 +699,28 @@
   codeIn.addEventListener("keydown", function(e){ if (e.key === "Enter") unlock(); });
   codeIn.focus();
 
-  var rows = Array.prototype.slice.call(document.querySelectorAll(".row"));
+  var revRows  = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="rev"]'));
+  var costRows = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="cost"]'));
 
   var money = new Intl.NumberFormat("en-US", {
+    style:"currency", currency:"USD", maximumFractionDigits:0
+  });
+  var money2 = new Intl.NumberFormat("en-US", {
     style:"currency", currency:"USD", maximumFractionDigits:0
   });
   var area = new Intl.NumberFormat("en-US", { maximumFractionDigits:2 });
 
   function num(el){
+    if (!el) return 0;
     var v = parseFloat(el.value);
-    return isFinite(v) && v > 0 ? v : 0;
+    return isFinite(v) && v >= 0 ? v : 0;
   }
 
   function recalc(){
-    var sumU = 0, sumL = 0, sumV = 0;
+    // ----- sales -----
+    var sumU = 0, sumL = 0, sumSales = 0;
 
-    rows.forEach(function(row){
+    revRows.forEach(function(row){
       var u = num(row.querySelector("[data-usable]"));
       var l = num(row.querySelector("[data-loaded]"));
       var p = num(row.querySelector("[data-price]"));
@@ -532,36 +728,52 @@
 
       row.querySelector("[data-total]").textContent = money.format(v);
 
-      var loadEl = row.querySelector("[data-load]");
-      loadEl.textContent = (u > 0 && l > 0)
+      var tag = row.querySelector("[data-load]");
+      tag.textContent = (u > 0 && l > 0)
         ? "loading " + (((l / u) - 1) * 100).toFixed(1) + "%"
         : "";
 
-      sumU += u; sumL += l; sumV += v;
+      sumU += u; sumL += l; sumSales += v;
     });
 
     document.getElementById("tUsable").textContent = area.format(sumU) + " m\u00B2";
     document.getElementById("tLoaded").textContent = area.format(sumL) + " m\u00B2";
     document.getElementById("tAvg").textContent =
-      sumL > 0 ? money.format(sumV / sumL) + " / m\u00B2" : "\u2014";
-    document.getElementById("tGrand").textContent = money.format(sumV);
+      sumL > 0 ? money.format(sumSales / sumL) + " / m\u00B2" : "\u2014";
+    document.getElementById("tSales").textContent = money.format(sumSales);
+
+    // ----- costs -----
+    var sumCosts = 0, construction = 0, fees = 0;
+
+    costRows.forEach(function(row, i){
+      var q = num(row.querySelector("[data-qty]"));
+      var r = num(row.querySelector("[data-rate]"));
+      var c = num(row.querySelector("[data-cont]"));
+      var v = q * r * (1 + c / 100);
+
+      row.querySelector("[data-total]").textContent = money.format(v);
+
+      if (i < 4) { construction += v; } else { fees += v; }
+      sumCosts += v;
+    });
+
+    var builtArea = num(document.getElementById("cq1"));
+
+    document.getElementById("cConstruction").textContent = money.format(construction);
+    document.getElementById("cFees").textContent = money.format(fees);
+    document.getElementById("cPerM").textContent =
+      builtArea > 0 ? money2.format(sumCosts / builtArea) + " / m\u00B2" : "\u2014";
+    document.getElementById("tCosts").textContent = money.format(sumCosts);
+
+    // ----- net -----
+    var profit = sumSales - sumCosts;
+
+    document.getElementById("nSales").textContent  = money.format(sumSales);
+    document.getElementById("nCosts").textContent  = "\u2212 " + money.format(sumCosts);
+    document.getElementById("nProfit").textContent = money.format(profit);
+    document.getElementById("nMargin").textContent =
+      sumSales > 0 ? ((profit / sumSales) * 100).toFixed(1) + "%" : "\u2014";
   }
-
-  // highlight the matching band in the schematic while a row is being edited
-  rows.forEach(function(row){
-    var bandId = row.getAttribute("data-band");
-    var band = bandId ? document.getElementById(bandId) : null;
-    var label = band ? document.getElementById(bandId.replace("band","lab")) : null;
-
-    row.addEventListener("focusin", function(){
-      if (band) band.classList.add("on");
-      if (label) label.classList.add("on");
-    });
-    row.addEventListener("focusout", function(){
-      if (band) band.classList.remove("on");
-      if (label) label.classList.remove("on");
-    });
-  });
 
   document.addEventListener("input", function(e){
     if (e.target.matches(".row input")) recalc();
