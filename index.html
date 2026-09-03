@@ -1322,16 +1322,15 @@
      identifier, not a secret — what may be read or written is decided by the
      Firestore security rules, not by this file. */
   const FIREBASE_CONFIG = {
-    apiKey:            "__API_KEY__",
-    authDomain:        "__AUTH_DOMAIN__",
-    projectId:         "__PROJECT_ID__",
-    storageBucket:     "__STORAGE_BUCKET__",
-    messagingSenderId: "__SENDER_ID__",
-    appId:             "__APP_ID__"
+    apiKey:            "AIzaSyDkInIswbFWuvtOBXx1oKlO_ymsBIvObgA",
+    authDomain:        "latakia-feasibility.firebaseapp.com",
+    projectId:         "latakia-feasibility",
+    storageBucket:     "latakia-feasibility.firebasestorage.app",
+    messagingSenderId: "1089852015737",
+    appId:             "1:1089852015737:web:eb874e03bf2cf2cf94c0a8"
   };
 
-  const SHEET_ID       = "latakia";
-  const KEEP_REVISIONS  = 20;
+  const SHEET_ID        = "latakia";
   const LOAD_TIMEOUT_MS = 8000;
   const SAVE_TIMEOUT_MS = 15000;
 
@@ -1347,10 +1346,8 @@
   try {
     const { initializeApp } =
       await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js");
-    const {
-      getFirestore, doc, getDoc, setDoc, collection, addDoc,
-      getDocs, deleteDoc, query, orderBy, limit, serverTimestamp
-    } = await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js");
+    const { getFirestore, doc, getDoc, setDoc, collection, addDoc, serverTimestamp } =
+      await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js");
 
     const db      = getFirestore(initializeApp(FIREBASE_CONFIG));
     const sheet   = doc(db, "sheets", SHEET_ID);
@@ -1368,7 +1365,8 @@
       },
 
       async save(state){
-        /* keep a copy first, so a bad overwrite is always recoverable */
+        /* archive the current version first; revisions are immutable, so a
+           bad overwrite can always be undone from the console */
         try {
           const prev = await withTimeout(getDoc(sheet), SAVE_TIMEOUT_MS, "archive read");
           if (prev.exists()) {
@@ -1383,16 +1381,6 @@
         await withTimeout(
           setDoc(sheet, { ...state, updatedAt: serverTimestamp() }),
           SAVE_TIMEOUT_MS, "save");
-
-        /* trim the history to the most recent KEEP_REVISIONS */
-        try {
-          const old = await withTimeout(getDocs(
-            query(history, orderBy("archivedAt", "desc"), limit(KEEP_REVISIONS + 25))
-          ), SAVE_TIMEOUT_MS, "trim");
-          await Promise.all(old.docs.slice(KEEP_REVISIONS).map(d => deleteDoc(d.ref)));
-        } catch (e) {
-          console.warn("[sheet] could not trim revisions", e);
-        }
 
         try {
           const saved = await withTimeout(getDoc(sheet), SAVE_TIMEOUT_MS, "confirm");
