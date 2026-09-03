@@ -22,6 +22,8 @@
     --rev-soft:#e2efef;
     --cost:#8a6520;
     --cost-soft:#f2ebdc;
+    --eng:#4c5a86;
+    --eng-soft:#e8ebf3;
     --net:#16232b;
 
     --radius:4px;
@@ -176,7 +178,7 @@
 
   /* ===== allocation ===== */
 
-  .block.alloc .block-head::before{background:linear-gradient(var(--rev) 50%, var(--cost) 50%);}
+  .block.alloc .block-head::before{background:linear-gradient(var(--rev) 33.33%, var(--cost) 33.33%, var(--cost) 66.66%, var(--eng) 66.66%);}
 
   .arow{
     background:var(--card);
@@ -210,10 +212,11 @@
   .seg .opt input:checked + span{color:#fff;}
   .seg .opt.land input:checked + span{background:var(--cost);}
   .seg .opt.dev  input:checked + span{background:var(--rev);}
+  .seg .opt.eng  input:checked + span{background:var(--eng);}
   .seg .opt input:focus-visible + span{outline:2px solid var(--ink);outline-offset:-2px;}
 
   .alloc-sum{
-    display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;
   }
   .sumbox{
     border:1px solid var(--rule);border-radius:var(--radius);
@@ -221,6 +224,7 @@
   }
   .sumbox.land{background:var(--cost-soft);border-color:#ddd0b2;}
   .sumbox.dev {background:var(--rev-soft);border-color:#bcdad9;}
+  .sumbox.eng {background:var(--eng-soft);border-color:#c6cee0;}
   .sumbox .k{font-size:12.5px;font-weight:500;display:block;}
   .sumbox .k .ar{color:var(--ink-3);font-size:11.5px;font-weight:400;}
   .sumbox .v{
@@ -230,6 +234,7 @@
   .sumbox .pct{display:block;font-size:14px;font-weight:500;margin-top:1px;}
   .sumbox.land .v,.sumbox.land .pct{color:var(--cost);}
   .sumbox.dev  .v,.sumbox.dev  .pct{color:var(--rev);}
+  .sumbox.eng  .v,.sumbox.eng  .pct{color:var(--eng);}
   .sumbox .u{display:block;color:var(--ink-3);font-size:11.5px;margin-top:3px;}
 
   /* ===== net block ===== */
@@ -610,8 +615,8 @@
     </div>
 
     <div class="grp">
-      Tick each unit to assign it to the landowner or the developer
-      <span class="ar">اختر لكل وحدة إن كانت من حصة صاحب الأرض أو حصة المتعهد</span>
+      Tick each unit to assign it to the landowner, the developer or the supervising engineer
+      <span class="ar">اختر لكل وحدة إن كانت من حصة صاحب الأرض أو المتعهد أو المهندس المشرف</span>
     </div>
 
     <div id="allocRows"></div>
@@ -628,6 +633,12 @@
         <span class="v" id="aDevV">—</span>
         <span class="pct" id="aDevP">—</span>
         <span class="u" id="aDevU">—</span>
+      </div>
+      <div class="sumbox eng">
+        <span class="k">Supervising engineer share<span class="ar">حصة المهندس المشرف</span></span>
+        <span class="v" id="aEngV">—</span>
+        <span class="pct" id="aEngP">—</span>
+        <span class="u" id="aEngU">—</span>
       </div>
     </div>
   </div>
@@ -979,6 +990,11 @@
                 (u.def === "dev" ? " checked" : "") + '>' +
               '<span>Developer<span class="ar">المتعهد</span></span>' +
             '</label>' +
+            '<label class="opt eng">' +
+              '<input type="radio" name="own' + i + '" value="eng"' +
+                (u.def === "eng" ? " checked" : "") + '>' +
+              '<span>Engineer<span class="ar">المهندس</span></span>' +
+            '</label>' +
           '</span>' +
         '</div>';
     });
@@ -990,7 +1006,7 @@
     var wsum = [];
     UNITS.forEach(function(u){ wsum[u.src] = (wsum[u.src] || 0) + u.w; });
 
-    var landV = 0, devV = 0, landA = 0, devA = 0, total = 0;
+    var landV = 0, devV = 0, engV = 0, landA = 0, devA = 0, engA = 0, total = 0;
 
     UNITS.forEach(function(u, i){
       var line = lines[u.src] || {sale:0, area:0};
@@ -1002,20 +1018,24 @@
       document.querySelector('[data-uarea="' + i + '"]').textContent = area.format(a) + " m\u00B2";
 
       var picked = document.querySelector('input[name="own' + i + '"]:checked');
-      if (picked && picked.value === "land") { landV += v; landA += a; }
-      else { devV += v; devA += a; }
+      var who = picked ? picked.value : "dev";
+      if (who === "land")      { landV += v; landA += a; }
+      else if (who === "eng")  { engV  += v; engA  += a; }
+      else                     { devV  += v; devA  += a; }
 
       total += v;
     });
 
-    document.getElementById("aLandV").textContent = money.format(landV);
-    document.getElementById("aDevV").textContent  = money.format(devV);
-    document.getElementById("aLandP").textContent =
-      total > 0 ? ((landV / total) * 100).toFixed(1) + "% of sales" : "\u2014";
-    document.getElementById("aDevP").textContent =
-      total > 0 ? ((devV / total) * 100).toFixed(1) + "% of sales" : "\u2014";
-    document.getElementById("aLandU").textContent = area.format(landA) + " m\u00B2 saleable";
-    document.getElementById("aDevU").textContent  = area.format(devA) + " m\u00B2 saleable";
+    function share(idV, idP, idU, v, a){
+      document.getElementById(idV).textContent = money.format(v);
+      document.getElementById(idP).textContent =
+        total > 0 ? ((v / total) * 100).toFixed(1) + "% of sales" : "\u2014";
+      document.getElementById(idU).textContent = area.format(a) + " m\u00B2 saleable";
+    }
+
+    share("aLandV", "aLandP", "aLandU", landV, landA);
+    share("aDevV",  "aDevP",  "aDevU",  devV,  devA);
+    share("aEngV",  "aEngP",  "aEngU",  engV,  engA);
   }
 
   function recalc(){
