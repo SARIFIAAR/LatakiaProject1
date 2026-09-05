@@ -392,3 +392,84 @@ a{color:inherit;}
   display:block;font-family:var(--ar);font-size:11.5px;letter-spacing:.02em;
   color:var(--ink-3);margin-top:5px;
 }
+
+/* ------------------------------------------------------ arabic layer --- */
+/* A quiet second voice: the same small, muted treatment as the
+   "Street · الشارع" marker under the plans, used consistently. */
+.ar-gloss{
+  display:block;
+  font-family:var(--ar);
+  font-size:11.5px;
+  line-height:1.5;
+  letter-spacing:0;
+  color:var(--ink-3);
+  margin-top:5px;
+  direction:rtl;
+  text-transform:none;
+  font-weight:400;
+}
+.ar-gloss.on-dark{color:rgba(246,241,231,.62);}
+
+.ar-body{
+  font-family:var(--ar);
+  font-size:13.5px;
+  line-height:1.95;
+  color:var(--ink-3);
+  margin:14px 0 0;
+  max-width:46ch;
+  margin-inline-start:auto;
+  text-align:right;
+  border-top:1px solid var(--line);
+  padding-top:13px;
+}
+.statement .ar-body{
+  font-size:clamp(15px,1.7vw,20px);line-height:1.95;max-width:34ch;
+  margin-top:clamp(26px,3.4vw,40px);padding-top:clamp(18px,2.4vw,26px);
+}
+.fig-note + .ar-body,.figures .ar-body{margin-inline-start:0;text-align:right;max-width:52ch;}
+
+/* nav gets its Arabic beneath, centred with the English */
+.nav-links{align-items:flex-start;}
+.nav-links a{display:block;text-align:center;line-height:1.15;}
+.nav-ar{
+  display:block;font-family:var(--ar);font-size:9.5px;letter-spacing:0;
+  text-transform:none;opacity:.62;margin-top:3px;direction:rtl;
+}
+.nav-cta{display:flex;flex-direction:column;align-items:center;}
+
+/* the figure captions and detail tiles keep their glosses tight */
+.cap .ar-gloss{margin-top:4px;font-size:11px;}
+.tile p .ar-gloss{margin-top:8px;font-size:11px;}
+.spec dt .ar-gloss,.plan-key dt .ar-gloss{margin-top:3px;font-size:11px;letter-spacing:0;}
+.fr-body h3 .ar-gloss{margin-top:5px;font-size:12.5px;}
+
+/* ------------------------------------------------------------ whatsapp --- */
+.foot-wa{
+  display:inline-flex;align-items:center;gap:11px;
+  text-decoration:none;color:inherit;
+  border:1px solid rgba(198,155,86,.5);border-radius:2px;
+  padding:11px 16px 12px;
+  transition:border-color .3s ease,background .3s ease,color .3s ease;
+}
+.foot-wa svg{width:21px;height:21px;flex:none;color:var(--gold);transition:color .3s ease;}
+.foot-wa .wa-num{
+  font-family:var(--display);font-size:clamp(17px,1.8vw,23px);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1.15;
+}
+.foot-wa .wa-tag{
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.6;
+  border-inline-start:1px solid rgba(246,241,231,.22);padding-inline-start:11px;line-height:1.2;
+}
+.foot-wa .wa-tag .ar-gloss{margin-top:2px;font-size:10px;letter-spacing:0;}
+.foot-wa:hover{border-color:var(--gold);background:rgba(198,155,86,.10);}
+.foot-wa:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+@media (max-width:520px){
+  .foot-wa{flex-wrap:wrap;}
+  .foot-wa .wa-tag{border-inline-start:0;padding-inline-start:0;}
+}
+
+/* keep the number on one line and the footer's arabic close to its english */
+.foot-wa .wa-num{white-space:nowrap;font-size:clamp(16px,1.55vw,20px);}
+.foot-creed p{max-width:20ch;}
+.foot-creed .ar-gloss{margin-top:3px;}
+.foot-contact .ar-gloss{max-width:22ch;}
