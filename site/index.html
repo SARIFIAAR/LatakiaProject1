@@ -204,6 +204,25 @@
       <span class="ar-s">الطابق الثاني — عيادات</span>
     </article>
   </div>
+
+  <div class="plans">
+    <div class="plan-tabs" role="tablist" aria-label="Floor plans">
+      <button type="button" role="tab" aria-selected="true"  data-plan="ground">Ground <span>الطابق الأرضي</span></button>
+      <button type="button" role="tab" aria-selected="false" data-plan="typical">Typical floor <span>الطابق المتكرر</span></button>
+    </div>
+
+    <div class="plan-stage">
+      <figure class="plan is-on" data-plan="ground">
+        <img src="assets/plan-ground.png" alt="Ground floor plan: a covered passage 2.50 m wide running the full 21.50 m depth, with shops either side and the stair off the left">
+      </figure>
+      <figure class="plan" data-plan="typical">
+        <img src="assets/plan-typical.png" alt="Typical upper floor plan: four clinic suites of 49, 40, 44 and 44 square metres around a central stair of 15 square metres">
+      </figure>
+      <span class="plan-orient" aria-hidden="true">Street · الشارع</span>
+    </div>
+
+    <dl class="plan-key" id="planKey"></dl>
+  </div>
 </section>
 
 <!-- ============================ 3D MODEL ============================ -->

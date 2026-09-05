@@ -62,6 +62,15 @@
 
   if (!hasGSAP) { document.body.classList.add("no-js"); return; }
 
+  // ScrollTrigger owns the header state: reading window.scrollY is unreliable while
+  // Lenis is driving, and a transparent header over the cream sections is unreadable
+  ScrollTrigger.create({
+    trigger: ".hero",
+    start: "bottom top+=90",
+    onEnter:     function () { nav.classList.add("is-solid"); },
+    onLeaveBack: function () { nav.classList.remove("is-solid"); }
+  });
+
   /* ------------------------------------------- hero: day becomes night --- */
   var night = document.getElementById("heroNight");
   var dayLabel = document.getElementById("dayNightLabel");
@@ -170,6 +179,69 @@
     scrollTrigger: { trigger: ".foot", start: "top 88%" },
     y: 30, opacity: 0, duration: 0.95, ease: "power3.out", stagger: 0.1
   });
+
+  /* ----------------------------------------------------- floor plans --- */
+  (function () {
+    var tabs = document.querySelectorAll(".plan-tabs button");
+    var panes = document.querySelectorAll(".plan");
+    var keyEl = document.getElementById("planKey");
+    if (!tabs.length || !keyEl) return;
+
+    var KEYS = {
+      ground: [
+        ["Frontage", "10.70 m", ""],
+        ["Depth", "21.50 m", ""],
+        ["Passage", "2.50 m", "clear width"],
+        ["Shopfronts", "3.70 m", "each, to the street"],
+        ["Front shops", "7.10 m", "deep"]
+      ],
+      typical: [
+        ["Street", "49 m²", "الشارع"],
+        ["Street corner", "40 m²", "زاوية الشارع"],
+        ["Back corner", "44 m²", "الزاوية الخلفية"],
+        ["Back", "44 m²", "الخلفي"],
+        ["Stair and core", "15 m²", "الدرج"]
+      ]
+    };
+
+    function paint(name) {
+      keyEl.innerHTML = KEYS[name].map(function (k) {
+        return "<div><dt>" + k[0] + "</dt><dd>" + k[1] +
+               (k[2] ? "<small>" + k[2] + "</small>" : "") + "</dd></div>";
+      }).join("");
+      if (!reduce) {
+        gsap.from(keyEl.children, { y: 14, opacity: 0, duration: 0.6,
+                                    ease: "power3.out", stagger: 0.045 });
+      }
+    }
+
+    function show(name) {
+      tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t.dataset.plan === name)); });
+      panes.forEach(function (p) { p.classList.toggle("is-on", p.dataset.plan === name); });
+      paint(name);
+    }
+
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () { show(t.dataset.plan); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        var list = Array.prototype.slice.call(tabs);
+        var next = list[(list.indexOf(t) + (e.key === "ArrowRight" ? 1 : list.length - 1)) % list.length];
+        next.focus(); show(next.dataset.plan);
+      });
+    });
+
+    paint("ground");
+    gsap.from(".plan-stage", {
+      scrollTrigger: { trigger: ".plans", start: "top 84%" },
+      y: 30, opacity: 0, duration: 1.0, ease: "power3.out"
+    });
+    gsap.from(".plan-tabs button", {
+      scrollTrigger: { trigger: ".plans", start: "top 88%" },
+      y: 16, opacity: 0, duration: 0.7, ease: "power3.out", stagger: 0.08
+    });
+  })();
 
   /* ============================== THE MODEL ============================= */
   var canvas = document.getElementById("scene");
