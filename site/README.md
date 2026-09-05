@@ -38,3 +38,10 @@ Change a constant at the top of the model block and the geometry follows.
 ## Deploying
 
 Any static host. On GitHub Pages, push and enable Pages for the branch.
+
+## One thing to remember
+
+`css/site.css` and `js/site.js` are referenced with a `?v=` query in `index.html`.
+GitHub Pages serves them with a long cache lifetime, so a returning visitor keeps
+the old file until that number changes. **Bump `?v=` whenever you edit either file** —
+otherwise your change is live but nobody sees it.
