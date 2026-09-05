@@ -72,23 +72,37 @@
   });
 
   /* ------------------------------------------- hero: day becomes night --- */
+  // The hero pins so the crossfade is something you watch rather than something
+  // that happens as the section leaves. Day holds, turns, then night holds.
   var night = document.getElementById("heroNight");
   var dayLabel = document.getElementById("dayNightLabel");
+  var dayBar = document.getElementById("dayNightBar");
 
-  gsap.timeline({
+  var heroTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".hero",
       start: "top top",
-      end: "bottom top",
-      scrub: 0.6,
+      end: "+=170%",
+      pin: true,
+      pinSpacing: true,
+      scrub: 0.55,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
       onUpdate: function (self) {
-        dayLabel.textContent = self.progress > 0.55 ? "Night" : "Day";
+        var p = self.progress;
+        dayLabel.textContent = p < 0.30 ? "Day" : p < 0.72 ? "Dusk" : "Night";
+        if (dayBar) dayBar.style.width = (p * 100).toFixed(1) + "%";
       }
     }
-  })
-    .to(night, { opacity: 1, ease: "none" }, 0)
-    .to(".hero-inner", { y: -70, opacity: 0.15, ease: "none" }, 0)
-    .to(".hero-img", { scale: 1.09, ease: "none" }, 0);
+  });
+
+  heroTl
+    .to(night,        { opacity: 0,   duration: 0.18, ease: "none" }, 0)      // day holds
+    .to(night,        { opacity: 1,   duration: 0.50, ease: "power1.inOut" })  // the turn
+    .to(".hero-img",  { scale: 1.045, duration: 0.68, ease: "none" }, 0)
+    .to(".hero-bg",   { opacity: 0.55, duration: 0.68, ease: "none" }, 0)
+    .to(".hero-inner",{ y: -46, opacity: 0, duration: 0.22, ease: "power2.in" }, 0.72)
+    .to(".hero-foot", { opacity: 0, duration: 0.18, ease: "none" }, 0.80);
 
   /* ------------------------------------------------------ hero intro --- */
   var intro = gsap.timeline({ delay: 0.15 });

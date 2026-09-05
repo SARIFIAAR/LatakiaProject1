@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=6">
+<link rel="stylesheet" href="css/site.css?v=10">
 </head>
 <body>
 
@@ -37,8 +37,10 @@
 <header class="hero" id="top">
   <div class="hero-media">
     <div class="hero-bg" style="background-image:url('assets/day.jpg')" aria-hidden="true"></div>
-    <img width="1200" height="1459" class="hero-img is-day"   id="heroDay"   src="assets/day.jpg"   alt="Khan Murjan, Latakia — the street elevation in daylight" fetchpriority="high">
-    <img width="1200" height="1468" class="hero-img is-night" id="heroNight" src="assets/night.jpg" alt="Khan Murjan, Latakia — the same elevation lit at night">
+    <div class="hero-frame">
+      <img width="1200" height="1459" class="hero-img is-day"   id="heroDay"   src="assets/day.jpg"   alt="Khan Murjan, Latakia — the street elevation in daylight" fetchpriority="high">
+      <img width="1200" height="1468" class="hero-img is-night" id="heroNight" src="assets/night.jpg" alt="Khan Murjan, Latakia — the same elevation lit at night">
+    </div>
     <div class="hero-veil"></div>
   </div>
 
@@ -56,7 +58,7 @@
   </div>
 
   <div class="hero-foot">
-    <span class="daynight" id="dayNightLabel">Day</span>
+    <span class="daynight"><span id="dayNightLabel">Day</span><span class="track" aria-hidden="true"><i id="dayNightBar"></i></span></span>
     <span class="scrollcue" aria-hidden="true"><i></i></span>
   </div>
 </header>
@@ -298,6 +300,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/site.js?v=6"></script>
+<script src="js/site.js?v=10"></script>
 </body>
 </html>
