@@ -82,7 +82,7 @@ def clinic(p, cross=False):
 
 
 def ground():
-    p = Plan(); p.furniture = False
+    p = Plan(); p.furniture = False; p.door_swings = False
     shell_ground(p)
     clinic(p)
     # stair, hall glazed onto the lightwell
@@ -164,7 +164,7 @@ def ground_central():
     """The passage on the facade's axis; at its end a corridor 1.35 m deep, cut
     from the clinic's front edge, turns left to the stair. The clinic is
     entered from the axis. Both shops keep their full depth."""
-    p = Plan(); p.furniture = False
+    p = Plan(); p.furniture = False; p.door_swings = False
     shell_ground(p)
     clinic(p, cross=True)
     p.glass_h(40, 230, 430, 455)
@@ -186,16 +186,22 @@ def ground_central():
     return p
 
 
-def suite_dental(p, a, b, ytop, door, name_ar, area, name_en):
+def suite_dental(p, a, b, ytop, door, name_ar, area, name_en, steril=True):
     """Street suite a..b from the corridor wall at ytop: waiting with reception,
     WC and sterilisation by the door, two treatment rooms at the window."""
     w = b - a
     # WC and sterilisation in the top-right corner
-    p.vwall(b - 300, ytop, ytop + 150, IW); p.hwall(b - 300, b, ytop + 150, IW); p.vwall(b - 150, ytop, ytop + 150, IW)
-    p.door_h(b - 265, ytop + 150, ytop + 160, 80, "l", "u"); p.door_h(b - 115, ytop + 150, ytop + 160, 80, "l", "u")
-    p.counter(b - 295, ytop + 5, 140, 50); p.basin(b - 250, ytop + 30, 0); p.rect(b - 200, ytop + 8, 42, 42, rx=4)
+    if steril:
+        p.vwall(b - 300, ytop, ytop + 150, IW); p.hwall(b - 300, b, ytop + 150, IW)
+        p.door_h(b - 265, ytop + 150, ytop + 160, 80, "l", "u")
+        p.counter(b - 295, ytop + 5, 140, 50); p.basin(b - 250, ytop + 30, 0); p.rect(b - 200, ytop + 8, 42, 42, rx=4)
+        p.room(b - 225, ytop + 110, "تعقيم", None, 16)
+    else:
+        p.hwall(b - 150, b, ytop + 150, IW)
+    p.vwall(b - 150, ytop, ytop + 150, IW)
+    p.door_h(b - 115, ytop + 150, ytop + 160, 80, "l", "u")
     p.toilet(b - 45, ytop + 45, 0); p.basin(b - 120, ytop + 120, 270)
-    p.room(b - 225, ytop + 110, "تعقيم", None, 16); p.room(b - 112, ytop + 60, "حمام", None, 16)
+    p.room(b - 112, ytop + 60, "حمام", None, 16)
     # waiting
     if door == "top":
         p.counter(a + 15, ytop + 110, 150, 55); p.chair(a + 90, ytop + 195, 0)
@@ -217,7 +223,7 @@ def suite_dental(p, a, b, ytop, door, name_ar, area, name_en):
 
 
 def typical():
-    p = Plan(); p.furniture = False
+    p = Plan(); p.furniture = False; p.door_swings = False
     p.vwall(0, 430, D, OW); p.vwall(W - OW, 430, D, OW); p.hwall(0, W, 430, 25)
     p.vwall(0, 0, 430, 8); p.vwall(W - 8, 0, 430, 8); p.hwall(0, W, 0, 8)
     p.vwall(540, 0, 455, 25); p.void(25, 25, 540, 430); p.hatch(565, 8, W - 8, 430, "terrace")
@@ -226,7 +232,7 @@ def typical():
     p.door_h(850, 430, 455, 100, "l", "u"); p.glass_h(970, 1030, 430, 455)
     # stair, rear suite, short corridor, two street suites
     p.vwall(245, 455, 965, PW)
-    p.hwall(245, 550, 965, PW)
+    p.hwall(245, W, 965, PW)
     p.hwall(0, 550, 1100, PW)
     p.vwall(535, 980, D, PW)
     p.hwall(0, W, 2125, 25)
@@ -249,8 +255,8 @@ def typical():
     p.room(805, 330, "تراس", "Terrace", 26); p.room(282, 240, "منور", "Lightwell · open", 26)
 
     # street suites
-    p.door_h(300, 1100, 1115, 90, "l", "d")
-    suite_dental(p, 25, 535, 1115, "top", "عيادة أ", "53 m²", "Suite A · 5.10 × 10.35")
+    p.door_h(60, 1100, 1115, 90, "l", "d")
+    suite_dental(p, 25, 535, 1115, "top", "عيادة أ", "53 m²", "Suite A · 5.10 × 10.35", steril=False)
     p.door_v(535, 550, 990, 90, "t", "r")
     suite_dental(p, 550, 1045, 980, "left", "عيادة ب", "58 m²", "Suite B · 4.95 × 11.70")
 

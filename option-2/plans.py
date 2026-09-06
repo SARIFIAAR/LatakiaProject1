@@ -41,6 +41,7 @@ class Plan:
     def __init__(self):
         self.L = {k: [] for k in LAYERS}
         self.furniture = True   # False: draw walls, doors, sanitary fixtures and landscape only
+        self.door_swings = True # False: doors are plain openings, no leaf or arc
 
     def add(self, layer, s):
         self.L[layer].append(s)
@@ -69,6 +70,7 @@ class Plan:
         lx, ly = hx, ym + dy * w
         ex, ey = hx + dx * w, ym
         sweep = 1 if (hinge == "r") != (swing == "u") else 0
+        if not self.door_swings: return
         self.add("door", f'<line x1="{hx}" y1="{ym}" x2="{lx}" y2="{ly}"/>'
                          f'<path d="M{lx} {ly} A{w} {w} 0 0 {sweep} {ex} {ey}"/>')
 
@@ -82,6 +84,7 @@ class Plan:
         lx, ly = xm + dx * w, hy
         ex, ey = xm, hy + dy * w
         sweep = 1 if (hinge == "t") == (swing == "r") else 0
+        if not self.door_swings: return
         self.add("door", f'<line x1="{xm}" y1="{hy}" x2="{lx}" y2="{ly}"/>'
                          f'<path d="M{lx} {ly} A{w} {w} 0 0 {sweep} {ex} {ey}"/>')
 
