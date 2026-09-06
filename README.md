@@ -35,8 +35,9 @@ Current shape of the sheet (September 2026):
 `option-2.html` is the same sheet for the architect's second layout (the
 "OPTION 2" sheet of 6 September): three 2.80 m shops facing the street on a
 1.30 m side corridor, the stair at the back and an L-shaped 66 m² clinic around
-a rear lightwell; above, offices of 48, 34 and 38 m² to the street and a 45 m²
-office at the rear with a terrace. Twelve units in allocation. It saves to its
+a planted rear lightwell; above, clinic suites of 48, 34 and 38 m² to the street
+and a 45 m² suite at the rear with a terrace, the lightwell kept open through
+every floor. Twelve units in allocation. It saves to its
 own document (`sheets/latakia-option-2`) so the two options never overwrite
 each other; a switch at the top of both pages moves between them. Prices and
 rates start as copies of the Option 1 figures so the comparison is like for
@@ -47,8 +48,9 @@ beside them) are drawn by `option-2/plans.py` — shell and unit areas from the
 architect's sheet, internal walls and furniture as a proposal. Edit the script
 and re-run it (`--png` also re-renders the PNGs through headless Chrome).
 
-`firestore.rules` holds the security rules both sheets need; see the comment
-at its top before deploying.
+`firestore.rules` holds the security rules both sheets need (Save on the
+Option 2 page works, so the live rules already admit its document; the file
+is the reference copy).
 
 ## The project site
 
@@ -79,7 +81,10 @@ of the building was cut down to the shop line, so that side reads as low-rise.
 
 **Calculator, 6 September (evening)** — a second sheet for the architect's
 Option 2, with its own Firestore document, an option switch on both pages,
-and furnished floor plans drawn from the Option 2 sheet.
+and furnished floor plans drawn from the Option 2 sheet. Later the same
+evening the upper floors were redrawn as clinic suites (the office fit-out
+read as clutter), the ground clinic got a store in its dead corner, the
+lightwell was planted and kept open through the upper floors.
 
 **Open** — the contact number in the footer is the live one; nothing else is
 placeholder. A higher-resolution export of the facade render would sharpen the

@@ -93,9 +93,9 @@ backdrop shows at the edges.
 ## Status (September 2026)
 
 Both pieces are live. On 6 September a second calculator for the architect's
-Option 2 was added (`option-2.html` + `option-2/`); its Firestore document is
-denied by the rules deployed at the time, so `firestore.rules` needs deploying
-before its Save works. Recent work on the site: new render with the shops, a
+Option 2 was added (`option-2.html` + `option-2/`), live and saving to its own
+document (`firestore.rules` is the reference copy of the policy). Recent work
+on the site: new render with the shops, a
 fifth detail tile, widened hero images, left neighbour cut to the shop line.
 Nothing is half-finished. Known limitation: the render is low resolution;
 a larger export would improve the hero on big screens without any code change.
