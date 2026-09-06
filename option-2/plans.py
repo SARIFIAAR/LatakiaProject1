@@ -26,6 +26,8 @@ SOFT  = "#aebcc3"
 GLASS = "#2f8f9d"
 HATCH = "#b7c4ca"
 DIM   = "#6f8590"
+LEAF  = "#3e8a4a"
+LEAF2 = "#dcefd9"
 FONT  = "'IBM Plex Sans','IBM Plex Sans Arabic',-apple-system,'Helvetica Neue',Arial,sans-serif"
 
 LAYERS = ("fill", "wall", "open", "glass", "door", "furn", "text", "dim")
@@ -197,7 +199,27 @@ class Plan:
         self.rect(x + 6, y + 6, w - 12, h - 12, extra=f'stroke="{SOFT}"')
 
     def plant(self, cx, cy, r=22):
-        self.f(f'<circle cx="{cx}" cy="{cy}" r="{r}"/><circle cx="{cx}" cy="{cy}" r="{r*0.45}" stroke="{SOFT}"/>')
+        self.f(f'<g stroke="{LEAF}" fill="{LEAF2}"><circle cx="{cx}" cy="{cy}" r="{r}"/>'
+               f'<circle cx="{cx}" cy="{cy}" r="{r*0.45}" fill="none" stroke-width="1.5"/></g>')
+
+    def tree(self, cx, cy, r=78):
+        self.f(f'<g stroke="{LEAF}" fill="{LEAF2}"><circle cx="{cx}" cy="{cy}" r="{r}"/>'
+               f'<circle cx="{cx}" cy="{cy}" r="{r*0.64}" fill="none" stroke-width="1.5"/>'
+               f'<circle cx="{cx}" cy="{cy}" r="{r*0.28}" fill="none" stroke-width="1.5"/></g>')
+
+    def dental_chair(self, cx, cy, rot=0):
+        """Dental treatment chair, head towards -y, with delivery unit, light and stools."""
+        self.f(f'<g transform="translate({cx} {cy}) rotate({rot})">'
+               f'<rect x="-31" y="-80" width="62" height="165" rx="26"/>'          # chair
+               f'<rect x="-16" y="-104" width="32" height="28" rx="10"/>'          # headrest
+               f'<line x1="-31" y1="-10" x2="31" y2="-10"/>'                        # backrest hinge
+               f'<line x1="-31" y1="40" x2="31" y2="40"/>'                          # knee break
+               f'<rect x="42" y="-30" width="44" height="34" rx="6"/>'              # delivery unit
+               f'<circle cx="52" cy="-62" r="13"/>'                                 # spittoon
+               f'<line x1="-38" y1="-120" x2="-70" y2="-150"/><circle cx="-76" cy="-158" r="14"/>'  # light
+               f'<circle cx="-48" cy="-118" r="18"/>'                               # operator stool
+               f'<circle cx="60" cy="30" r="18"/>'                                  # assistant stool
+               f'</g>')
 
     def stair(self, x, y, w, h, land=120, hall=120, tread=27):
         """Dog-leg stair in a well x..x+w, y..y+h: landing at the top (rear),
@@ -307,8 +329,7 @@ def ground():
                       (90, 365, 24), (170, 365, 28), (250, 365, 22), (330, 365, 27), (410, 365, 23), (480, 365, 26),
                       (70, 150, 30), (70, 260, 34), (500, 150, 32), (500, 260, 30)):
         p.plant(cx, cy, r)
-    p.f('<circle cx="285" cy="215" r="78"/><circle cx="285" cy="215" r="50" stroke="#aebcc3"/>'
-        '<circle cx="285" cy="215" r="22" stroke="#aebcc3"/>')                # tree
+    p.tree(285, 215)
     p.rect(200, 190, 60, 50, rx=8); p.rect(310, 190, 60, 50, rx=8)            # benches
 
     # stair / clinic wall, shops' back wall
@@ -351,32 +372,31 @@ def ground():
     # wing: second consulting room, lit from the lightwell
     p.hwall(565, 1045, 445, IW)
     p.door_h(600, 445, 455, 90, "l", "u")
-    p.glass_v(540, 565, 150, 380)
+    p.glass_v(540, 565, 25, 430)                              # full-height glazing to the lightwell
 
     # furniture
     p.counter(430, 655, 180, 60);      p.chair(520, 745, 180)
     p.sofa(270, 650, 60, 190, "l")
     p.sofa(400, 880, 200, 60, "b")
     p.rect(350, 780, 60, 60, rx=6)                             # coffee table
-    p.desk(730, 700, 160, 80, "t");   p.chair(770, 810, 0);  p.chair(850, 810, 0)
-    p.bed(960, 770, 70, 170, "b")
-    p.basin(745, 918, 0)
-    p.f(f'<line x1="930" y1="760" x2="930" y2="945" stroke-dasharray="10 8"/>')   # curtain
+    p.counter(830, 890, 200, 55); p.basin(930, 917, 0)         # treatment 1: cabinet, basin, dental chair
+    p.dental_chair(860, 760, 90)
     p.toilet(300, 500, 0);  p.basin(390, 600, 90)
-    p.shelf(435, 460, 160, 40); p.shelf(435, 510, 40, 100)     # store
-    p.counter(805, 460, 235, 55); p.basin(1010, 600, 90)       # prep room
-    p.desk(600, 300, 160, 80, "b");   p.chair(640, 250, 180); p.chair(720, 250, 180)
-    p.bed(960, 60, 70, 170, "t")
-    p.basin(600, 60, 180)
-    p.f(f'<line x1="930" y1="40" x2="930" y2="250" stroke-dasharray="10 8"/>')
+    p.counter(435, 460, 160, 55); p.basin(470, 487, 0)          # sterilisation: counter, basin, autoclave
+    p.rect(545, 465, 45, 45, rx=4)
+    p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)    # store, on the right
+    p.counter(985, 40, 55, 250); p.basin(1012, 120, 90)        # treatment 2: cabinet, basin, dental chair
+    p.dental_chair(800, 250)
+    p.rect(590, 380, 50, 50, rx=4)                              # x-ray unit
 
-    p.unit(560, 800, "عيادة", "66 m²", "Clinic")
+    p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
     p.room(660, 905, "انتظار", "Waiting", 22)
-    p.room(965, 690, "فحص ١", "Consulting 1", 22)
-    p.room(850, 400, "فحص ٢", "Consulting 2", 24)
+    p.room(765, 680, "علاج ١", "Treatment 1", 22)
+    p.room(700, 410, "علاج ٢", "Treatment 2", 22)
+    p.label(615, 448, "X-ray", size=14, color=FURN)
     p.room(340, 560, "حمام", "WC", 22)
-    p.room(515, 585, "مخزن", "Store", 22)
-    p.room(920, 570, "تعقيم", "Prep", 22)
+    p.room(515, 540, "تعقيم", "Sterilisation", 18)
+    p.room(920, 580, "مخزن", "Store", 22)
     p.room(700, 525, "ممر", None, 20)
     p.room(285, 315, "منور مزروع", "Planted lightwell", 24)
 

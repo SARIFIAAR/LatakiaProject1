@@ -34,8 +34,8 @@ Current shape of the sheet (September 2026):
 
 `option-2.html` is the same sheet for the architect's second layout (the
 "OPTION 2" sheet of 6 September): three 2.80 m shops facing the street on a
-1.30 m side corridor, the stair at the back and an L-shaped 66 m² clinic around
-a planted rear lightwell; above, clinic suites of 48, 34 and 38 m² to the street
+1.30 m side corridor, the stair at the back and an L-shaped 66 m² dental clinic glazed
+onto a planted rear lightwell; above, clinic suites of 48, 34 and 38 m² to the street
 and a 45 m² suite at the rear with a terrace, the lightwell kept open through
 every floor. Twelve units in allocation. It saves to its
 own document (`sheets/latakia-option-2`) so the two options never overwrite
@@ -48,9 +48,10 @@ beside them) are drawn by `option-2/plans.py` — shell and unit areas from the
 architect's sheet, internal walls and furniture as a proposal. Edit the script
 and re-run it (`--png` also re-renders the PNGs through headless Chrome).
 
-`firestore.rules` holds the security rules both sheets need (Save on the
-Option 2 page works, so the live rules already admit its document; the file
-is the reference copy).
+`firestore.rules` holds the security rules both sheets need. It was deployed
+on 6 September (`firebase deploy --only firestore:rules --project
+latakia-feasibility`); before that the live rules admitted only the Option 1
+document and Save on Option 2 failed.
 
 ## The project site
 

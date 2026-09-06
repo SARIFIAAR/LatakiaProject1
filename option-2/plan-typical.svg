@@ -123,7 +123,7 @@
 <rect x="400" y="640" width="160" height="60" rx="0" />
 <rect x="406" y="646" width="148" height="48" rx="0" stroke="#aebcc3"/>
 <g transform="translate(480 730) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
-<circle cx="540" cy="930" r="22"/><circle cx="540" cy="930" r="9.9" stroke="#aebcc3"/>
+<g stroke="#3e8a4a" fill="#dcefd9"><circle cx="540" cy="930" r="22"/><circle cx="540" cy="930" r="9.9" fill="none" stroke-width="1.5"/></g>
 <rect x="620" y="720" width="160" height="80" rx="0" />
 <g transform="translate(700.0 688) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
 <g transform="translate(660 830) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
@@ -147,7 +147,7 @@
 <line x1="396" y1="1405.0" x2="436" y2="1405.0"/>
 <line x1="396" y1="1465.0" x2="436" y2="1465.0"/>
 <line x1="396" y1="1525.0" x2="436" y2="1525.0"/>
-<circle cx="415" cy="1315" r="22"/><circle cx="415" cy="1315" r="9.9" stroke="#aebcc3"/>
+<g stroke="#3e8a4a" fill="#dcefd9"><circle cx="415" cy="1315" r="22"/><circle cx="415" cy="1315" r="9.9" fill="none" stroke-width="1.5"/></g>
 <rect x="150" y="1780" width="140" height="70" rx="0" />
 <g transform="translate(220.0 1748) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
 <g transform="translate(185 1882) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
@@ -165,7 +165,7 @@
 <line x1="499" y1="1349" x2="499" y2="1556"/>
 <line x1="501" y1="1416.6666666666667" x2="541" y2="1416.6666666666667"/>
 <line x1="501" y1="1488.3333333333333" x2="541" y2="1488.3333333333333"/>
-<circle cx="710" cy="1315" r="22"/><circle cx="710" cy="1315" r="9.9" stroke="#aebcc3"/>
+<g stroke="#3e8a4a" fill="#dcefd9"><circle cx="710" cy="1315" r="22"/><circle cx="710" cy="1315" r="9.9" fill="none" stroke-width="1.5"/></g>
 <rect x="520" y="1740" width="140" height="70" rx="0" />
 <g transform="translate(590.0 1708) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
 <g transform="translate(555 1842) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
@@ -184,7 +184,7 @@
 <line x1="796" y1="1270.0" x2="836" y2="1270.0"/>
 <line x1="796" y1="1330.0" x2="836" y2="1330.0"/>
 <line x1="796" y1="1390.0" x2="836" y2="1390.0"/>
-<circle cx="1005" cy="1180" r="22"/><circle cx="1005" cy="1180" r="9.9" stroke="#aebcc3"/>
+<g stroke="#3e8a4a" fill="#dcefd9"><circle cx="1005" cy="1180" r="22"/><circle cx="1005" cy="1180" r="9.9" fill="none" stroke-width="1.5"/></g>
 <rect x="815" y="1680" width="140" height="70" rx="0" />
 <g transform="translate(885.0 1648) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
 <g transform="translate(850 1782) rotate(0)"><rect x="-22" y="-20" width="44" height="42" rx="8"/><line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>
