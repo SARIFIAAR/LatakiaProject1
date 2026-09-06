@@ -8,6 +8,7 @@ project, both static, both served by GitHub Pages.
 |---|---|---|
 | **Feasibility calculator — Option 1** | `index.html` (and `test.html`, a scratch copy) | https://sarifiaar.github.io/LatakiaProject1/ |
 | **Feasibility calculator — Option 2** | `option-2.html`, plans in `option-2/` | https://sarifiaar.github.io/LatakiaProject1/option-2.html |
+| **Feasibility calculator — Option 3 (recommended)** | `option-3.html`, plans in `option-3/` | https://sarifiaar.github.io/LatakiaProject1/option-3.html |
 | **Project site** | `site/` | https://sarifiaar.github.io/LatakiaProject1/site/ |
 
 No build step anywhere. Open the file, or serve the folder.
@@ -48,7 +49,18 @@ beside them) are drawn by `option-2/plans.py` — shell and unit areas from the
 architect's sheet, internal walls and furniture as a proposal. Edit the script
 and re-run it (`--png` also re-renders the PNGs through headless Chrome).
 
-`firestore.rules` holds the security rules both sheets need. It was deployed
+### Option 3 — the recommended layout
+
+`option-3.html` is our proposal on the Option 2 envelope: two shops of
+4.20 × 11.80 m with mezzanines under the 5.00 m ground floor instead of three
+narrow shops, a 1.50 m corridor, the stair hall glazed onto the lightwell, the
+same dental clinic, and three suites per upper floor (53, 58 and 45 m², each
+with two treatment rooms) instead of four. Eleven units in allocation, a
+mezzanine-slab cost row, its own document `sheets/latakia-option-3`. The plans
+come from `option-3/plans.py`, which imports the drawing helpers from
+`option-2/plans.py`.
+
+`firestore.rules` holds the security rules all three sheets need. It was deployed
 on 6 September (`firebase deploy --only firestore:rules --project
 latakia-feasibility`); before that the live rules admitted only the Option 1
 document and Save on Option 2 failed.
@@ -86,6 +98,10 @@ and furnished floor plans drawn from the Option 2 sheet. Later the same
 evening the upper floors were redrawn as clinic suites (the office fit-out
 read as clutter), the ground clinic got a store in its dead corner, the
 lightwell was planted and kept open through the upper floors.
+
+**Calculator, 6 September (late)** — the ground clinic became a dental clinic
+and the rules were deployed; then a third sheet, Option 3, for the layout we
+recommend, with its own plans and a three-way switch on every sheet.
 
 **Open** — the contact number in the footer is the live one; nothing else is
 placeholder. A higher-resolution export of the facade render would sharpen the

@@ -9,7 +9,9 @@ is; this file is about how to work on it without breaking things.
 index.html          feasibility calculator, Option 1 (live at the Pages root)
 option-2.html       the same calculator for the architect's Option 2 layout
 option-2/           Option 2 floor plans (SVG + PNG) and plans.py, which draws them
-firestore.rules     security rules for both sheets (deploy with firebase.json)
+option-3.html       the recommended layout, generated from option-2.html
+option-3/           its plans; plans.py imports the helpers from option-2/plans.py
+firestore.rules     security rules for the three sheets (deploy with firebase.json)
 test.html           scratch copy of the calculator — not linked, not maintained
 site/               the project site (live at /site/)
   index.html        markup and copy, English + Arabic
@@ -45,12 +47,15 @@ cd site && python3 -m http.server 8765
   change to the data shape needs a schema-version bump in the sheet.
 - The calculator and the site are independent. A change to one should not
   touch the other.
-- **`option-2.html` is generated from `index.html` once, then diverges.** The
-  two share their CSS and script by copy, not by reference: a fix to the
-  sheet's logic has to be made in both files. They save to different Firestore
-  documents (`sheets/latakia` and `sheets/latakia-option-2`) with their own
-  schema versions (2 and 1); keep both ids in `firestore.rules`.
-- **The Option 2 plans are drawn by `option-2/plans.py`**, not by hand. Change
+- **`option-2.html` and `option-3.html` were generated from `index.html` once,
+  then diverge.** The three share their CSS and script by copy, not by
+  reference: a fix to the sheet's logic has to be made in all three files.
+  They save to different Firestore documents (`sheets/latakia`,
+  `sheets/latakia-option-2`, `sheets/latakia-option-3`) with their own schema
+  versions; keep every id in `firestore.rules` and redeploy when one is added.
+  Option 3 has five construction cost rows, so its script sums `i < 5`.
+- **The Option 2 and 3 plans are drawn by `option-2/plans.py` and
+  `option-3/plans.py`**, not by hand. Change
   the script, run `python3 option-2/plans.py --png`, and commit the SVG and PNG
   it writes. Only the shell and unit areas come from the architect; the
   partitions and furniture are our proposal and say so on the page.
@@ -94,7 +99,8 @@ backdrop shows at the edges.
 
 Both pieces are live. On 6 September a second calculator for the architect's
 Option 2 was added (`option-2.html` + `option-2/`), live and saving to its own
-document since `firestore.rules` was deployed that evening. Recent work
+document since `firestore.rules` was deployed that evening. Option 3, the
+recommended layout, followed the same night with its own sheet and plans. Recent work
 on the site: new render with the shops, a
 fifth detail tile, widened hero images, left neighbour cut to the shop line.
 Nothing is half-finished. Known limitation: the render is low resolution;
