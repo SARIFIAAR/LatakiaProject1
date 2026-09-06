@@ -372,7 +372,7 @@ def ground():
 
     p.unit(560, 800, "عيادة", "66 m²", "Clinic")
     p.room(660, 905, "انتظار", "Waiting", 22)
-    p.room(810, 890, "فحص ١", "Consulting 1", 24)
+    p.room(965, 690, "فحص ١", "Consulting 1", 22)
     p.room(850, 400, "فحص ٢", "Consulting 2", 24)
     p.room(340, 560, "حمام", "WC", 22)
     p.room(515, 585, "مخزن", "Store", 22)

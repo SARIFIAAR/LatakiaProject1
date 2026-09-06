@@ -285,8 +285,8 @@
 <text x="560" y="864" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Clinic</text>
 <text x="660" y="905" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">انتظار</text>
 <text x="660" y="923.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Waiting</text>
-<text x="810" y="890" font-size="24" font-weight="500" text-anchor="middle" fill="#1c2a33">فحص ١</text>
-<text x="810" y="910.4" font-size="16.799999999999997" font-weight="400" text-anchor="middle" fill="#5f7079">Consulting 1</text>
+<text x="965" y="690" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">فحص ١</text>
+<text x="965" y="708.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Consulting 1</text>
 <text x="850" y="400" font-size="24" font-weight="500" text-anchor="middle" fill="#1c2a33">فحص ٢</text>
 <text x="850" y="420.4" font-size="16.799999999999997" font-weight="400" text-anchor="middle" fill="#5f7079">Consulting 2</text>
 <text x="340" y="560" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
