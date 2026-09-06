@@ -18,9 +18,7 @@
 <rect x="245" y="815" width="365" height="15"/>
 <rect x="610" y="830" width="15" height="120"/>
 <rect x="700" y="640" width="10" height="310"/>
-<rect x="430" y="630" width="615" height="10"/>
-<rect x="420" y="455" width="10" height="175"/>
-<rect x="560" y="455" width="10" height="175"/>
+<rect x="680" y="630" width="365" height="10"/>
 <rect x="680" y="455" width="10" height="175"/>
 <rect x="790" y="455" width="10" height="175"/>
 <rect x="565" y="445" width="480" height="10"/>
@@ -30,18 +28,16 @@
 <rect x="610" y="950" width="15" height="1200"/>
 <rect x="460" y="2135" width="150" height="15"/>
 <rect x="25" y="2135" width="420" height="15"/>
-<rect x="25" y="1200" width="420" height="10"/>
-<rect x="145" y="970" width="10" height="230"/>
+<rect x="315" y="970" width="10" height="150"/>
+<rect x="315" y="1120" width="130" height="10"/>
 <rect x="625" y="2135" width="420" height="15"/>
-<rect x="625" y="1200" width="420" height="10"/>
-<rect x="745" y="970" width="10" height="230"/>
+<rect x="915" y="970" width="10" height="150"/>
+<rect x="915" y="1120" width="130" height="10"/>
 </g>
 <g id="open" fill="#fff">
 <rect x="480" y="814" width="110" height="17"/>
 <rect x="699" y="830" width="12" height="90"/>
-<rect x="270" y="429" width="140" height="27"/>
-<rect x="460" y="629" width="80" height="12"/>
-<rect x="585" y="629" width="80" height="12"/>
+<rect x="270" y="429" width="260" height="27"/>
 <rect x="679" y="550" width="12" height="70"/>
 <rect x="830" y="629" width="80" height="12"/>
 <rect x="590" y="444" width="90" height="12"/>
@@ -51,17 +47,15 @@
 <rect x="25" y="2134" width="155" height="17"/>
 <rect x="290" y="2134" width="155" height="17"/>
 <rect x="180" y="2134" width="110" height="17"/>
-<rect x="45" y="1199" width="80" height="12"/>
-<rect x="335" y="1199" width="90" height="12"/>
+<rect x="350" y="1119" width="80" height="12"/>
 <rect x="625" y="2134" width="155" height="17"/>
 <rect x="890" y="2134" width="155" height="17"/>
 <rect x="780" y="2134" width="110" height="17"/>
-<rect x="645" y="1199" width="80" height="12"/>
-<rect x="935" y="1199" width="90" height="12"/>
+<rect x="950" y="1119" width="80" height="12"/>
 </g>
 <g id="glass" fill="none" stroke="#2f8f9d" stroke-width="2.5">
 <line x1="480" y1="817" x2="541.0" y2="817" stroke-width="4"/><line x1="529.0" y1="828" x2="590" y2="828" stroke-width="4"/>
-<line x1="270" y1="430" x2="410" y2="430"/><line x1="270" y1="442.5" x2="410" y2="442.5"/><line x1="270" y1="455" x2="410" y2="455"/>
+<line x1="270" y1="430" x2="530" y2="430"/><line x1="270" y1="442.5" x2="530" y2="442.5"/><line x1="270" y1="455" x2="530" y2="455"/>
 <line x1="540" y1="25" x2="540" y2="430"/><line x1="552.5" y1="25" x2="552.5" y2="430"/><line x1="565" y1="25" x2="565" y2="430"/>
 <line x1="40" y1="430" x2="230" y2="430"/><line x1="40" y1="442.5" x2="230" y2="442.5"/><line x1="40" y1="455" x2="230" y2="455"/>
 <line x1="25" y1="2135" x2="180" y2="2135"/><line x1="25" y1="2142.5" x2="180" y2="2142.5"/><line x1="25" y1="2150" x2="180" y2="2150"/>
@@ -71,18 +65,14 @@
 </g>
 <g id="door" fill="none" stroke="#1c2a33" stroke-width="2.5">
 <line x1="710" y1="920" x2="800" y2="920"/><path d="M800 920 A90 90 0 0 0 710 830"/>
-<line x1="460" y1="630" x2="460" y2="550"/><path d="M460 550 A80 80 0 0 1 540 630"/>
-<line x1="585" y1="630" x2="585" y2="550"/><path d="M585 550 A80 80 0 0 1 665 630"/>
 <line x1="690" y1="550" x2="760" y2="550"/><path d="M760 550 A70 70 0 0 1 690 620"/>
 <line x1="830" y1="630" x2="830" y2="550"/><path d="M830 550 A80 80 0 0 1 910 630"/>
 <line x1="590" y1="445" x2="590" y2="355"/><path d="M590 355 A90 90 0 0 1 680 445"/>
 <line x1="470" y1="2135" x2="470" y2="2005"/><path d="M470 2005 A130 130 0 0 1 600 2135"/>
 <line x1="180" y1="2135" x2="180" y2="2025"/><path d="M180 2025 A110 110 0 0 1 290 2135"/>
-<line x1="45" y1="1200" x2="45" y2="1120"/><path d="M45 1120 A80 80 0 0 1 125 1200"/>
-<line x1="425" y1="1200" x2="425" y2="1110"/><path d="M425 1110 A90 90 0 0 0 335 1200"/>
+<line x1="350" y1="1120" x2="350" y2="1040"/><path d="M350 1040 A80 80 0 0 1 430 1120"/>
 <line x1="780" y1="2135" x2="780" y2="2025"/><path d="M780 2025 A110 110 0 0 1 890 2135"/>
-<line x1="645" y1="1200" x2="645" y2="1120"/><path d="M645 1120 A80 80 0 0 1 725 1200"/>
-<line x1="1025" y1="1200" x2="1025" y2="1110"/><path d="M1025 1110 A90 90 0 0 0 935 1200"/>
+<line x1="950" y1="1120" x2="950" y2="1040"/><path d="M950 1040 A80 80 0 0 1 1030 1120"/>
 </g>
 <g id="furn" fill="#fff" stroke="#5f7079" stroke-width="2.2" stroke-linejoin="round">
 <rect x="45" y="45" width="475" height="40" rx="4" />
@@ -109,7 +99,6 @@
 <g transform="translate(930 917) rotate(0)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 <g transform="translate(740 495) rotate(0)"><rect x="-25" y="-38" width="50" height="18" rx="3"/><ellipse cx="0" cy="8" rx="19" ry="26"/></g>
 <g transform="translate(765 588) rotate(90)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
-<g transform="translate(470 487) rotate(0)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 <g transform="translate(1012 120) rotate(90)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 <rect x="25.0" y="575" width="105.0" height="255" fill="none"/>
 <line x1="25.0" y1="602" x2="130.0" y2="602"/>
@@ -134,38 +123,44 @@
 <line x1="25" y1="575" x2="245" y2="575"/>
 <rect x="130.0" y="575" width="10" height="255" fill="#1c2a33"/>
 <line x1="192.5" y1="870" x2="192.5" y2="605" stroke-width="3"/><path d="M180.5 627 L192.5 605 L204.5 627" fill="none" stroke-width="3"/>
-<g transform="translate(85 1010) rotate(0)"><rect x="-25" y="-38" width="50" height="18" rx="3"/><ellipse cx="0" cy="8" rx="19" ry="26"/></g>
-<g transform="translate(85 1165) rotate(180)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
+<g transform="translate(385 1015) rotate(0)"><rect x="-25" y="-38" width="50" height="18" rx="3"/><ellipse cx="0" cy="8" rx="19" ry="26"/></g>
+<g transform="translate(333 1075) rotate(270)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 <rect x="25" y="970" width="420" height="480" fill="none" stroke-dasharray="14 10"/>
-<rect x="350" y="1220" width="90" height="300" fill="none"/>
-<line x1="350" y1="1245" x2="440" y2="1245"/>
-<line x1="350" y1="1270" x2="440" y2="1270"/>
-<line x1="350" y1="1295" x2="440" y2="1295"/>
-<line x1="350" y1="1320" x2="440" y2="1320"/>
-<line x1="350" y1="1345" x2="440" y2="1345"/>
-<line x1="350" y1="1370" x2="440" y2="1370"/>
-<line x1="350" y1="1395" x2="440" y2="1395"/>
-<line x1="350" y1="1420" x2="440" y2="1420"/>
-<line x1="350" y1="1445" x2="440" y2="1445"/>
-<line x1="350" y1="1470" x2="440" y2="1470"/>
-<line x1="350" y1="1495" x2="440" y2="1495"/>
-<line x1="395" y1="1560" x2="395" y2="1245" stroke-width="3"/><path d="M383 1265 L395 1245 L407 1265" fill="none" stroke-width="3"/>
-<g transform="translate(685 1010) rotate(0)"><rect x="-25" y="-38" width="50" height="18" rx="3"/><ellipse cx="0" cy="8" rx="19" ry="26"/></g>
-<g transform="translate(685 1165) rotate(180)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
+<rect x="35" y="975" width="300" height="90" fill="none"/>
+<line x1="55" y1="975" x2="55" y2="1065"/>
+<line x1="75" y1="975" x2="75" y2="1065"/>
+<line x1="95" y1="975" x2="95" y2="1065"/>
+<line x1="115" y1="975" x2="115" y2="1065"/>
+<line x1="135" y1="975" x2="135" y2="1065"/>
+<line x1="155" y1="975" x2="155" y2="1065"/>
+<line x1="175" y1="975" x2="175" y2="1065"/>
+<line x1="195" y1="975" x2="195" y2="1065"/>
+<line x1="215" y1="975" x2="215" y2="1065"/>
+<line x1="235" y1="975" x2="235" y2="1065"/>
+<line x1="255" y1="975" x2="255" y2="1065"/>
+<line x1="275" y1="975" x2="275" y2="1065"/>
+<line x1="295" y1="975" x2="295" y2="1065"/>
+<line x1="315" y1="975" x2="315" y2="1065"/>
+<line x1="55" y1="1020.0" x2="310" y2="1020.0" stroke-width="3"/><path d="M290 1008.0 L310 1020.0 L290 1032.0" fill="none" stroke-width="3"/>
+<g transform="translate(985 1015) rotate(0)"><rect x="-25" y="-38" width="50" height="18" rx="3"/><ellipse cx="0" cy="8" rx="19" ry="26"/></g>
+<g transform="translate(933 1075) rotate(270)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 <rect x="625" y="970" width="420" height="480" fill="none" stroke-dasharray="14 10"/>
-<rect x="950" y="1220" width="90" height="300" fill="none"/>
-<line x1="950" y1="1245" x2="1040" y2="1245"/>
-<line x1="950" y1="1270" x2="1040" y2="1270"/>
-<line x1="950" y1="1295" x2="1040" y2="1295"/>
-<line x1="950" y1="1320" x2="1040" y2="1320"/>
-<line x1="950" y1="1345" x2="1040" y2="1345"/>
-<line x1="950" y1="1370" x2="1040" y2="1370"/>
-<line x1="950" y1="1395" x2="1040" y2="1395"/>
-<line x1="950" y1="1420" x2="1040" y2="1420"/>
-<line x1="950" y1="1445" x2="1040" y2="1445"/>
-<line x1="950" y1="1470" x2="1040" y2="1470"/>
-<line x1="950" y1="1495" x2="1040" y2="1495"/>
-<line x1="995" y1="1560" x2="995" y2="1245" stroke-width="3"/><path d="M983 1265 L995 1245 L1007 1265" fill="none" stroke-width="3"/>
+<rect x="635" y="975" width="300" height="90" fill="none"/>
+<line x1="655" y1="975" x2="655" y2="1065"/>
+<line x1="675" y1="975" x2="675" y2="1065"/>
+<line x1="695" y1="975" x2="695" y2="1065"/>
+<line x1="715" y1="975" x2="715" y2="1065"/>
+<line x1="735" y1="975" x2="735" y2="1065"/>
+<line x1="755" y1="975" x2="755" y2="1065"/>
+<line x1="775" y1="975" x2="775" y2="1065"/>
+<line x1="795" y1="975" x2="795" y2="1065"/>
+<line x1="815" y1="975" x2="815" y2="1065"/>
+<line x1="835" y1="975" x2="835" y2="1065"/>
+<line x1="855" y1="975" x2="855" y2="1065"/>
+<line x1="875" y1="975" x2="875" y2="1065"/>
+<line x1="895" y1="975" x2="895" y2="1065"/>
+<line x1="915" y1="975" x2="915" y2="1065"/>
+<line x1="655" y1="1020.0" x2="910" y2="1020.0" stroke-width="3"/><path d="M890 1008.0 L910 1020.0 L890 1032.0" fill="none" stroke-width="3"/>
 </g>
 <g id="text" >
 <text x="285" y="315" font-size="24" font-weight="500" text-anchor="middle" fill="#1c2a33">منور مزروع</text>
@@ -180,29 +175,22 @@
 <text x="700" y="410" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">علاج ٢</text>
 <text x="700" y="428.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Treatment 2</text>
 <text x="712" y="614" font-size="13" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="495" y="545" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">تعقيم</text>
-<text x="495" y="560.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Sterilisation</text>
 <text x="920" y="580" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">مخزن</text>
 <text x="920" y="598.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Store</text>
-<text x="625" y="530" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">ممر</text>
 <text x="135" y="900" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">درج</text>
 <text x="135" y="918.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Stair · daylit</text>
-<text x="235" y="1330" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">ميزانين فوق</text>
-<text x="235" y="1347.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Mezzanine over</text>
+<text x="390" y="1088" font-size="13" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
+<text x="235" y="1300" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">ميزانين فوق</text>
+<text x="235" y="1317.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Mezzanine over</text>
 <text x="235" y="1590" font-size="34" font-weight="600" text-anchor="middle" fill="#1c2a33">محل ١</text>
 <text x="235" y="1626" font-size="30" font-weight="500" text-anchor="middle" fill="#1c2a33">49.6 m²</text>
 <text x="235" y="1654" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Shop 1 · 4.20 × 11.80</text>
-<text x="85" y="1090" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="295" y="1090" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">مستودع</text>
-<text x="295" y="1107.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Store</text>
-<text x="835" y="1330" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">ميزانين فوق</text>
-<text x="835" y="1347.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Mezzanine over</text>
+<text x="990" y="1088" font-size="13" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
+<text x="835" y="1300" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">ميزانين فوق</text>
+<text x="835" y="1317.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Mezzanine over</text>
 <text x="835" y="1590" font-size="34" font-weight="600" text-anchor="middle" fill="#1c2a33">محل ٢</text>
 <text x="835" y="1626" font-size="30" font-weight="500" text-anchor="middle" fill="#1c2a33">49.6 m²</text>
 <text x="835" y="1654" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Shop 2 · 4.20 × 11.80</text>
-<text x="685" y="1090" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="895" y="1090" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">مستودع</text>
-<text x="895" y="1107.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Store</text>
 <text x="535" y="1560" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">ممر</text>
 <text x="535" y="1578.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Passage 1.50</text>
 <text x="400" y="895" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">ممر</text>

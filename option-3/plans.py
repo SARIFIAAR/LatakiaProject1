@@ -51,14 +51,11 @@ def clinic(p, cross=False):
         p.vwall(245, 430, 950, PW)
         p.door_v(245, 260, 850, 90, "b", "r")
     p.vwall(700, 640, 950, IW); p.door_v(700, 710, 830, 90, "b", "r")
-    # the row along the lightwell wall: sterilisation, a short hall, the WC against
-    # the store wall, the store; the waiting room reaches the garden wall on the left
-    p.hwall(430, 1045, 630, IW)
-    p.glass_h(270, 410, 430, 455)                               # waiting room onto the garden
-    p.vwall(420, 455, 630, IW)                                  # sterilisation
-    p.vwall(560, 455, 630, IW); p.door_h(460, 630, 640, 80, "l", "u")
-    p.door_h(585, 630, 640, 80, "l", "u")                       # waiting -> hall
-    p.vwall(680, 455, 630, IW); p.door_v(680, 690, 550, 70, "t", "r")   # WC off the hall
+    # along the lightwell wall: the waiting room, glazed to the garden, then the WC
+    # against the store wall, then the store
+    p.hwall(680, 1045, 630, IW)
+    p.glass_h(270, 530, 430, 455)                               # the waiting room's garden wall, all glass
+    p.vwall(680, 455, 630, IW); p.door_v(680, 690, 550, 70, "t", "r")   # WC in the corner by the store
     p.vwall(790, 455, 630, IW); p.door_h(830, 630, 640, 80, "l", "u")   # store
     p.hwall(565, 1045, 445, IW); p.door_h(590, 445, 455, 90, "l", "u")
     p.glass_v(540, 565, 25, 430)
@@ -74,15 +71,14 @@ def clinic(p, cross=False):
         p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
     p.counter(830, 890, 200, 55); p.basin(930, 917, 0); p.dental_chair(860, 760, 90)
     p.toilet(740, 495, 0); p.basin(765, 588, 90)
-    p.counter(435, 460, 120, 55); p.basin(470, 487, 0); p.rect(510, 465, 40, 40, rx=4)
     p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)
     p.counter(985, 40, 55, 250); p.basin(1012, 120, 90); p.dental_chair(800, 250)
     p.rect(590, 380, 50, 50, rx=4)
     if p.furniture: p.label(615, 448, "X-ray", size=14, color=FURN)
     p.room(660, 900, "انتظار", "Waiting", 22)
     p.room(765, 680, "علاج ١", "Treatment 1", 22); p.room(700, 410, "علاج ٢", "Treatment 2", 22)
-    p.label(712, 614, "حمام", size=13); p.room(495, 545, "تعقيم", "Sterilisation", 18)
-    p.room(920, 580, "مخزن", "Store", 22); p.room(625, 530, "ممر", None, 18)
+    p.label(712, 614, "حمام", size=13)
+    p.room(920, 580, "مخزن", "Store", 22)
 
 
 def ground():
@@ -134,30 +130,34 @@ def ground():
 
 
 def shop(p, a, b, ytop, i, area, dims):
-    """One shop between party walls a..b from its back wall at ytop to the street,
-    with WC and store under a mezzanine at the back."""
+    """One shop between party walls a..b from its back wall at ytop to the street.
+    A straight stair along the back wall climbs to a mezzanine over the back
+    4.8 m; the WC sits in the back corner beside it."""
     m = (a + b) // 2
     p.hwall(a, b, 2135, 15)
     p.glass_h(a, m - 55, 2135, 2150); p.glass_h(m + 55, b, 2135, 2150)
     p.door_h(m - 55, 2135, 2150, 110, "l", "u")
-    p.hwall(a, b, ytop + 230, IW); p.vwall(a + 120, ytop, ytop + 230, IW)
-    p.door_h(a + 20, ytop + 230, ytop + 240, 80, "l", "u"); p.door_h(b - 110, ytop + 230, ytop + 240, 90, "r", "u")
-    p.toilet(a + 60, ytop + 40, 0); p.basin(a + 60, ytop + 195, 180)
-    p.shelf(a + 140, ytop + 5, b - a - 150, 40)
+    # WC in the back corner
+    p.vwall(b - 130, ytop, ytop + 150, IW); p.hwall(b - 130, b, ytop + 150, IW)
+    p.door_h(b - 95, ytop + 150, ytop + 160, 80, "l", "u")
+    p.toilet(b - 60, ytop + 45, 0); p.basin(b - 112, ytop + 105, 270)
+    p.label(b - 55, ytop + 118, "حمام", size=13)
+    # mezzanine outline and its stair along the back wall
     p.f(f'<rect x="{a}" y="{ytop}" width="{b-a}" height="480" fill="none" stroke-dasharray="14 10"/>')
-    p.f(f'<rect x="{b-95}" y="{ytop+250}" width="90" height="300" fill="none"/>')
-    for k in range(1, 12):
-        p.f(f'<line x1="{b-95}" y1="{ytop+250+k*25}" x2="{b-5}" y2="{ytop+250+k*25}"/>')
-    p.f(f'<line x1="{b-50}" y1="{ytop+590}" x2="{b-50}" y2="{ytop+275}" stroke-width="3"/>'
-        f'<path d="M{b-62} {ytop+295} L{b-50} {ytop+275} L{b-38} {ytop+295}" fill="none" stroke-width="3"/>')
-    p.room(m, ytop + 360, "ميزانين فوق", "Mezzanine over", 20)
+    sx0, sx1, sy0, sy1 = a + 10, a + 310, ytop + 5, ytop + 95
+    p.f(f'<rect x="{sx0}" y="{sy0}" width="{sx1-sx0}" height="{sy1-sy0}" fill="none"/>')
+    for k in range(1, 15):
+        p.f(f'<line x1="{sx0+k*20}" y1="{sy0}" x2="{sx0+k*20}" y2="{sy1}"/>')
+    p.f(f'<line x1="{sx0+20}" y1="{(sy0+sy1)/2}" x2="{sx1-25}" y2="{(sy0+sy1)/2}" stroke-width="3"/>'
+        f'<path d="M{sx1-45} {(sy0+sy1)/2-12} L{sx1-25} {(sy0+sy1)/2} L{sx1-45} {(sy0+sy1)/2+12}" fill="none" stroke-width="3"/>')
+    p.room(m, ytop + 330, "ميزانين فوق", "Mezzanine over", 20)
+    # sales floor
     p.shelf(a + 5, ytop + 500, 40, 2030 - ytop - 500); p.shelf(b - 45, ytop + 630, 40, 2030 - ytop - 630)
     p.counter(a + 60, ytop + 510, 200, 65); p.chair(a + 160, ytop + 465, 0)
     ty = max(1750, ytop + 700)
     p.rect(m - 60, ty, 120, 200, rx=6); p.rect(m - 160, ty, 70, 200, rx=6); p.rect(m + 90, ty, 70, 200, rx=6)
     p.plant(a + 45, 2095); p.plant(b - 45, 2095)
     p.unit(m, ytop + 620, f"محل {'١٢'[i]}", area, f"Shop {i+1} · {dims}")
-    p.room(a + 60, ytop + 120, "حمام", None, 20); p.room(m + 60, ytop + 120, "مستودع", "Store", 20)
 
 
 def ground_central():
