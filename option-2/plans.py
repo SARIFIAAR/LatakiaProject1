@@ -84,6 +84,13 @@ class Plan:
         self.add("door", f'<line x1="{xm}" y1="{hy}" x2="{lx}" y2="{ly}"/>'
                          f'<path d="M{lx} {ly} A{w} {w} 0 0 {sweep} {ex} {ey}"/>')
 
+    def door_slide_h(self, x, y0, y1, w=110):
+        """Sliding glass door in a horizontal wall: two offset leaves, no swing."""
+        self.opening(x, y0 - 1, x + w, y1 + 1)
+        h = w / 2 + 6
+        self.add("glass", f'<line x1="{x}" y1="{y0+2}" x2="{x+h}" y2="{y0+2}" stroke-width="4"/>'
+                          f'<line x1="{x+w-h}" y1="{y1-2}" x2="{x+w}" y2="{y1-2}" stroke-width="4"/>')
+
     # ---- glazing -----------------------------------------------------------
     def glass_h(self, x0, x1, y0, y1):
         self.opening(x0, y0 - 1, x1, y1 + 1)

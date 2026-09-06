@@ -33,10 +33,18 @@ def shell_ground(p):
     p.room(285, 315, "منور مزروع", "Planted lightwell", 24)
 
 
-def clinic(p):
+def clinic(p, cross=False):
+    """The Option 2 dental clinic. With cross=True a corridor 1.35 m deep is cut
+    off its front edge between the stair hall and the passage, and the entrance
+    moves to the axis."""
     """The Option 2 dental clinic, unchanged: it already works."""
-    p.vwall(245, 430, 950, PW)
-    p.door_v(245, 260, 850, 90, "b", "r")
+    if cross:
+        p.vwall(245, 430, 830, PW)
+        p.hwall(245, 610, 815, 15); p.door_slide_h(480, 815, 830, 110)
+        p.vwall(610, 830, 950, 15)
+    else:
+        p.vwall(245, 430, 950, PW)
+        p.door_v(245, 260, 850, 90, "b", "r")
     p.vwall(700, 640, 950, IW); p.door_v(700, 710, 830, 90, "b", "r")
     p.hwall(260, 1045, 630, IW)
     p.vwall(420, 455, 630, IW); p.door_h(300, 630, 640, 80, "l", "u")
@@ -45,16 +53,23 @@ def clinic(p):
     p.vwall(790, 455, 630, IW); p.door_h(830, 630, 640, 80, "l", "u")
     p.hwall(565, 1045, 445, IW); p.door_h(600, 445, 455, 90, "l", "u")
     p.glass_v(540, 565, 25, 430)
-    p.counter(430, 655, 180, 60); p.chair(520, 745, 180)
-    p.sofa(270, 650, 60, 190, "l"); p.sofa(400, 880, 200, 60, "b"); p.rect(350, 780, 60, 60, rx=6)
+    if cross:
+        p.counter(430, 700, 180, 60); p.chair(520, 670, 0)
+        p.sofa(270, 650, 60, 150, "l"); p.rect(350, 720, 60, 60, rx=6); p.sofa(635, 650, 60, 150, "r")
+        p.label(430, 795, "عيادة أسنان", size=26, weight=600, anchor="end")
+        p.label(450, 795, "61 m²", size=24, weight=600, anchor="start")
+        p.label(520, 812, "Dental clinic", size=15, color=FURN)
+    else:
+        p.counter(430, 655, 180, 60); p.chair(520, 745, 180)
+        p.sofa(270, 650, 60, 190, "l"); p.rect(350, 780, 60, 60, rx=6); p.sofa(400, 880, 200, 60, "b")
+        p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
     p.counter(830, 890, 200, 55); p.basin(930, 917, 0); p.dental_chair(860, 760, 90)
     p.toilet(300, 500, 0); p.basin(390, 600, 90)
     p.counter(435, 460, 160, 55); p.basin(470, 487, 0); p.rect(545, 465, 45, 45, rx=4)
     p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)
     p.counter(985, 40, 55, 250); p.basin(1012, 120, 90); p.dental_chair(800, 250)
     p.rect(590, 380, 50, 50, rx=4); p.label(615, 448, "X-ray", size=14, color=FURN)
-    p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
-    p.room(660, 905, "انتظار", "Waiting", 22)
+    p.room(660, 900, "انتظار", "Waiting", 22)
     p.room(765, 680, "علاج ١", "Treatment 1", 22); p.room(700, 410, "علاج ٢", "Treatment 2", 22)
     p.room(340, 560, "حمام", "WC", 22); p.room(515, 540, "تعقيم", "Sterilisation", 18)
     p.room(920, 580, "مخزن", "Store", 22); p.room(700, 525, "ممر", None, 20)
@@ -102,6 +117,59 @@ def ground():
     y = D + 130
     p.dim_h(0, W, y + 60, "10.70")
     p.dim_h(25, 175, y, "1.50"); p.dim_h(190, 610, y, "4.20"); p.dim_h(625, 1045, y, "4.20")
+    x = W + 80
+    p.dim_v(x + 60, 0, D, "21.50")
+    p.dim_v(x, 0, 430, "4.30"); p.dim_v(x, 455, 950, "4.95"); p.dim_v(x, 970, D, "11.80")
+    return p
+
+
+def shop(p, a, b, ytop, i, area, dims):
+    """One shop between party walls a..b from its back wall at ytop to the street,
+    with WC and store under a mezzanine at the back."""
+    m = (a + b) // 2
+    p.hwall(a, b, 2135, 15)
+    p.glass_h(a, m - 55, 2135, 2150); p.glass_h(m + 55, b, 2135, 2150)
+    p.door_h(m - 55, 2135, 2150, 110, "l", "u")
+    p.hwall(a, b, ytop + 230, IW); p.vwall(a + 120, ytop, ytop + 230, IW)
+    p.door_h(a + 20, ytop + 230, ytop + 240, 80, "l", "u"); p.door_h(b - 110, ytop + 230, ytop + 240, 90, "r", "u")
+    p.toilet(a + 60, ytop + 40, 0); p.basin(a + 60, ytop + 195, 180)
+    p.shelf(a + 140, ytop + 5, b - a - 150, 40)
+    p.f(f'<rect x="{a}" y="{ytop}" width="{b-a}" height="480" fill="none" stroke-dasharray="14 10"/>')
+    p.f(f'<rect x="{b-95}" y="{ytop+250}" width="90" height="300" fill="none"/>')
+    for k in range(1, 12):
+        p.f(f'<line x1="{b-95}" y1="{ytop+250+k*25}" x2="{b-5}" y2="{ytop+250+k*25}"/>')
+    p.f(f'<line x1="{b-50}" y1="{ytop+590}" x2="{b-50}" y2="{ytop+275}" stroke-width="3"/>'
+        f'<path d="M{b-62} {ytop+295} L{b-50} {ytop+275} L{b-38} {ytop+295}" fill="none" stroke-width="3"/>')
+    p.room(m, ytop + 360, "ميزانين فوق", "Mezzanine over", 20)
+    p.shelf(a + 5, ytop + 500, 40, 2030 - ytop - 500); p.shelf(b - 45, ytop + 630, 40, 2030 - ytop - 630)
+    p.counter(a + 60, ytop + 510, 200, 65); p.chair(a + 160, ytop + 465, 0)
+    ty = max(1750, ytop + 700)
+    p.rect(m - 60, ty, 120, 200, rx=6); p.rect(m - 160, ty, 70, 200, rx=6); p.rect(m + 90, ty, 70, 200, rx=6)
+    p.plant(a + 45, 2095); p.plant(b - 45, 2095)
+    p.unit(m, ytop + 620, f"محل {'١٢'[i]}", area, f"Shop {i+1} · {dims}")
+    p.room(a + 60, ytop + 120, "حمام", None, 20); p.room(m + 60, ytop + 120, "مستودع", "Store", 20)
+
+
+def ground_central():
+    """The passage on the facade's axis; at its end a corridor 1.35 m deep, cut
+    from the clinic's front edge, turns left to the stair. The clinic is
+    entered from the axis. Both shops keep their full depth."""
+    p = Plan()
+    shell_ground(p)
+    clinic(p, cross=True)
+    p.glass_h(40, 230, 430, 455)
+    p.stair(25, 455, 220, 495)
+    p.room(135, 900, "درج", "Stair · daylit", 22)
+    p.hwall(25, 445, 950, 20); p.hwall(625, W, 950, 20)        # the shops' back walls
+    p.vwall(445, 950, D, PW); p.vwall(610, 950, D, PW)          # the passage
+    p.hwall(460, 610, 2135, 15); p.door_h(470, 2135, 2150, 130, "l", "u")
+    shop(p, 25, 445, 970, 0, "49.6 m²", "4.20 × 11.80")
+    shop(p, 625, 1045, 970, 1, "49.6 m²", "4.20 × 11.80")
+    p.room(535, 1560, "ممر", "Passage 1.50", 22)
+    p.room(400, 895, "ممر", None, 18)
+    y = D + 130
+    p.dim_h(0, W, y + 60, "10.70")
+    p.dim_h(25, 445, y, "4.20"); p.dim_h(460, 610, y, "1.50"); p.dim_h(625, 1045, y, "4.20")
     x = W + 80
     p.dim_v(x + 60, 0, D, "21.50")
     p.dim_v(x, 0, 430, "4.30"); p.dim_v(x, 455, 950, "4.95"); p.dim_v(x, 970, D, "11.80")
@@ -187,7 +255,8 @@ def typical():
 
 
 if __name__ == "__main__":
-    for name, fn, title in (("plan-ground", ground, "Recommended — ground floor"),
+    for name, fn, title in (("plan-ground", ground_central, "Recommended — ground floor"),
+                            ("plan-ground-side", ground, "Recommended — ground floor, side-corridor variant"),
                             ("plan-typical", typical, "Recommended — typical upper floor")):
         path = os.path.join(HERE, name + ".svg")
         with open(path, "w") as f:

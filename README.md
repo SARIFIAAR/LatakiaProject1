@@ -51,14 +51,16 @@ and re-run it (`--png` also re-renders the PNGs through headless Chrome).
 
 ### Option 3 — the recommended layout
 
-`option-3.html` is our proposal on the Option 2 envelope: two shops of
-4.20 × 11.80 m with mezzanines under the 5.00 m ground floor instead of three
-narrow shops, a 1.50 m corridor, the stair hall glazed onto the lightwell, the
-same dental clinic, and three suites per upper floor (53, 58 and 45 m², each
+`option-3.html` is our proposal on the Option 2 envelope: a 1.50 m passage
+on the axis of the facade with a shop of 4.20 × 11.80 m either side, each with
+a mezzanine under the 5.00 m ground floor; the dental clinic entered from the
+end of the passage, a corridor cut from its front edge turning to the stair
+(the clinic keeps 61 m²); the stair hall glazed onto the lightwell; and three suites per upper floor (53, 58 and 45 m², each
 with two treatment rooms) instead of four. Eleven units in allocation, a
 mezzanine-slab cost row, its own document `sheets/latakia-option-3`. The plans
 come from `option-3/plans.py`, which imports the drawing helpers from
-`option-2/plans.py`.
+`option-2/plans.py`; `plan-ground-side.*` is the earlier side-corridor
+variant, kept for comparison and not shown on the page.
 
 `firestore.rules` holds the security rules all three sheets need. It was deployed
 on 6 September (`firebase deploy --only firestore:rules --project
