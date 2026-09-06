@@ -20,7 +20,7 @@ All three load from CDN, so there is nothing to install.
 index.html        markup and copy
 css/site.css      one stylesheet, custom properties at the top
 js/site.js        scroll work, then the Three.js model
-assets/           day and night views, four detail crops
+assets/           day and night views, five detail crops
 ```
 
 ## The model
