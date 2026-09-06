@@ -40,34 +40,55 @@ def shell_ground(p):
 
 def clinic(p, cross=False):
     """The Option 2 dental clinic. With cross=True a corridor 1.35 m deep is cut
-    off its front edge between the stair hall and the passage, and the entrance
-    moves to the axis."""
-    """The Option 2 dental clinic, unchanged: it already works."""
+    off its front edge between the stair hall and the passage, the entrance
+    moves to the axis, and shop 2 runs back to the clinic's door line, so the
+    clinic is the front block (7.85 x 3.60) and the block beside the lightwell
+    (4.80 x 4.20): waiting glazed to the garden, one treatment room at the back
+    beside the lightwell, the WC in a strip off a small lobby, and a store in
+    the front block's right-hand room, joined to the strip beside the WC."""
     if cross:
         p.vwall(245, 430, 830, PW)
-        p.hwall(245, 610, 815, 15); p.door_slide_h(480, 815, 830, 110)
-        p.vwall(610, 830, 950, 15)
+        p.hwall(245, W, 815, 15); p.door_slide_h(480, 815, 830, 110)
     else:
         p.vwall(245, 430, 950, PW)
         p.door_v(245, 260, 850, 90, "b", "r")
+    p.glass_h(270, 530, 430, 455)                               # the waiting room's garden wall, all glass
+    p.hwall(565, 1045 if not cross else 870, 445, IW); p.door_h(590, 445, 455, 90, "l", "u")
+    p.glass_v(540, 565, 25, 430)
+    if cross:
+        # front block: waiting on the garden; on the right the store, which runs
+        # through into the strip beside the WC (the treatment room that was here
+        # was cancelled and merged with the store)
+        p.vwall(700, 455, 815, IW); p.door_v(700, 710, 715, 90, "b", "r")
+        p.counter(430, 700, 180, 60); p.chair(520, 670, 0)
+        p.sofa(270, 650, 60, 150, "l"); p.rect(350, 720, 60, 60, rx=6)
+        p.shelf(1000, 470, 40, 330); p.shelf(715, 470, 40, 200)
+        # back block: a lobby off the waiting room and the WC in a 1.45 m strip,
+        # the treatment room across the back; the store also opens off it
+        p.hwall(565, 1045, 290, IW); p.door_h(600, 290, 300, 90, "l", "u"); p.door_h(945, 290, 300, 80, "r", "u")
+        p.vwall(700, 300, 445, IW); p.door_v(700, 710, 330, 80, "t", "r")
+        p.vwall(860, 300, 455, IW)
+        p.toilet(785, 345, 0); p.basin(745, 415, 0)
+        p.dental_chair(800, 160)
+        p.unit(480, 610, "عيادة أسنان", "48 m²")
+        p.room(480, 760, "انتظار", "Waiting", 22)
+        p.room(880, 640, "مخزن", "Store", 22); p.room(800, 130, "علاج", "Treatment", 22)
+        p.label(830, 420, "حمام", size=13)
+        p.room(632, 385, "مدخل", None, 16)
+        p.dim_h(260, 700, 480, "440"); p.dim_v(290, 455, 815, "360")
+        p.dim_h(710, 1045, 480, "335"); p.dim_v(740, 455, 815, "360")
+        p.dim_h(565, 1045, 50, "480"); p.dim_v(600, 25, 290, "265")
+        p.dim_v(1020, 300, 445, "145")
+        return
     p.vwall(700, 640, 950, IW); p.door_v(700, 710, 830, 90, "b", "r")
     # along the lightwell wall: the waiting room, glazed to the garden, then the WC
     # against the store wall, then the store
     p.hwall(680, 1045, 630, IW)
-    p.glass_h(270, 530, 430, 455)                               # the waiting room's garden wall, all glass
     p.vwall(680, 455, 630, IW); p.door_v(680, 690, 550, 70, "t", "r")   # WC in the corner by the store
     p.vwall(790, 455, 630, IW); p.door_h(830, 630, 640, 80, "l", "u")   # store
-    p.hwall(565, 1045, 445, IW); p.door_h(590, 445, 455, 90, "l", "u")
-    p.glass_v(540, 565, 25, 430)
-    if cross:
-        p.counter(430, 700, 180, 60); p.chair(520, 670, 0)
-        p.sofa(270, 650, 60, 150, "l"); p.rect(350, 720, 60, 60, rx=6); p.sofa(635, 650, 60, 150, "r")
-        p.unit(470, 700, "عيادة أسنان", "61 m²")
-        p.dim_h(260, 680, 480, "420"); p.dim_v(290, 455, 815, "360")
-    else:
-        p.counter(430, 655, 180, 60); p.chair(520, 745, 180)
-        p.sofa(270, 650, 60, 190, "l"); p.rect(350, 780, 60, 60, rx=6); p.sofa(400, 880, 200, 60, "b")
-        p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
+    p.counter(430, 655, 180, 60); p.chair(520, 745, 180)
+    p.sofa(270, 650, 60, 190, "l"); p.rect(350, 780, 60, 60, rx=6); p.sofa(400, 880, 200, 60, "b")
+    p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
     p.counter(830, 890, 200, 55); p.basin(930, 917, 0); p.dental_chair(860, 760, 90)
     p.toilet(740, 495, 0); p.basin(765, 588, 90)
     p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)
@@ -153,7 +174,7 @@ def shop(p, a, b, ytop, i, area, dims):
     p.f(f'<line x1="{sx0+20}" y1="{(sy0+sy1)/2}" x2="{sx1-25}" y2="{(sy0+sy1)/2}" stroke-width="3"/>'
         f'<path d="M{sx1-45} {(sy0+sy1)/2-12} L{sx1-25} {(sy0+sy1)/2} L{sx1-45} {(sy0+sy1)/2+12}" fill="none" stroke-width="3"/>')
     p.room(m, ytop + 330, "ميزانين فوق", "Mezzanine over", 20)
-    p.dim_h(a, b, ytop + 200, "420"); p.dim_v(a + 50, ytop, D, "1180")
+    p.dim_h(a, b, ytop + 200, "420"); p.dim_v(a + 50, ytop, D, str(D - ytop))
     p.dim_h(b - 130, b, ytop + 190, "130")
     # sales floor
     p.shelf(a + 5, ytop + 500, 40, 2030 - ytop - 500); p.shelf(b - 45, ytop + 630, 40, 2030 - ytop - 630)
@@ -167,18 +188,19 @@ def shop(p, a, b, ytop, i, area, dims):
 def ground_central():
     """The passage on the facade's axis; at its end a corridor 1.35 m deep, cut
     from the clinic's front edge, turns left to the stair. The clinic is
-    entered from the axis. Both shops keep their full depth."""
+    entered from the axis. Shop 1 keeps its 11.80 m depth; shop 2 runs back to
+    the clinic's door line, 13.20 m, so the corridor serves only the stair."""
     p = Plan(); p.furniture = False; p.door_swings = False; p.cad = True
     shell_ground(p)
     clinic(p, cross=True)
     p.glass_h(40, 230, 430, 455)
     p.stair(25, 455, 220, 495)
     p.room(135, 900, "درج", "Stair · daylit", 22)
-    p.hwall(25, 445, 950, 20); p.hwall(625, W, 950, 20)        # the shops' back walls
-    p.vwall(445, 950, D, PW); p.vwall(610, 950, D, PW)          # the passage
+    p.hwall(25, 445, 950, 20)                                   # shop 1's back wall
+    p.vwall(445, 950, D, PW); p.vwall(610, 830, D, PW)          # the passage
     p.hwall(460, 610, 2135, 15); p.door_h(470, 2135, 2150, 130, "l", "u")
     shop(p, 25, 445, 970, 0, "49.6 m²", "4.20 × 11.80")
-    shop(p, 625, 1045, 970, 1, "49.6 m²", "4.20 × 11.80")
+    shop(p, 625, 1045, 830, 1, "55.4 m²", "4.20 × 13.20")
     p.room(535, 1560, "ممر", "Passage 1.50", 22)
     p.dim_h(460, 610, 1300, "150")
     p.room(400, 895, "ممر", None, 18)
@@ -189,7 +211,7 @@ def ground_central():
     p.dim_h(25, 445, y, "420"); p.dim_h(460, 610, y, "150"); p.dim_h(625, 1045, y, "420")
     x = W + 80
     p.dim_v(x + 60, 0, D, "2150")
-    p.dim_v(x, 0, 430, "430"); p.dim_v(x, 455, 950, "495"); p.dim_v(x, 970, D, "1180")
+    p.dim_v(x, 0, 430, "430"); p.dim_v(x, 455, 815, "360"); p.dim_v(x, 830, D, "1320")
     return p
 
 

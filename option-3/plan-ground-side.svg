@@ -15,11 +15,11 @@
 <rect x="540" y="0" width="25" height="455" fill="#000"/>
 <rect x="0" y="430" width="565" height="25" fill="#000"/>
 <rect x="245" y="430" width="15" height="520" fill="#000"/>
+<rect x="565" y="445" width="480" height="10" fill="#000"/>
 <rect x="700" y="640" width="10" height="310" fill="#000"/>
 <rect x="680" y="630" width="365" height="10" fill="#000"/>
 <rect x="680" y="455" width="10" height="175" fill="#000"/>
 <rect x="790" y="455" width="10" height="175" fill="#000"/>
-<rect x="565" y="445" width="480" height="10" fill="#000"/>
 <rect x="175" y="950" width="895" height="20" fill="#000"/>
 <rect x="175" y="970" width="15" height="1180" fill="#000"/>
 <rect x="610" y="970" width="15" height="1180" fill="#000"/>
@@ -36,11 +36,11 @@
 <rect x="543" y="3" width="19" height="449" fill="#fff"/>
 <rect x="3" y="433" width="559" height="19" fill="#fff"/>
 <rect x="248" y="433" width="9" height="514" fill="#fff"/>
+<rect x="568" y="448" width="474" height="4" fill="#fff"/>
 <rect x="703" y="643" width="4" height="304" fill="#fff"/>
 <rect x="683" y="633" width="359" height="4" fill="#fff"/>
 <rect x="683" y="458" width="4" height="169" fill="#fff"/>
 <rect x="793" y="458" width="4" height="169" fill="#fff"/>
-<rect x="568" y="448" width="474" height="4" fill="#fff"/>
 <rect x="178" y="953" width="889" height="14" fill="#fff"/>
 <rect x="178" y="973" width="9" height="1174" fill="#fff"/>
 <rect x="613" y="973" width="9" height="1174" fill="#fff"/>
@@ -54,12 +54,12 @@
 </g>
 <g id="open" fill="#fff">
 <rect x="244" y="850" width="17" height="90"/>
-<rect x="699" y="830" width="12" height="90"/>
 <rect x="270" y="429" width="260" height="27"/>
-<rect x="679" y="550" width="12" height="70"/>
-<rect x="830" y="629" width="80" height="12"/>
 <rect x="590" y="444" width="90" height="12"/>
 <rect x="539" y="25" width="27" height="405"/>
+<rect x="699" y="830" width="12" height="90"/>
+<rect x="679" y="550" width="12" height="70"/>
+<rect x="830" y="629" width="80" height="12"/>
 <rect x="40" y="429" width="190" height="27"/>
 <rect x="45" y="2134" width="110" height="17"/>
 <rect x="190" y="2134" width="155" height="17"/>
@@ -84,12 +84,12 @@
 </g>
 <g id="door" fill="none" stroke="#000" stroke-width="1.4">
 <line x1="245" y1="850" x2="260" y2="850"/><line x1="245" y1="940" x2="260" y2="940"/>
-<line x1="700" y1="830" x2="710" y2="830"/><line x1="700" y1="920" x2="710" y2="920"/>
 <line x1="270" y1="430" x2="270" y2="455"/><line x1="530" y1="430" x2="530" y2="455"/>
-<line x1="680" y1="550" x2="690" y2="550"/><line x1="680" y1="620" x2="690" y2="620"/>
-<line x1="830" y1="630" x2="830" y2="640"/><line x1="910" y1="630" x2="910" y2="640"/>
 <line x1="590" y1="445" x2="590" y2="455"/><line x1="680" y1="445" x2="680" y2="455"/>
 <line x1="540" y1="25" x2="565" y2="25"/><line x1="540" y1="430" x2="565" y2="430"/>
+<line x1="700" y1="830" x2="710" y2="830"/><line x1="700" y1="920" x2="710" y2="920"/>
+<line x1="680" y1="550" x2="690" y2="550"/><line x1="680" y1="620" x2="690" y2="620"/>
+<line x1="830" y1="630" x2="830" y2="640"/><line x1="910" y1="630" x2="910" y2="640"/>
 <line x1="40" y1="430" x2="40" y2="455"/><line x1="230" y1="430" x2="230" y2="455"/>
 <line x1="45" y1="2135" x2="45" y2="2150"/><line x1="155" y1="2135" x2="155" y2="2150"/>
 <line x1="190" y1="2135" x2="190" y2="2150"/><line x1="345" y1="2135" x2="345" y2="2150"/>
