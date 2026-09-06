@@ -52,15 +52,29 @@ and re-run it (`--png` also re-renders the PNGs through headless Chrome).
 ### Option 3 — the recommended layout
 
 `option-3.html` is our proposal on the Option 2 envelope: a 1.50 m passage
-on the axis of the facade with a shop of 4.20 × 11.80 m either side, each with
-a mezzanine under the 5.00 m ground floor; the dental clinic entered from the
-end of the passage, a corridor cut from its front edge turning to the stair
-(the clinic keeps 61 m²); the stair hall glazed onto the lightwell; and three suites per upper floor (53, 58 and 45 m², each
-with two treatment rooms) instead of four. Eleven units in allocation, a
-mezzanine-slab cost row, its own document `sheets/latakia-option-3`. The plans
-come from `option-3/plans.py`, which imports the drawing helpers from
+on the axis of the facade with a 4.20 m shop either side. Shop 1 is 11.80 m
+deep (49.6 m²); shop 2 runs back to the clinic's door line, 13.20 m deep
+(55.4 m²), so the corridor at the end of the passage serves only the stair.
+Each shop has a mezzanine under the 5.00 m ground floor. The dental clinic is
+entered from the end of the passage and is 48 m² net: waiting room glazed
+onto the lightwell, one treatment room at the back beside it, the WC off a
+small lobby, and the store in the front block's right-hand room (a second
+treatment room was cancelled and merged into that store). The stair hall is
+glazed onto the lightwell, and there are three suites per upper floor (53, 58
+and 45 m², each with two treatment rooms) instead of four. Eleven units in
+allocation, a mezzanine-slab cost row, its own document
+`sheets/latakia-option-3` (schema 2). The plans come from
+`option-3/plans.py`, which imports the drawing helpers from
 `option-2/plans.py`; `plan-ground-side.*` is the earlier side-corridor
 variant, kept for comparison and not shown on the page.
+
+Saleable area on this sheet follows a rule the owner set: a shop has its own
+street door, so it sells at its net area plus its walls only (the full outer
+wall, half of each shared wall) and carries no common area. The passage,
+corridor and stair hall serve the clinic and the six suites above, so those
+38 m² are shared between the seven units in proportion to size, on top of
+each unit's own walls. Option 2 still shares each floor plate across all its
+units, shops included, so its shop figures are not on the same basis.
 
 `firestore.rules` holds the security rules all three sheets need. It was deployed
 on 6 September (`firebase deploy --only firestore:rules --project
@@ -104,6 +118,13 @@ lightwell was planted and kept open through the upper floors.
 **Calculator, 6 September (late)** — the ground clinic became a dental clinic
 and the rules were deployed; then a third sheet, Option 3, for the layout we
 recommend, with its own plans and a three-way switch on every sheet.
+
+**Calculator, 6 September (night)** — on Option 3 shop 2 was deepened to the
+clinic's door line, the clinic reduced to one treatment room with a merged
+store, and the saleable areas re-based so the shops carry their walls only.
+The sheet's schema went to 2 and the saved document was re-saved on the new
+basis; the plan images gained a version query so browsers drop the old
+drawing.
 
 **Open** — the contact number in the footer is the live one; nothing else is
 placeholder. A higher-resolution export of the facade render would sharpen the

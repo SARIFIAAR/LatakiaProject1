@@ -34,6 +34,10 @@ cd site && python3 -m http.server 8765
 - **Bump `?v=` in `site/index.html`** whenever `css/site.css` or `js/site.js`
   changes. GitHub Pages caches them for a long time; without the bump the change
   is live but returning visitors keep the old file. Keep both numbers the same.
+  The same applies to the plan images in `option-3.html` (`plan-*.svg?v=N`):
+  bump N whenever a plan is redrawn, or returning visitors keep the old
+  drawing. `option-2.html` has no query on its plans yet; add one the first
+  time they change.
 - **Never edit the facade inside the hero images.** `day.jpg` and `night.jpg`
   are cut straight from the render sheet, and `day-wide.jpg` / `night-wide.jpg`
   are generated *around* them with the building pasted back untouched. To change
@@ -54,6 +58,18 @@ cd site && python3 -m http.server 8765
   `sheets/latakia-option-2`, `sheets/latakia-option-3`) with their own schema
   versions; keep every id in `firestore.rules` and redeploy when one is added.
   Option 3 has five construction cost rows, so its script sums `i < 5`.
+- **Bump `SCHEMA` in a sheet when its figures change meaning**, not only when
+  rows are added: the page then ignores the older saved document and shows its
+  own defaults with a "press Save to replace" notice. After pushing, open the
+  live page and press Save so the stored document is on the new basis (Option
+  3 is at schema 2 since the 6 September night re-basing).
+- **Saleable-area rule for Option 3** (the owner's): shops carry only their
+  walls — full outer wall, half of each shared wall — and no common area;
+  the passage, corridor and stair hall are shared between the clinic and the
+  six suites above, in proportion to size, on top of their own walls. The
+  default `data-loaded` values on the sheet were computed by hand on the
+  drawn geometry (wall centrelines); recompute them when a plan changes
+  shape. Option 2 still uses the older plate-sharing method.
 - **The Option 2 and 3 plans are drawn by `option-2/plans.py` and
   `option-3/plans.py`**, not by hand. Option 3 uses the helpers' CAD mode
   (`p.cad = True`, no furniture, no door swings): thin black double-line
@@ -104,7 +120,10 @@ backdrop shows at the edges.
 Both pieces are live. On 6 September a second calculator for the architect's
 Option 2 was added (`option-2.html` + `option-2/`), live and saving to its own
 document since `firestore.rules` was deployed that evening. Option 3, the
-recommended layout, followed the same night with its own sheet and plans. Recent work
+recommended layout, followed the same night with its own sheet and plans; later
+that night its ground floor was revised (shop 2 deepened to the clinic door,
+one treatment room, store merged) and its saleable areas re-based on the
+walls-only rule above, schema 2. Recent work
 on the site: new render with the shops, a
 fifth detail tile, widened hero images, left neighbour cut to the shop line.
 Nothing is half-finished. Known limitation: the render is low resolution;
