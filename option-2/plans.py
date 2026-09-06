@@ -40,6 +40,7 @@ def esc(s):
 class Plan:
     def __init__(self):
         self.L = {k: [] for k in LAYERS}
+        self.furniture = True   # False: draw walls, doors, sanitary fixtures and landscape only
 
     def add(self, layer, s):
         self.L[layer].append(s)
@@ -126,16 +127,19 @@ class Plan:
     def f(self, s):
         self.add("furn", s)
 
-    def rect(self, x, y, w, h, rx=0, extra=""):
+    def rect(self, x, y, w, h, rx=0, extra="", landscape=False):
+        if not self.furniture and not landscape: return
         self.f(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" {extra}/>')
 
     def chair(self, cx, cy, rot=0):
+        if not self.furniture: return
         # 45 x 45 seat with a back on its top edge; rot in degrees (back faces up at 0)
         self.f(f'<g transform="translate({cx} {cy}) rotate({rot})">'
                f'<rect x="-22" y="-20" width="44" height="42" rx="8"/>'
                f'<line x1="-22" y1="-20" x2="22" y2="-20" stroke-width="5"/></g>')
 
     def desk(self, x, y, w, h, chair="b"):
+        if not self.furniture: return
         """Desk with one chair on the side given: t/b/l/r (the chair's back faces away)."""
         self.rect(x, y, w, h)
         if chair == "b":
@@ -148,6 +152,7 @@ class Plan:
             self.chair(x + w + 32, y + h / 2, 90)
 
     def table(self, cx, cy, w, h, top=2, bottom=2, left=0, right=0):
+        if not self.furniture: return
         self.rect(cx - w / 2, cy - h / 2, w, h, rx=6)
         for i in range(top):
             self.chair(cx - w / 2 + (i + 0.5) * w / top, cy - h / 2 - 32, 0)
@@ -159,6 +164,7 @@ class Plan:
             self.chair(cx + w / 2 + 32, cy - h / 2 + (i + 0.5) * h / right, 90)
 
     def sofa(self, x, y, w, h, back="t"):
+        if not self.furniture: return
         self.rect(x, y, w, h, rx=10)
         if back in ("t", "b"):
             by = y + 14 if back == "t" else y + h - 14
@@ -174,6 +180,7 @@ class Plan:
                 self.f(f'<line x1="{x+16}" y1="{y + i*h/n}" x2="{x+w-4}" y2="{y + i*h/n}"/>')
 
     def bed(self, x, y, w=70, h=190, pillow="t"):
+        if not self.furniture: return
         self.rect(x, y, w, h, rx=6)
         if pillow == "t":
             self.rect(x + 8, y + 8, w - 16, 30, rx=6)
@@ -191,6 +198,7 @@ class Plan:
                f'<circle cx="0" cy="2" r="11"/></g>')
 
     def shelf(self, x, y, w, h):
+        if not self.furniture: return
         self.rect(x, y, w, h)
         if w >= h:
             step = 40
@@ -202,19 +210,23 @@ class Plan:
                 self.f(f'<line x1="{x}" y1="{y+i*step}" x2="{x+w}" y2="{y+i*step}" stroke="{SOFT}"/>')
 
     def counter(self, x, y, w, h):
+        if not self.furniture: return
         self.rect(x, y, w, h)
         self.rect(x + 6, y + 6, w - 12, h - 12, extra=f'stroke="{SOFT}"')
 
-    def plant(self, cx, cy, r=22):
+    def plant(self, cx, cy, r=22, landscape=False):
+        if not self.furniture and not landscape: return
         self.f(f'<g stroke="{LEAF}" fill="{LEAF2}"><circle cx="{cx}" cy="{cy}" r="{r}"/>'
                f'<circle cx="{cx}" cy="{cy}" r="{r*0.45}" fill="none" stroke-width="1.5"/></g>')
 
-    def tree(self, cx, cy, r=78):
+    def tree(self, cx, cy, r=78, landscape=False):
+        if not self.furniture and not landscape: return
         self.f(f'<g stroke="{LEAF}" fill="{LEAF2}"><circle cx="{cx}" cy="{cy}" r="{r}"/>'
                f'<circle cx="{cx}" cy="{cy}" r="{r*0.64}" fill="none" stroke-width="1.5"/>'
                f'<circle cx="{cx}" cy="{cy}" r="{r*0.28}" fill="none" stroke-width="1.5"/></g>')
 
     def dental_chair(self, cx, cy, rot=0):
+        if not self.furniture: return
         """Dental treatment chair, head towards -y, with delivery unit, light and stools."""
         self.f(f'<g transform="translate({cx} {cy}) rotate({rot})">'
                f'<rect x="-31" y="-80" width="62" height="165" rx="26"/>'          # chair

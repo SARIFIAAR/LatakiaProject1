@@ -13,6 +13,10 @@ weak points fixed. Same plot, same envelope, same lightwell and terrace.
            daylit from the open lightwell on every floor.
 
     python3 option-3/plans.py --png
+
+The plans are drawn without furniture (p.furniture = False): walls, doors,
+glazing, the stair, sanitary fixtures and the lightwell planting only. Set it
+back to True in ground(), ground_central() and typical() for a furnished set.
 """
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -24,12 +28,13 @@ def shell_ground(p):
     p.vwall(0, 0, D, OW); p.vwall(W - OW, 0, D, OW); p.hwall(0, W, 0, OW)
     p.vwall(540, 0, 455, 25); p.hwall(0, 565, 430, 25)
     p.hatch(25, 25, 540, 430, "well")
-    p.rect(45, 45, 475, 40, rx=4); p.rect(45, 345, 475, 40, rx=4)
+    p.rect(45, 45, 475, 40, rx=4, landscape=True); p.rect(45, 345, 475, 40, rx=4, landscape=True)
     for cx, cy, r in ((90, 65, 26), (170, 65, 22), (250, 65, 28), (330, 65, 22), (410, 65, 27), (480, 65, 22),
                       (90, 365, 24), (170, 365, 28), (250, 365, 22), (330, 365, 27), (410, 365, 23), (480, 365, 26),
                       (70, 150, 30), (70, 260, 34), (500, 150, 32), (500, 260, 30)):
-        p.plant(cx, cy, r)
-    p.tree(285, 215); p.rect(200, 190, 60, 50, rx=8); p.rect(310, 190, 60, 50, rx=8)
+        p.plant(cx, cy, r, landscape=True)
+    p.tree(285, 215, landscape=True)
+    p.rect(200, 190, 60, 50, rx=8, landscape=True); p.rect(310, 190, 60, 50, rx=8, landscape=True)
     p.room(285, 315, "منور مزروع", "Planted lightwell", 24)
 
 
@@ -68,7 +73,8 @@ def clinic(p, cross=False):
     p.counter(435, 460, 160, 55); p.basin(470, 487, 0); p.rect(545, 465, 45, 45, rx=4)
     p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)
     p.counter(985, 40, 55, 250); p.basin(1012, 120, 90); p.dental_chair(800, 250)
-    p.rect(590, 380, 50, 50, rx=4); p.label(615, 448, "X-ray", size=14, color=FURN)
+    p.rect(590, 380, 50, 50, rx=4)
+    if p.furniture: p.label(615, 448, "X-ray", size=14, color=FURN)
     p.room(660, 900, "انتظار", "Waiting", 22)
     p.room(765, 680, "علاج ١", "Treatment 1", 22); p.room(700, 410, "علاج ٢", "Treatment 2", 22)
     p.room(340, 560, "حمام", "WC", 22); p.room(515, 540, "تعقيم", "Sterilisation", 18)
@@ -76,7 +82,7 @@ def clinic(p, cross=False):
 
 
 def ground():
-    p = Plan()
+    p = Plan(); p.furniture = False
     shell_ground(p)
     clinic(p)
     # stair, hall glazed onto the lightwell
@@ -154,7 +160,7 @@ def ground_central():
     """The passage on the facade's axis; at its end a corridor 1.35 m deep, cut
     from the clinic's front edge, turns left to the stair. The clinic is
     entered from the axis. Both shops keep their full depth."""
-    p = Plan()
+    p = Plan(); p.furniture = False
     shell_ground(p)
     clinic(p, cross=True)
     p.glass_h(40, 230, 430, 455)
@@ -207,7 +213,7 @@ def suite_dental(p, a, b, ytop, door, name_ar, area, name_en):
 
 
 def typical():
-    p = Plan()
+    p = Plan(); p.furniture = False
     p.vwall(0, 430, D, OW); p.vwall(W - OW, 430, D, OW); p.hwall(0, W, 430, 25)
     p.vwall(0, 0, 430, 8); p.vwall(W - 8, 0, 430, 8); p.hwall(0, W, 0, 8)
     p.vwall(540, 0, 455, 25); p.void(25, 25, 540, 430); p.hatch(565, 8, W - 8, 430, "terrace")
