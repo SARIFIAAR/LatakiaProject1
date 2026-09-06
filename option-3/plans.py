@@ -51,12 +51,16 @@ def clinic(p, cross=False):
         p.vwall(245, 430, 950, PW)
         p.door_v(245, 260, 850, 90, "b", "r")
     p.vwall(700, 640, 950, IW); p.door_v(700, 710, 830, 90, "b", "r")
-    p.hwall(260, 1045, 630, IW)
-    p.vwall(420, 455, 630, IW); p.door_h(300, 630, 640, 80, "l", "u")
-    p.vwall(600, 455, 630, IW); p.door_h(480, 630, 640, 80, "l", "u")
-    p.door_h(615, 630, 640, 85, "l", "u")
-    p.vwall(790, 455, 630, IW); p.door_h(830, 630, 640, 80, "l", "u")
-    p.hwall(565, 1045, 445, IW); p.door_h(600, 445, 455, 90, "l", "u")
+    # the row along the lightwell wall: sterilisation, a short hall, the WC against
+    # the store wall, the store; the waiting room reaches the garden wall on the left
+    p.hwall(430, 1045, 630, IW)
+    p.glass_h(270, 410, 430, 455)                               # waiting room onto the garden
+    p.vwall(420, 455, 630, IW)                                  # sterilisation
+    p.vwall(560, 455, 630, IW); p.door_h(460, 630, 640, 80, "l", "u")
+    p.door_h(585, 630, 640, 80, "l", "u")                       # waiting -> hall
+    p.vwall(680, 455, 630, IW); p.door_v(680, 690, 550, 70, "t", "r")   # WC off the hall
+    p.vwall(790, 455, 630, IW); p.door_h(830, 630, 640, 80, "l", "u")   # store
+    p.hwall(565, 1045, 445, IW); p.door_h(590, 445, 455, 90, "l", "u")
     p.glass_v(540, 565, 25, 430)
     if cross:
         p.counter(430, 700, 180, 60); p.chair(520, 670, 0)
@@ -69,16 +73,16 @@ def clinic(p, cross=False):
         p.sofa(270, 650, 60, 190, "l"); p.rect(350, 780, 60, 60, rx=6); p.sofa(400, 880, 200, 60, "b")
         p.unit(560, 800, "عيادة أسنان", "66 m²", "Dental clinic")
     p.counter(830, 890, 200, 55); p.basin(930, 917, 0); p.dental_chair(860, 760, 90)
-    p.toilet(300, 500, 0); p.basin(390, 600, 90)
-    p.counter(435, 460, 160, 55); p.basin(470, 487, 0); p.rect(545, 465, 45, 45, rx=4)
+    p.toilet(740, 495, 0); p.basin(765, 588, 90)
+    p.counter(435, 460, 120, 55); p.basin(470, 487, 0); p.rect(510, 465, 40, 40, rx=4)
     p.shelf(805, 460, 235, 40); p.shelf(1000, 505, 40, 120)
     p.counter(985, 40, 55, 250); p.basin(1012, 120, 90); p.dental_chair(800, 250)
     p.rect(590, 380, 50, 50, rx=4)
     if p.furniture: p.label(615, 448, "X-ray", size=14, color=FURN)
     p.room(660, 900, "انتظار", "Waiting", 22)
     p.room(765, 680, "علاج ١", "Treatment 1", 22); p.room(700, 410, "علاج ٢", "Treatment 2", 22)
-    p.room(340, 560, "حمام", "WC", 22); p.room(515, 540, "تعقيم", "Sterilisation", 18)
-    p.room(920, 580, "مخزن", "Store", 22); p.room(700, 525, "ممر", None, 20)
+    p.label(712, 614, "حمام", size=13); p.room(495, 545, "تعقيم", "Sterilisation", 18)
+    p.room(920, 580, "مخزن", "Store", 22); p.room(625, 530, "ممر", None, 18)
 
 
 def ground():
