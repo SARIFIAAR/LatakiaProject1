@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Latakia Building — Feasibility Calculator</title>
+<title>Latakia Building — Feasibility Calculator · Option 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
@@ -101,6 +101,27 @@
   .opt-switch a[aria-current] .ar{color:#cfe6e8;}
 
   /* ===== blocks ===== */
+
+  /* ===== plans ===== */
+
+  .block.plans{margin-top:26px;}
+  .block.plans .block-head::before{background:var(--ink-3);}
+  .plan-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;
+    background:var(--card);border:1px solid var(--rule-soft);border-top:none;padding:16px 14px 14px;
+  }
+  .plan-grid figure{margin:0;}
+  .plan-grid img{width:100%;height:auto;display:block;border:1px solid var(--rule-soft);}
+  .plan-grid figcaption{font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.35;}
+  .plan-grid figcaption strong{font-weight:600;color:var(--ink);}
+  .plan-grid figcaption .ar{color:var(--ink-3);margin-top:2px;}
+  .plan-foot{
+    background:var(--card);border:1px solid var(--rule-soft);border-top:none;
+    padding:0 14px 12px;font-size:12px;color:var(--ink-3);
+  }
+  .plan-foot .ar{margin-top:2px;}
+  @media (max-width:780px){ .plan-grid{grid-template-columns:1fr;} }
+
 
   .block{margin-bottom:24px;}
 
@@ -434,8 +455,8 @@
 
 <div id="gate">
   <div class="gate-box">
-    <h1>Latakia building — feasibility calculator</h1>
-    <div class="h-ar ar">مبنى اللاذقية — دراسة الجدوى</div>
+    <h1>Latakia building — feasibility calculator · Option 2</h1>
+    <div class="h-ar ar">مبنى اللاذقية — دراسة الجدوى · الخيار الثاني</div>
     <p>
       Enter the access code to open the sheet.
       <span class="ar">أدخل رمز الدخول لفتح الملف</span>
@@ -452,14 +473,15 @@
 
   <header>
     <nav class="opt-switch" aria-label="Design option">
-      <a href="index.html" aria-current="page">Option 1<span class="ar">الخيار الأول</span></a>
-      <a href="option-2.html">Option 2<span class="ar">الخيار الثاني</span></a>
+      <a href="index.html">Option 1<span class="ar">الخيار الأول</span></a>
+      <a href="option-2.html" aria-current="page">Option 2<span class="ar">الخيار الثاني</span></a>
     </nav>
-    <h1>Latakia building — feasibility calculator · Option 1</h1>
-    <div class="h-ar ar">مبنى اللاذقية — حاسبة دراسة الجدوى · الخيار الأول</div>
+    <h1>Latakia building — feasibility calculator · Option 2</h1>
+    <div class="h-ar ar">مبنى اللاذقية — حاسبة دراسة الجدوى · الخيار الثاني</div>
     <p class="sub">
-      Areas are taken from the ground floor and typical floor plans. Every figure is editable and all totals recalculate as you type.
-      <span class="ar">المساحات مأخوذة من مخططات الطابق الأرضي والطابق المتكرر. جميع القيم قابلة للتعديل ويعاد الحساب تلقائياً</span>
+      Areas are taken from the Option 2 plans below: three shops and a clinic on the ground floor, four offices on each floor above.
+      Every figure is editable and all totals recalculate as you type. This sheet saves separately from Option 1.
+      <span class="ar">المساحات مأخوذة من مخططات الخيار الثاني أدناه: ثلاثة محلات وعيادة في الطابق الأرضي، وأربعة مكاتب في كل طابق علوي. جميع القيم قابلة للتعديل ويعاد الحساب تلقائياً. يُحفظ هذا الملف بشكل مستقل عن الخيار الأول</span>
     </p>
   </header>
 
@@ -474,28 +496,28 @@
     </div>
 
     <div class="grp">
-      Ground floor — shops
-      <span class="ar">الطابق الأرضي — المحلات</span>
+      Ground floor — shops and clinic
+      <span class="ar">الطابق الأرضي — المحلات والعيادة</span>
     </div>
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Front shops</span>
-        <span class="n-ar ar">المحلات الأمامية</span>
+        <span class="n">Street shops (3 × 38.4 m²)</span>
+        <span class="n-ar ar">المحلات على الشارع (٣ محلات × ٣٨٫٤ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u1">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u1" type="number" min="0" step="0.01" value="70.45" data-usable>
+        <input id="u1" type="number" min="0" step="0.01" value="115.2" data-usable>
       </div>
       <div class="field">
         <label for="l1">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l1" type="number" min="0" step="0.01" value="111.01" data-loaded>
+        <input id="l1" type="number" min="0" step="0.01" value="131.48" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p1">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p1" type="number" min="0" step="10" value="3000" data-price>
+        <input id="p1" type="number" min="0" step="10" value="3500" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -505,22 +527,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Back shops</span>
-        <span class="n-ar ar">المحلات الخلفية</span>
+        <span class="n">Rear clinic (66 m²)</span>
+        <span class="n-ar ar">العيادة الخلفية (٦٦ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u2">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u2" type="number" min="0" step="0.01" value="70.37" data-usable>
+        <input id="u2" type="number" min="0" step="0.01" value="66" data-usable>
       </div>
       <div class="field">
         <label for="l2">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l2" type="number" min="0" step="0.01" value="110.90" data-loaded>
+        <input id="l2" type="number" min="0" step="0.01" value="75.33" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p2">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p2" type="number" min="0" step="10" value="1000" data-price>
+        <input id="p2" type="number" min="0" step="10" value="2000" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -535,22 +557,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Street</span>
-        <span class="n-ar ar">الشارع</span>
+        <span class="n">Street office A (48 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي أ (٤٨ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u3">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u3" type="number" min="0" step="0.01" value="49" data-usable>
+        <input id="u3" type="number" min="0" step="0.01" value="48" data-usable>
       </div>
       <div class="field">
         <label for="l3">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l3" type="number" min="0" step="0.01" value="53.15" data-loaded>
+        <input id="l3" type="number" min="0" step="0.01" value="53.54" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p3">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p3" type="number" min="0" step="10" value="500" data-price>
+        <input id="p3" type="number" min="0" step="10" value="750" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -560,22 +582,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Street corner</span>
-        <span class="n-ar ar">زاوية الشارع</span>
+        <span class="n">Street office B (34 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي ب (٣٤ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u4">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u4" type="number" min="0" step="0.01" value="40" data-usable>
+        <input id="u4" type="number" min="0" step="0.01" value="34" data-usable>
       </div>
       <div class="field">
         <label for="l4">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l4" type="number" min="0" step="0.01" value="43.39" data-loaded>
+        <input id="l4" type="number" min="0" step="0.01" value="37.92" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p4">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p4" type="number" min="0" step="10" value="500" data-price>
+        <input id="p4" type="number" min="0" step="10" value="650" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -585,22 +607,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Back corner</span>
-        <span class="n-ar ar">الزاوية الخلفية</span>
+        <span class="n">Street office C (38 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي ج (٣٨ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u5">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u5" type="number" min="0" step="0.01" value="44" data-usable>
+        <input id="u5" type="number" min="0" step="0.01" value="38" data-usable>
       </div>
       <div class="field">
         <label for="l5">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l5" type="number" min="0" step="0.01" value="47.73" data-loaded>
+        <input id="l5" type="number" min="0" step="0.01" value="42.39" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p5">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p5" type="number" min="0" step="10" value="500" data-price>
+        <input id="p5" type="number" min="0" step="10" value="750" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -610,22 +632,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Back</span>
-        <span class="n-ar ar">الخلفي</span>
+        <span class="n">Rear office with terrace (45 m²)</span>
+        <span class="n-ar ar">المكتب الخلفي مع التراس (٤٥ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u6">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u6" type="number" min="0" step="0.01" value="44" data-usable>
+        <input id="u6" type="number" min="0" step="0.01" value="45" data-usable>
       </div>
       <div class="field">
         <label for="l6">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l6" type="number" min="0" step="0.01" value="47.73" data-loaded>
+        <input id="l6" type="number" min="0" step="0.01" value="50.19" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p6">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p6" type="number" min="0" step="10" value="500" data-price>
+        <input id="p6" type="number" min="0" step="10" value="600" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -640,22 +662,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Street</span>
-        <span class="n-ar ar">الشارع</span>
+        <span class="n">Street office A (48 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي أ (٤٨ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u7">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u7" type="number" min="0" step="0.01" value="49" data-usable>
+        <input id="u7" type="number" min="0" step="0.01" value="48" data-usable>
       </div>
       <div class="field">
         <label for="l7">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l7" type="number" min="0" step="0.01" value="53.15" data-loaded>
+        <input id="l7" type="number" min="0" step="0.01" value="53.54" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p7">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p7" type="number" min="0" step="10" value="500" data-price>
+        <input id="p7" type="number" min="0" step="10" value="750" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -665,22 +687,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Street corner</span>
-        <span class="n-ar ar">زاوية الشارع</span>
+        <span class="n">Street office B (34 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي ب (٣٤ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u8">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u8" type="number" min="0" step="0.01" value="40" data-usable>
+        <input id="u8" type="number" min="0" step="0.01" value="34" data-usable>
       </div>
       <div class="field">
         <label for="l8">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l8" type="number" min="0" step="0.01" value="43.39" data-loaded>
+        <input id="l8" type="number" min="0" step="0.01" value="37.92" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p8">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p8" type="number" min="0" step="10" value="500" data-price>
+        <input id="p8" type="number" min="0" step="10" value="650" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -690,22 +712,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Back corner</span>
-        <span class="n-ar ar">الزاوية الخلفية</span>
+        <span class="n">Street office C (38 m²)</span>
+        <span class="n-ar ar">المكتب الأمامي ج (٣٨ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u9">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u9" type="number" min="0" step="0.01" value="44" data-usable>
+        <input id="u9" type="number" min="0" step="0.01" value="38" data-usable>
       </div>
       <div class="field">
         <label for="l9">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l9" type="number" min="0" step="0.01" value="47.73" data-loaded>
+        <input id="l9" type="number" min="0" step="0.01" value="42.39" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p9">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p9" type="number" min="0" step="10" value="500" data-price>
+        <input id="p9" type="number" min="0" step="10" value="750" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -715,22 +737,22 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Back</span>
-        <span class="n-ar ar">الخلفي</span>
+        <span class="n">Rear office with terrace (45 m²)</span>
+        <span class="n-ar ar">المكتب الخلفي مع التراس (٤٥ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="field">
         <label for="u10">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u10" type="number" min="0" step="0.01" value="44" data-usable>
+        <input id="u10" type="number" min="0" step="0.01" value="45" data-usable>
       </div>
       <div class="field">
         <label for="l10">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l10" type="number" min="0" step="0.01" value="47.73" data-loaded>
+        <input id="l10" type="number" min="0" step="0.01" value="50.19" data-loaded>
         <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p10">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p10" type="number" min="0" step="10" value="500" data-price>
+        <input id="p10" type="number" min="0" step="10" value="600" data-price>
       </div>
       <div class="out">
         <span class="lab">Total<span class="ar">الإجمالي</span></span>
@@ -824,7 +846,8 @@
       </div>
       <div class="field">
         <label for="cq1">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
-        <input id="cq1" type="number" min="0" step="0.01" value="690.15" data-qty>
+        <input id="cq1" type="number" min="0" step="0.01" value="574.9" data-qty>
+        <span class="hint">ground 206.8 m² (plot less the lightwell) + 2 × 184.0 m² (10.70 × 17.20 m); the rear terrace is not counted<span class="ar">الأرضي ٢٠٦٫٨ م² (العقار ناقص المنور) + طابقان × ١٨٤٫٠ م²؛ التراس الخلفي غير محسوب</span></span>
       </div>
       <div class="field">
         <label for="cr1">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
@@ -872,7 +895,7 @@
       </div>
       <div class="field">
         <label for="cq3">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
-        <input id="cq3" type="number" min="0" step="0.01" value="85" data-qty>
+        <input id="cq3" type="number" min="0" step="0.01" value="60" data-qty>
       </div>
       <div class="field">
         <label for="cr3">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
@@ -896,7 +919,7 @@
       </div>
       <div class="field">
         <label for="cq4">Quantity <span class="u">m²</span><span class="ar">الكمية</span></label>
-        <input id="cq4" type="number" min="0" step="0.01" value="690.15" data-qty>
+        <input id="cq4" type="number" min="0" step="0.01" value="574.9" data-qty>
       </div>
       <div class="field">
         <label for="cr4">Rate <span class="u">$ / m²</span><span class="ar">سعر الوحدة</span></label>
@@ -1046,13 +1069,50 @@
     <span class="save-state" id="saveState" data-state="idle">Loading saved figures…<span class="ar">جاري تحميل القيم المحفوظة</span></span>
   </div>
 
+  <!-- ============ PLANS ============ -->
+
+  <div class="block plans" id="plans">
+    <div class="block-head">
+      <div>
+        <h2>Option 2 — plans</h2>
+        <div class="h-ar ar">الخيار الثاني — المخططات</div>
+      </div>
+    </div>
+    <div class="plan-grid">
+      <figure>
+        <img src="option-2/plan-ground.svg" width="1420" height="2400"
+             alt="Option 2 ground floor plan: three shops of 2.80 by 11.80 metres facing the street, a 1.30 metre side corridor to the stair at the back, and an L-shaped clinic of 66 square metres around a rear lightwell">
+        <figcaption>
+          <strong>Ground floor.</strong> Three shops of 2.80 × 11.80 m face the street, each with a WC and store at the back.
+          A 1.30 m corridor on the left leads to the stair and to a 66 m² clinic: waiting and reception, two consulting rooms, WC and store, lit from a 5.40 × 4.30 m lightwell.
+          <span class="ar">الطابق الأرضي: ثلاثة محلات بمقاس ٢٫٨٠ × ١١٫٨٠ م على الشارع، لكل منها حمام ومستودع في الخلف. ممر جانبي بعرض ١٫٣٠ م يقود إلى الدرج وإلى عيادة بمساحة ٦٦ م²: انتظار واستقبال وغرفتا فحص وحمام ومخزن، مضاءة من منور ٥٫٤٠ × ٤٫٣٠ م</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="option-2/plan-typical.svg" width="1420" height="2400"
+             alt="Option 2 typical upper floor plan: offices of 48, 34 and 38 square metres to the street on a 1.20 metre corridor, a 45 square metre office at the rear opening onto a terrace, and the stair on the left">
+        <figcaption>
+          <strong>Typical floor.</strong> Offices A, B and C (48, 34 and 38 m²) face the street off a 1.20 m corridor; the 45 m² rear office opens onto a private terrace over the clinic wing.
+          Each office has its own WC; office A has a manager's room and meeting table, the rear office a glazed meeting room.
+          <span class="ar">الطابق المتكرر: المكاتب أ و ب و ج (٤٨ و ٣٤ و ٣٨ م²) تطل على الشارع عبر ممر بعرض ١٫٢٠ م، والمكتب الخلفي ٤٥ م² يفتح على تراس خاص فوق جناح العيادة. لكل مكتب حمامه؛ المكتب أ فيه غرفة مدير وطاولة اجتماعات، والمكتب الخلفي غرفة اجتماعات زجاجية</span>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="plan-foot">
+      The shell and the unit areas follow the architect's Option 2 sheet. Internal walls and furniture are a proposal for discussion, not the architect's drawing.
+      <span class="ar">الهيكل ومساحات الوحدات وفق لوحة الخيار الثاني من المهندس المعماري. الجدران الداخلية والأثاث مقترح للنقاش وليس رسم المهندس</span>
+    </p>
+  </div>
+
   <p class="note">
     Sales totals are saleable area × price per m². Cost totals are quantity × rate, plus contingency.
-    Usable area is the net internal area from the plans; the loading percentage shown on each sales line is
-    the difference between usable and saleable.
-    <strong>Ground floor saleable area includes the central passage and structural walls, which is why its
-    loading is high — the supervising engineer should confirm this allocation matches local practice.</strong>
-    <span class="ar">تشمل المساحة البيعية للطابق الأرضي الممر المركزي والجدران، لذلك نسبة المشاع مرتفعة — يرجى من المهندس المشرف تأكيد طريقة التوزيع</span>
+    Usable area is the unit area written on the Option 2 plans. Saleable area shares each floor plate
+    (walls, corridor and stair) between its units in proportion to their size: the ground floor plate is
+    206.8 m² over 181.2 m² of units (+14.1%), a typical floor 184.0 m² over 165 m² (+11.5%).
+    <strong>Rates and prices are copied from the Option 1 sheet so the two options compare like for like;
+    the clinic is priced as a rear ground-floor unit and the shops at the street rate, which the supervising
+    engineer should confirm for 2.80 m wide units.</strong>
+    <span class="ar">المساحة الصافية هي مساحة الوحدة المكتوبة على مخططات الخيار الثاني، والمساحة البيعية توزّع مساحة الطابق (الجدران والممر والدرج) على الوحدات بنسبة مساحاتها. الأسعار والتكاليف منقولة من ملف الخيار الأول للمقارنة على الأساس نفسه — يرجى من المهندس المشرف تأكيد سعر المحلات بعرض ٢٫٨٠ م</span>
   </p>
 
 </div>
@@ -1113,25 +1173,18 @@
 
   // ---- unit list: src = index of the sales line, w = weight within that line ----
   var UNITS = [
-    {src:0, w:1,  en:"Front shop 1",  ar:"محل أمامي ١", def:"dev"},
-    {src:0, w:1,  en:"Front shop 2",  ar:"محل أمامي ٢", def:"dev"},
-    {src:1, w:1,  en:"Back shop 1",   ar:"محل خلفي ١",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 2",   ar:"محل خلفي ٢",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 3",   ar:"محل خلفي ٣",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 4",   ar:"محل خلفي ٤",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 5",   ar:"محل خلفي ٥",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 6",   ar:"محل خلفي ٦",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 7",   ar:"محل خلفي ٧",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 8",   ar:"محل خلفي ٨",  def:"dev"},
-    {src:1, w:1,  en:"Back shop 9",   ar:"محل خلفي ٩",  def:"dev"},
-    {src:2, w:1,  en:"Floor 1 — street (49 m²)", ar:"الطابق الأول — الشارع", def:"land"},
-    {src:3, w:1,  en:"Floor 1 — street corner (40 m²)", ar:"الطابق الأول — زاوية الشارع", def:"land"},
-    {src:4, w:1,  en:"Floor 1 — back corner (44 m²)", ar:"الطابق الأول — الزاوية الخلفية", def:"land"},
-    {src:5, w:1,  en:"Floor 1 — back (44 m²)", ar:"الطابق الأول — الخلفي", def:"land"},
-    {src:6, w:1,  en:"Floor 2 — street (49 m²)", ar:"الطابق الثاني — الشارع", def:"land"},
-    {src:7, w:1,  en:"Floor 2 — street corner (40 m²)", ar:"الطابق الثاني — زاوية الشارع", def:"land"},
-    {src:8, w:1,  en:"Floor 2 — back corner (44 m²)", ar:"الطابق الثاني — الزاوية الخلفية", def:"land"},
-    {src:9, w:1,  en:"Floor 2 — back (44 m²)", ar:"الطابق الثاني — الخلفي", def:"land"}
+    {src:0, w:1, en:"Shop 1 (38.4 m²)", ar:"محل ١", def:"dev"},
+    {src:0, w:1, en:"Shop 2 (38.4 m²)", ar:"محل ٢", def:"dev"},
+    {src:0, w:1, en:"Shop 3 (38.4 m²)", ar:"محل ٣", def:"dev"},
+    {src:1, w:1, en:"Clinic (66 m²)", ar:"العيادة", def:"dev"},
+    {src:2, w:1, en:"Floor 1 — office A (48 m²)", ar:"الطابق الأول — مكتب أ", def:"land"},
+    {src:3, w:1, en:"Floor 1 — office B (34 m²)", ar:"الطابق الأول — مكتب ب", def:"land"},
+    {src:4, w:1, en:"Floor 1 — office C (38 m²)", ar:"الطابق الأول — مكتب ج", def:"land"},
+    {src:5, w:1, en:"Floor 1 — rear office (45 m²)", ar:"الطابق الأول — المكتب الخلفي", def:"land"},
+    {src:6, w:1, en:"Floor 2 — office A (48 m²)", ar:"الطابق الثاني — مكتب أ", def:"land"},
+    {src:7, w:1, en:"Floor 2 — office B (34 m²)", ar:"الطابق الثاني — مكتب ب", def:"land"},
+    {src:8, w:1, en:"Floor 2 — office C (38 m²)", ar:"الطابق الثاني — مكتب ج", def:"land"},
+    {src:9, w:1, en:"Floor 2 — rear office (45 m²)", ar:"الطابق الثاني — المكتب الخلفي", def:"land"}
   ];
 
   function buildAlloc(){
@@ -1288,7 +1341,7 @@
   /* Bump whenever the sales lines change shape. Figures saved under an older
      layout key their values to fields that no longer mean the same thing, so
      they are ignored rather than misapplied. */
-  var SCHEMA = 2;
+  var SCHEMA = 1;
 
   var lastSaved = null;   // last state known to be in the store
   var dirty     = false;
@@ -1463,7 +1516,7 @@
     appId:             "1:1089852015737:web:eb874e03bf2cf2cf94c0a8"
   };
 
-  const SHEET_ID        = "latakia";
+  const SHEET_ID        = "latakia-option-2";
   const LOAD_TIMEOUT_MS = 8000;
   const SAVE_TIMEOUT_MS = 15000;
 

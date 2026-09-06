@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// Security rules for the feasibility calculators (project latakia-feasibility).
+//
+// Two sheets, one document each: sheets/latakia (Option 1) and
+// sheets/latakia-option-2 (Option 2). Anyone with the page can read and
+// overwrite a sheet — the access code in the page is the only gate — but
+// nothing can be deleted, and every save first archives the previous version
+// under revisions/, which are write-once.
+//
+// Deploy with:  firebase deploy --only firestore:rules --project latakia-feasibility
+// (compare with the console first: this file was written to match the policy
+// described in CLAUDE.md, not exported from the console).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSheet(id) {
+      return id == 'latakia' || id == 'latakia-option-2';
+    }
+
+    function validState() {
+      return request.resource.data.keys().hasOnly(['v', 'inputs', 'alloc', 'updatedAt'])
+          && request.resource.data.v is int
+          && request.resource.data.inputs is map
+          && request.resource.data.alloc is map;
+    }
+
+    match /sheets/{sheetId} {
+      allow read:           if isSheet(sheetId);
+      allow create, update: if isSheet(sheetId) && validState();
+      allow delete:         if false;
+
+      match /revisions/{revisionId} {
+        allow read:           if isSheet(sheetId);
+        allow create:         if isSheet(sheetId);
+        allow update, delete: if false;
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

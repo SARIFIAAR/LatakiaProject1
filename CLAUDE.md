@@ -6,7 +6,10 @@ is; this file is about how to work on it without breaking things.
 ## Layout
 
 ```
-index.html          feasibility calculator (live at the Pages root)
+index.html          feasibility calculator, Option 1 (live at the Pages root)
+option-2.html       the same calculator for the architect's Option 2 layout
+option-2/           Option 2 floor plans (SVG + PNG) and plans.py, which draws them
+firestore.rules     security rules for both sheets (deploy with firebase.json)
 test.html           scratch copy of the calculator — not linked, not maintained
 site/               the project site (live at /site/)
   index.html        markup and copy, English + Arabic
@@ -38,10 +41,19 @@ cd site && python3 -m http.server 8765
   changes size.
 - **The calculator's Firestore config is public by design** (a client API key,
   locked down by security rules). Do not "fix" it by removing it. The rules
-  allow one document, deny deletes and archive every revision; a change to the
-  data shape needs a schema-version bump in the sheet.
+  allow one document per option, deny deletes and archive every revision; a
+  change to the data shape needs a schema-version bump in the sheet.
 - The calculator and the site are independent. A change to one should not
   touch the other.
+- **`option-2.html` is generated from `index.html` once, then diverges.** The
+  two share their CSS and script by copy, not by reference: a fix to the
+  sheet's logic has to be made in both files. They save to different Firestore
+  documents (`sheets/latakia` and `sheets/latakia-option-2`) with their own
+  schema versions (2 and 1); keep both ids in `firestore.rules`.
+- **The Option 2 plans are drawn by `option-2/plans.py`**, not by hand. Change
+  the script, run `python3 option-2/plans.py --png`, and commit the SVG and PNG
+  it writes. Only the shell and unit areas come from the architect; the
+  partitions and furniture are our proposal and say so on the page.
 
 ## Images
 
@@ -80,7 +92,10 @@ backdrop shows at the edges.
 
 ## Status (September 2026)
 
-Both pieces are live. Recent work on the site: new render with the shops, a
+Both pieces are live. On 6 September a second calculator for the architect's
+Option 2 was added (`option-2.html` + `option-2/`); its Firestore document is
+denied by the rules deployed at the time, so `firestore.rules` needs deploying
+before its Save works. Recent work on the site: new render with the shops, a
 fifth detail tile, widened hero images, left neighbour cut to the shop line.
 Nothing is half-finished. Known limitation: the render is low resolution;
 a larger export would improve the hero on big screens without any code change.

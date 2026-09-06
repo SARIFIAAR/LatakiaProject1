@@ -6,7 +6,8 @@ project, both static, both served by GitHub Pages.
 
 | | Where | Live |
 |---|---|---|
-| **Feasibility calculator** | `index.html` (and `test.html`, a scratch copy) | https://sarifiaar.github.io/LatakiaProject1/ |
+| **Feasibility calculator — Option 1** | `index.html` (and `test.html`, a scratch copy) | https://sarifiaar.github.io/LatakiaProject1/ |
+| **Feasibility calculator — Option 2** | `option-2.html`, plans in `option-2/` | https://sarifiaar.github.io/LatakiaProject1/option-2.html |
 | **Project site** | `site/` | https://sarifiaar.github.io/LatakiaProject1/site/ |
 
 No build step anywhere. Open the file, or serve the folder.
@@ -28,6 +29,26 @@ Current shape of the sheet (September 2026):
 - Three parties in unit allocation: the two owners and the supervising engineer.
 - Saved figures carry a schema version, so a sheet stored under an older layout
   prompts for a re-save instead of being misread.
+
+### Option 2
+
+`option-2.html` is the same sheet for the architect's second layout (the
+"OPTION 2" sheet of 6 September): three 2.80 m shops facing the street on a
+1.30 m side corridor, the stair at the back and an L-shaped 66 m² clinic around
+a rear lightwell; above, offices of 48, 34 and 38 m² to the street and a 45 m²
+office at the rear with a terrace. Twelve units in allocation. It saves to its
+own document (`sheets/latakia-option-2`) so the two options never overwrite
+each other; a switch at the top of both pages moves between them. Prices and
+rates start as copies of the Option 1 figures so the comparison is like for
+like.
+
+The Option 2 plans shown on that page (`option-2/plan-*.svg`, PNG copies
+beside them) are drawn by `option-2/plans.py` — shell and unit areas from the
+architect's sheet, internal walls and furniture as a proposal. Edit the script
+and re-run it (`--png` also re-renders the PNGs through headless Chrome).
+
+`firestore.rules` holds the security rules both sheets need; see the comment
+at its top before deploying.
 
 ## The project site
 
@@ -55,6 +76,10 @@ added. The hero images were then widened so the render fills the frame instead
 of sitting between blurred bands: sky with clouds above, cobbles below,
 out-of-focus low-rise neighbours to either side. Finally the wall to the left
 of the building was cut down to the shop line, so that side reads as low-rise.
+
+**Calculator, 6 September (evening)** — a second sheet for the architect's
+Option 2, with its own Firestore document, an option switch on both pages,
+and furnished floor plans drawn from the Option 2 sheet.
 
 **Open** — the contact number in the footer is the live one; nothing else is
 placeholder. A higher-resolution export of the facade render would sharpen the
