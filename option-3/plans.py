@@ -62,9 +62,8 @@ def clinic(p, cross=False):
     if cross:
         p.counter(430, 700, 180, 60); p.chair(520, 670, 0)
         p.sofa(270, 650, 60, 150, "l"); p.rect(350, 720, 60, 60, rx=6); p.sofa(635, 650, 60, 150, "r")
-        p.label(430, 795, "عيادة أسنان", size=26, weight=600, anchor="end")
-        p.label(450, 795, "61 m²", size=24, weight=600, anchor="start")
-        p.label(520, 812, "Dental clinic", size=15, color=FURN)
+        p.unit(470, 700, "عيادة أسنان", "61 m²")
+        p.dim_h(260, 680, 480, "420"); p.dim_v(290, 455, 815, "360")
     else:
         p.counter(430, 655, 180, 60); p.chair(520, 745, 180)
         p.sofa(270, 650, 60, 190, "l"); p.rect(350, 780, 60, 60, rx=6); p.sofa(400, 880, 200, 60, "b")
@@ -76,13 +75,16 @@ def clinic(p, cross=False):
     p.rect(590, 380, 50, 50, rx=4)
     if p.furniture: p.label(615, 448, "X-ray", size=14, color=FURN)
     p.room(660, 900, "انتظار", "Waiting", 22)
-    p.room(765, 680, "علاج ١", "Treatment 1", 22); p.room(700, 410, "علاج ٢", "Treatment 2", 22)
+    p.room(880, 800, "علاج ١", "Treatment 1", 22); p.room(800, 250, "علاج ٢", "Treatment 2", 22)
     p.label(712, 614, "حمام", size=13)
-    p.room(920, 580, "مخزن", "Store", 22)
+    p.room(920, 600, "مخزن", "Store", 22)
+    p.dim_h(800, 1045, 480, "245")
+    p.dim_h(710, 1045, 665, "335"); p.dim_v(740, 640, 950, "310")
+    p.dim_h(565, 1045, 50, "480"); p.dim_v(600, 25, 445, "420")
 
 
 def ground():
-    p = Plan(); p.furniture = False; p.door_swings = False
+    p = Plan(); p.furniture = False; p.door_swings = False; p.cad = True
     shell_ground(p)
     clinic(p)
     # stair, hall glazed onto the lightwell
@@ -121,11 +123,11 @@ def ground():
         p.room(a + 60, 1090, "حمام", None, 20); p.room(m + 60, 1090, "مستودع", "Store", 20)
     p.room(100, 1560, "ممر", "Corridor 1.50", 22)
     y = D + 130
-    p.dim_h(0, W, y + 60, "10.70")
-    p.dim_h(25, 175, y, "1.50"); p.dim_h(190, 610, y, "4.20"); p.dim_h(625, 1045, y, "4.20")
+    p.dim_h(0, W, y + 60, "1070")
+    p.dim_h(25, 175, y, "150"); p.dim_h(190, 610, y, "420"); p.dim_h(625, 1045, y, "420")
     x = W + 80
-    p.dim_v(x + 60, 0, D, "21.50")
-    p.dim_v(x, 0, 430, "4.30"); p.dim_v(x, 455, 950, "4.95"); p.dim_v(x, 970, D, "11.80")
+    p.dim_v(x + 60, 0, D, "2150")
+    p.dim_v(x, 0, 430, "430"); p.dim_v(x, 455, 950, "495"); p.dim_v(x, 970, D, "1180")
     return p
 
 
@@ -151,6 +153,8 @@ def shop(p, a, b, ytop, i, area, dims):
     p.f(f'<line x1="{sx0+20}" y1="{(sy0+sy1)/2}" x2="{sx1-25}" y2="{(sy0+sy1)/2}" stroke-width="3"/>'
         f'<path d="M{sx1-45} {(sy0+sy1)/2-12} L{sx1-25} {(sy0+sy1)/2} L{sx1-45} {(sy0+sy1)/2+12}" fill="none" stroke-width="3"/>')
     p.room(m, ytop + 330, "ميزانين فوق", "Mezzanine over", 20)
+    p.dim_h(a, b, ytop + 200, "420"); p.dim_v(a + 50, ytop, D, "1180")
+    p.dim_h(b - 130, b, ytop + 190, "130")
     # sales floor
     p.shelf(a + 5, ytop + 500, 40, 2030 - ytop - 500); p.shelf(b - 45, ytop + 630, 40, 2030 - ytop - 630)
     p.counter(a + 60, ytop + 510, 200, 65); p.chair(a + 160, ytop + 465, 0)
@@ -164,7 +168,7 @@ def ground_central():
     """The passage on the facade's axis; at its end a corridor 1.35 m deep, cut
     from the clinic's front edge, turns left to the stair. The clinic is
     entered from the axis. Both shops keep their full depth."""
-    p = Plan(); p.furniture = False; p.door_swings = False
+    p = Plan(); p.furniture = False; p.door_swings = False; p.cad = True
     shell_ground(p)
     clinic(p, cross=True)
     p.glass_h(40, 230, 430, 455)
@@ -176,13 +180,16 @@ def ground_central():
     shop(p, 25, 445, 970, 0, "49.6 m²", "4.20 × 11.80")
     shop(p, 625, 1045, 970, 1, "49.6 m²", "4.20 × 11.80")
     p.room(535, 1560, "ممر", "Passage 1.50", 22)
+    p.dim_h(460, 610, 1300, "150")
     p.room(400, 895, "ممر", None, 18)
+    p.dim_h(260, 610, 870, "350"); p.dim_v(560, 830, 950, "120")
+    p.axis_v(535, -60, D + 60); p.axis_h(430, -60, W + 60); p.axis_h(950, -60, W + 60)
     y = D + 130
-    p.dim_h(0, W, y + 60, "10.70")
-    p.dim_h(25, 445, y, "4.20"); p.dim_h(460, 610, y, "1.50"); p.dim_h(625, 1045, y, "4.20")
+    p.dim_h(0, W, y + 60, "1070")
+    p.dim_h(25, 445, y, "420"); p.dim_h(460, 610, y, "150"); p.dim_h(625, 1045, y, "420")
     x = W + 80
-    p.dim_v(x + 60, 0, D, "21.50")
-    p.dim_v(x, 0, 430, "4.30"); p.dim_v(x, 455, 950, "4.95"); p.dim_v(x, 970, D, "11.80")
+    p.dim_v(x + 60, 0, D, "2150")
+    p.dim_v(x, 0, 430, "430"); p.dim_v(x, 455, 950, "495"); p.dim_v(x, 970, D, "1180")
     return p
 
 
@@ -218,12 +225,14 @@ def suite_dental(p, a, b, ytop, door, name_ar, area, name_en, steril=True):
         rm = (ra + rb) // 2
         p.dental_chair(rm + 10, ys + 300)
         p.counter(ra + 10, D - 80, rb - ra - 20, 50); p.basin(rm, D - 55, 0)
-    p.room(a + (3 * w) // 8 + 20, ys + 52, "علاج ١", "Treatment 1", 18); p.room(m + 5 + (3 * w) // 8 + 20, ys + 52, "علاج ٢", "Treatment 2", 18)
+    p.room((a + m) // 2, ys + 300, "علاج ١", "Treatment 1", 18); p.room((m + b) // 2, ys + 300, "علاج ٢", "Treatment 2", 18)
     p.unit((a + b) // 2, ytop + 330 if door == "top" else ytop + 380, name_ar, area, name_en)
+    p.dim_h(a, b, ytop + 175, str(w)); p.dim_v(a + 50, ytop, ys, str(ys - ytop))
+    p.dim_h(a, m - 5, ys + 60, str(m - 5 - a)); p.dim_h(m + 5, b, ys + 60, str(b - m - 5)); p.dim_v(a + 50, ys + IW, D, str(D - ys - IW))
 
 
 def typical():
-    p = Plan(); p.furniture = False; p.door_swings = False
+    p = Plan(); p.furniture = False; p.door_swings = False; p.cad = True
     p.vwall(0, 430, D, OW); p.vwall(W - OW, 430, D, OW); p.hwall(0, W, 430, 25)
     p.vwall(0, 0, 430, 8); p.vwall(W - 8, 0, 430, 8); p.hwall(0, W, 0, 8)
     p.vwall(540, 0, 455, 25); p.void(25, 25, 540, 430); p.hatch(565, 8, W - 8, 430, "terrace")
@@ -253,6 +262,8 @@ def typical():
     p.unit(430, 790, "عيادة خلفية", "45 m²", "Rear suite")
     p.room(340, 540, "مخزن", "Store", 18); p.room(655, 470, "حمام", None, 18)
     p.room(805, 330, "تراس", "Terrace", 26); p.room(282, 240, "منور", "Lightwell · open", 26)
+    p.dim_h(260, 1045, 660, "785"); p.dim_v(480, 455, 965, "510")
+    p.dim_h(260, 570, 900, "310"); p.dim_h(580, 1045, 900, "465")
 
     # street suites
     p.door_h(60, 1100, 1115, 90, "l", "d")
@@ -260,13 +271,15 @@ def typical():
     p.door_v(535, 550, 990, 90, "t", "r")
     suite_dental(p, 550, 1045, 980, "left", "عيادة ب", "58 m²", "Suite B · 4.95 × 11.70")
 
+    p.dim_h(245, 550, 1040, "305"); p.dim_v(500, 980, 1100, "120")
+    p.axis_v(535, -60, D + 60); p.axis_h(430, -60, W + 60); p.axis_h(965, -60, W + 60); p.axis_h(1100, -60, W + 60)
     y = D + 130
-    p.dim_h(0, W, y + 60, "10.70")
-    p.dim_h(25, 535, y, "5.10"); p.dim_h(550, 1045, y, "4.95")
+    p.dim_h(0, W, y + 60, "1070")
+    p.dim_h(25, 535, y, "510"); p.dim_h(550, 1045, y, "495")
     x = W + 80
-    p.dim_v(x + 60, 0, D, "21.50")
-    p.dim_v(x, 0, 430, "4.30"); p.dim_v(x, 455, 965, "5.10")
-    p.dim_v(x, 980, 1100, "1.20"); p.dim_v(x, 1115, D, "10.35")
+    p.dim_v(x + 60, 0, D, "2150")
+    p.dim_v(x, 0, 430, "430"); p.dim_v(x, 455, 965, "510")
+    p.dim_v(x, 980, 1100, "120"); p.dim_v(x, 1115, D, "1035")
     return p
 
 

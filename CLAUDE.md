@@ -55,7 +55,11 @@ cd site && python3 -m http.server 8765
   versions; keep every id in `firestore.rules` and redeploy when one is added.
   Option 3 has five construction cost rows, so its script sums `i < 5`.
 - **The Option 2 and 3 plans are drawn by `option-2/plans.py` and
-  `option-3/plans.py`**, not by hand. Change
+  `option-3/plans.py`**, not by hand. Option 3 uses the helpers' CAD mode
+  (`p.cad = True`, no furniture, no door swings): thin black double-line
+  walls, jambs at openings, dash-dot axes, centimetre dimensions and Arabic
+  room names with an area — the style of the architect's own sheets, which
+  the user asked for. Change
   the script, run `python3 option-2/plans.py --png`, and commit the SVG and PNG
   it writes. Only the shell and unit areas come from the architect; the
   partitions and furniture are our proposal and say so on the page.

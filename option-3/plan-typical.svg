@@ -8,34 +8,64 @@
 <g id="fill" >
 <rect x="25" y="25" width="515" height="405" fill="#fff" stroke="#1c2a33" stroke-width="3" stroke-dasharray="18 10"/><line x1="25" y1="25" x2="540" y2="430" stroke="#aebcc3" stroke-width="2"/><line x1="540" y1="25" x2="25" y2="430" stroke="#aebcc3" stroke-width="2"/>
 <rect x="565" y="8" width="497" height="422" fill="url(#terrace)"/>
+<line x1="535" y1="-60" x2="535" y2="2210" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>
+<line x1="-60" y1="430" x2="1130" y2="430" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>
+<line x1="-60" y1="965" x2="1130" y2="965" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>
+<line x1="-60" y1="1100" x2="1130" y2="1100" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>
 </g>
-<g id="wall" fill="#1c2a33">
-<rect x="0" y="430" width="25" height="1720"/>
-<rect x="1045" y="430" width="25" height="1720"/>
-<rect x="0" y="430" width="1070" height="25"/>
-<rect x="0" y="0" width="8" height="430"/>
-<rect x="1062" y="0" width="8" height="430"/>
-<rect x="0" y="0" width="1070" height="8"/>
-<rect x="540" y="0" width="25" height="455"/>
-<rect x="245" y="455" width="15" height="510"/>
-<rect x="245" y="965" width="825" height="15"/>
-<rect x="0" y="1100" width="550" height="15"/>
-<rect x="535" y="980" width="15" height="1170"/>
-<rect x="0" y="2125" width="1070" height="25"/>
-<rect x="420" y="455" width="10" height="145"/>
-<rect x="260" y="600" width="170" height="10"/>
-<rect x="570" y="455" width="10" height="510"/>
-<rect x="570" y="620" width="160" height="10"/>
-<rect x="730" y="455" width="10" height="165"/>
-<rect x="385" y="1265" width="150" height="10"/>
-<rect x="385" y="1115" width="10" height="150"/>
-<rect x="25" y="1590" width="510" height="10"/>
-<rect x="275" y="1590" width="10" height="560"/>
-<rect x="745" y="980" width="10" height="150"/>
-<rect x="745" y="1130" width="300" height="10"/>
-<rect x="895" y="980" width="10" height="150"/>
-<rect x="550" y="1590" width="495" height="10"/>
-<rect x="792" y="1590" width="10" height="560"/>
+<g id="wall" >
+<rect x="0" y="430" width="25" height="1720" fill="#000"/>
+<rect x="1045" y="430" width="25" height="1720" fill="#000"/>
+<rect x="0" y="430" width="1070" height="25" fill="#000"/>
+<rect x="0" y="0" width="8" height="430" fill="#000"/>
+<rect x="1062" y="0" width="8" height="430" fill="#000"/>
+<rect x="0" y="0" width="1070" height="8" fill="#000"/>
+<rect x="540" y="0" width="25" height="455" fill="#000"/>
+<rect x="245" y="455" width="15" height="510" fill="#000"/>
+<rect x="245" y="965" width="825" height="15" fill="#000"/>
+<rect x="0" y="1100" width="550" height="15" fill="#000"/>
+<rect x="535" y="980" width="15" height="1170" fill="#000"/>
+<rect x="0" y="2125" width="1070" height="25" fill="#000"/>
+<rect x="420" y="455" width="10" height="145" fill="#000"/>
+<rect x="260" y="600" width="170" height="10" fill="#000"/>
+<rect x="570" y="455" width="10" height="510" fill="#000"/>
+<rect x="570" y="620" width="160" height="10" fill="#000"/>
+<rect x="730" y="455" width="10" height="165" fill="#000"/>
+<rect x="385" y="1265" width="150" height="10" fill="#000"/>
+<rect x="385" y="1115" width="10" height="150" fill="#000"/>
+<rect x="25" y="1590" width="510" height="10" fill="#000"/>
+<rect x="275" y="1590" width="10" height="560" fill="#000"/>
+<rect x="745" y="980" width="10" height="150" fill="#000"/>
+<rect x="745" y="1130" width="300" height="10" fill="#000"/>
+<rect x="895" y="980" width="10" height="150" fill="#000"/>
+<rect x="550" y="1590" width="495" height="10" fill="#000"/>
+<rect x="792" y="1590" width="10" height="560" fill="#000"/>
+<rect x="3" y="433" width="19" height="1714" fill="#fff"/>
+<rect x="1048" y="433" width="19" height="1714" fill="#fff"/>
+<rect x="3" y="433" width="1064" height="19" fill="#fff"/>
+<rect x="3" y="3" width="2" height="424" fill="#fff"/>
+<rect x="1065" y="3" width="2" height="424" fill="#fff"/>
+<rect x="3" y="3" width="1064" height="2" fill="#fff"/>
+<rect x="543" y="3" width="19" height="449" fill="#fff"/>
+<rect x="248" y="458" width="9" height="504" fill="#fff"/>
+<rect x="248" y="968" width="819" height="9" fill="#fff"/>
+<rect x="3" y="1103" width="544" height="9" fill="#fff"/>
+<rect x="538" y="983" width="9" height="1164" fill="#fff"/>
+<rect x="3" y="2128" width="1064" height="19" fill="#fff"/>
+<rect x="423" y="458" width="4" height="139" fill="#fff"/>
+<rect x="263" y="603" width="164" height="4" fill="#fff"/>
+<rect x="573" y="458" width="4" height="504" fill="#fff"/>
+<rect x="573" y="623" width="154" height="4" fill="#fff"/>
+<rect x="733" y="458" width="4" height="159" fill="#fff"/>
+<rect x="388" y="1268" width="144" height="4" fill="#fff"/>
+<rect x="388" y="1118" width="4" height="144" fill="#fff"/>
+<rect x="28" y="1593" width="504" height="4" fill="#fff"/>
+<rect x="278" y="1593" width="4" height="554" fill="#fff"/>
+<rect x="748" y="983" width="4" height="144" fill="#fff"/>
+<rect x="748" y="1133" width="294" height="4" fill="#fff"/>
+<rect x="898" y="983" width="4" height="144" fill="#fff"/>
+<rect x="553" y="1593" width="489" height="4" fill="#fff"/>
+<rect x="795" y="1593" width="4" height="554" fill="#fff"/>
 </g>
 <g id="open" fill="#fff">
 <rect x="40" y="429" width="190" height="27"/>
@@ -61,7 +91,7 @@
 <rect x="575" y="1589" width="85" height="12"/>
 <rect x="817" y="1589" width="85" height="12"/>
 </g>
-<g id="glass" fill="none" stroke="#2f8f9d" stroke-width="2.5">
+<g id="glass" fill="none" stroke="#000" stroke-width="1.4">
 <line x1="40" y1="430" x2="230" y2="430"/><line x1="40" y1="442.5" x2="230" y2="442.5"/><line x1="40" y1="455" x2="230" y2="455"/>
 <line x1="440" y1="430" x2="530" y2="430"/><line x1="440" y1="442.5" x2="530" y2="442.5"/><line x1="440" y1="455" x2="530" y2="455"/>
 <line x1="760" y1="430" x2="830" y2="430"/><line x1="760" y1="442.5" x2="830" y2="442.5"/><line x1="760" y1="455" x2="830" y2="455"/>
@@ -71,7 +101,31 @@
 <line x1="590" y1="2125" x2="770" y2="2125"/><line x1="590" y1="2137.5" x2="770" y2="2137.5"/><line x1="590" y1="2150" x2="770" y2="2150"/>
 <line x1="850" y1="2125" x2="1020" y2="2125"/><line x1="850" y1="2137.5" x2="1020" y2="2137.5"/><line x1="850" y1="2150" x2="1020" y2="2150"/>
 </g>
-<g id="furn" fill="#fff" stroke="#5f7079" stroke-width="2.2" stroke-linejoin="round">
+<g id="door" fill="none" stroke="#000" stroke-width="1.4">
+<line x1="40" y1="430" x2="40" y2="455"/><line x1="230" y1="430" x2="230" y2="455"/>
+<line x1="440" y1="430" x2="440" y2="455"/><line x1="530" y1="430" x2="530" y2="455"/>
+<line x1="760" y1="430" x2="760" y2="455"/><line x1="830" y1="430" x2="830" y2="455"/>
+<line x1="850" y1="430" x2="850" y2="455"/><line x1="950" y1="430" x2="950" y2="455"/>
+<line x1="970" y1="430" x2="970" y2="455"/><line x1="1030" y1="430" x2="1030" y2="455"/>
+<line x1="60" y1="2125" x2="60" y2="2150"/><line x1="240" y1="2125" x2="240" y2="2150"/>
+<line x1="320" y1="2125" x2="320" y2="2150"/><line x1="500" y1="2125" x2="500" y2="2150"/>
+<line x1="590" y1="2125" x2="590" y2="2150"/><line x1="770" y1="2125" x2="770" y2="2150"/>
+<line x1="850" y1="2125" x2="850" y2="2150"/><line x1="1020" y1="2125" x2="1020" y2="2150"/>
+<line x1="245" y1="860" x2="260" y2="860"/><line x1="245" y1="950" x2="260" y2="950"/>
+<line x1="320" y1="600" x2="320" y2="610"/><line x1="400" y1="600" x2="400" y2="610"/>
+<line x1="570" y1="800" x2="580" y2="800"/><line x1="570" y1="890" x2="580" y2="890"/>
+<line x1="730" y1="470" x2="740" y2="470"/><line x1="730" y1="550" x2="740" y2="550"/>
+<line x1="60" y1="1100" x2="60" y2="1115"/><line x1="150" y1="1100" x2="150" y2="1115"/>
+<line x1="420" y1="1265" x2="420" y2="1275"/><line x1="500" y1="1265" x2="500" y2="1275"/>
+<line x1="50" y1="1590" x2="50" y2="1600"/><line x1="135" y1="1590" x2="135" y2="1600"/>
+<line x1="300" y1="1590" x2="300" y2="1600"/><line x1="385" y1="1590" x2="385" y2="1600"/>
+<line x1="535" y1="990" x2="550" y2="990"/><line x1="535" y1="1080" x2="550" y2="1080"/>
+<line x1="780" y1="1130" x2="780" y2="1140"/><line x1="860" y1="1130" x2="860" y2="1140"/>
+<line x1="930" y1="1130" x2="930" y2="1140"/><line x1="1010" y1="1130" x2="1010" y2="1140"/>
+<line x1="575" y1="1590" x2="575" y2="1600"/><line x1="660" y1="1590" x2="660" y2="1600"/>
+<line x1="817" y1="1590" x2="817" y2="1600"/><line x1="902" y1="1590" x2="902" y2="1600"/>
+</g>
+<g id="furn" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round">
 <rect x="25.0" y="575" width="105.0" height="270" fill="none"/>
 <line x1="25.0" y1="602" x2="130.0" y2="602"/>
 <line x1="25.0" y1="629" x2="130.0" y2="629"/>
@@ -109,47 +163,51 @@
 <g transform="translate(923 2095) rotate(0)"><rect x="-27" y="-18" width="54" height="36" rx="4"/><circle cx="0" cy="2" r="11"/></g>
 </g>
 <g id="text" >
-<text x="135" y="920" font-size="22" font-weight="500" text-anchor="middle" fill="#1c2a33">درج</text>
-<text x="135" y="938.7" font-size="15.399999999999999" font-weight="400" text-anchor="middle" fill="#5f7079">Stair · daylit</text>
-<text x="390" y="1052" font-size="20" font-weight="500" text-anchor="middle" fill="#1c2a33">ممر</text>
-<text x="390" y="1069.0" font-size="14.0" font-weight="400" text-anchor="middle" fill="#5f7079">Corridor 1.20</text>
-<text x="430" y="790" font-size="34" font-weight="600" text-anchor="middle" fill="#1c2a33">عيادة خلفية</text>
-<text x="430" y="826" font-size="30" font-weight="500" text-anchor="middle" fill="#1c2a33">45 m²</text>
-<text x="430" y="854" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Rear suite</text>
-<text x="340" y="540" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">مخزن</text>
-<text x="340" y="555.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Store</text>
-<text x="655" y="470" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="805" y="330" font-size="26" font-weight="500" text-anchor="middle" fill="#1c2a33">تراس</text>
-<text x="805" y="352.1" font-size="18.2" font-weight="400" text-anchor="middle" fill="#5f7079">Terrace</text>
-<text x="282" y="240" font-size="26" font-weight="500" text-anchor="middle" fill="#1c2a33">منور</text>
-<text x="282" y="262.1" font-size="18.2" font-weight="400" text-anchor="middle" fill="#5f7079">Lightwell · open</text>
-<text x="423" y="1175" font-size="16" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="236" y="1642" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">علاج ١</text>
-<text x="236" y="1657.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Treatment 1</text>
-<text x="496" y="1642" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">علاج ٢</text>
-<text x="496" y="1657.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Treatment 2</text>
-<text x="280" y="1445" font-size="34" font-weight="600" text-anchor="middle" fill="#1c2a33">عيادة أ</text>
-<text x="280" y="1481" font-size="30" font-weight="500" text-anchor="middle" fill="#1c2a33">53 m²</text>
-<text x="280" y="1509" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Suite A · 5.10 × 10.35</text>
-<text x="820" y="1090" font-size="16" font-weight="500" text-anchor="middle" fill="#1c2a33">تعقيم</text>
-<text x="933" y="1040" font-size="16" font-weight="500" text-anchor="middle" fill="#1c2a33">حمام</text>
-<text x="755" y="1642" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">علاج ١</text>
-<text x="755" y="1657.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Treatment 1</text>
-<text x="1007" y="1642" font-size="18" font-weight="500" text-anchor="middle" fill="#1c2a33">علاج ٢</text>
-<text x="1007" y="1657.3" font-size="12.6" font-weight="400" text-anchor="middle" fill="#5f7079">Treatment 2</text>
-<text x="797" y="1360" font-size="34" font-weight="600" text-anchor="middle" fill="#1c2a33">عيادة ب</text>
-<text x="797" y="1396" font-size="30" font-weight="500" text-anchor="middle" fill="#1c2a33">58 m²</text>
-<text x="797" y="1424" font-size="22" font-weight="400" text-anchor="middle" fill="#5f7079">Suite B · 4.95 × 11.70</text>
+<text x="135" y="920" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">درج</text>
+<text x="390" y="1052" font-size="20" font-weight="400" text-anchor="middle" fill="#1c2a33">ممر</text>
+<text x="430" y="790" font-size="26" font-weight="500" text-anchor="middle" fill="#1c2a33">عيادة خلفية</text>
+<text x="430" y="820" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">area 45 m2</text>
+<text x="340" y="540" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">مخزن</text>
+<text x="655" y="470" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">حمام</text>
+<text x="805" y="330" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">تراس</text>
+<text x="282" y="240" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">منور</text>
+<text x="423" y="1175" font-size="16" font-weight="400" text-anchor="middle" fill="#1c2a33">حمام</text>
+<text x="152" y="1890" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">علاج ١</text>
+<text x="407" y="1890" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">علاج ٢</text>
+<text x="280" y="1445" font-size="26" font-weight="500" text-anchor="middle" fill="#1c2a33">عيادة أ</text>
+<text x="280" y="1475" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">area 53 m2</text>
+<text x="820" y="1090" font-size="16" font-weight="400" text-anchor="middle" fill="#1c2a33">تعقيم</text>
+<text x="933" y="1040" font-size="16" font-weight="400" text-anchor="middle" fill="#1c2a33">حمام</text>
+<text x="673" y="1890" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">علاج ١</text>
+<text x="921" y="1890" font-size="18" font-weight="400" text-anchor="middle" fill="#1c2a33">علاج ٢</text>
+<text x="797" y="1360" font-size="26" font-weight="500" text-anchor="middle" fill="#1c2a33">عيادة ب</text>
+<text x="797" y="1390" font-size="22" font-weight="400" text-anchor="middle" fill="#1c2a33">area 58 m2</text>
 </g>
-<g id="dim" fill="#6f8590" stroke="#6f8590" stroke-width="1.5">
-<line x1="0" y1="2340" x2="1070" y2="2340"/><line x1="0" y1="2330" x2="0" y2="2350"/><line x1="1070" y1="2330" x2="1070" y2="2350"/><text x="535.0" y="2332" font-size="24" text-anchor="middle">10.70</text>
-<line x1="25" y1="2280" x2="535" y2="2280"/><line x1="25" y1="2270" x2="25" y2="2290"/><line x1="535" y1="2270" x2="535" y2="2290"/><text x="280.0" y="2272" font-size="24" text-anchor="middle">5.10</text>
-<line x1="550" y1="2280" x2="1045" y2="2280"/><line x1="550" y1="2270" x2="550" y2="2290"/><line x1="1045" y1="2270" x2="1045" y2="2290"/><text x="797.5" y="2272" font-size="24" text-anchor="middle">4.95</text>
-<line x1="1210" y1="0" x2="1210" y2="2150"/><line x1="1200" y1="0" x2="1220" y2="0"/><line x1="1200" y1="2150" x2="1220" y2="2150"/><text x="1200" y="1075.0" font-size="24" text-anchor="middle" transform="rotate(-90 1200 1075.0)">21.50</text>
-<line x1="1150" y1="0" x2="1150" y2="430"/><line x1="1140" y1="0" x2="1160" y2="0"/><line x1="1140" y1="430" x2="1160" y2="430"/><text x="1140" y="215.0" font-size="24" text-anchor="middle" transform="rotate(-90 1140 215.0)">4.30</text>
-<line x1="1150" y1="455" x2="1150" y2="965"/><line x1="1140" y1="455" x2="1160" y2="455"/><line x1="1140" y1="965" x2="1160" y2="965"/><text x="1140" y="710.0" font-size="24" text-anchor="middle" transform="rotate(-90 1140 710.0)">5.10</text>
-<line x1="1150" y1="980" x2="1150" y2="1100"/><line x1="1140" y1="980" x2="1160" y2="980"/><line x1="1140" y1="1100" x2="1160" y2="1100"/><text x="1140" y="1040.0" font-size="24" text-anchor="middle" transform="rotate(-90 1140 1040.0)">1.20</text>
-<line x1="1150" y1="1115" x2="1150" y2="2150"/><line x1="1140" y1="1115" x2="1160" y2="1115"/><line x1="1140" y1="2150" x2="1160" y2="2150"/><text x="1140" y="1632.5" font-size="24" text-anchor="middle" transform="rotate(-90 1140 1632.5)">10.35</text>
+<g id="dim" fill="#000" stroke="#000" stroke-width="1">
+<line x1="260" y1="660" x2="1045" y2="660"/><line x1="260" y1="650" x2="260" y2="670"/><line x1="1045" y1="650" x2="1045" y2="670"/><text x="652.5" y="652" font-size="20" text-anchor="middle">785</text>
+<line x1="480" y1="455" x2="480" y2="965"/><line x1="470" y1="455" x2="490" y2="455"/><line x1="470" y1="965" x2="490" y2="965"/><text x="470" y="710.0" font-size="20" text-anchor="middle" transform="rotate(-90 470 710.0)">510</text>
+<line x1="260" y1="900" x2="570" y2="900"/><line x1="260" y1="890" x2="260" y2="910"/><line x1="570" y1="890" x2="570" y2="910"/><text x="415.0" y="892" font-size="20" text-anchor="middle">310</text>
+<line x1="580" y1="900" x2="1045" y2="900"/><line x1="580" y1="890" x2="580" y2="910"/><line x1="1045" y1="890" x2="1045" y2="910"/><text x="812.5" y="892" font-size="20" text-anchor="middle">465</text>
+<line x1="25" y1="1290" x2="535" y2="1290"/><line x1="25" y1="1280" x2="25" y2="1300"/><line x1="535" y1="1280" x2="535" y2="1300"/><text x="280.0" y="1282" font-size="20" text-anchor="middle">510</text>
+<line x1="75" y1="1115" x2="75" y2="1590"/><line x1="65" y1="1115" x2="85" y2="1115"/><line x1="65" y1="1590" x2="85" y2="1590"/><text x="65" y="1352.5" font-size="20" text-anchor="middle" transform="rotate(-90 65 1352.5)">475</text>
+<line x1="25" y1="1650" x2="275" y2="1650"/><line x1="25" y1="1640" x2="25" y2="1660"/><line x1="275" y1="1640" x2="275" y2="1660"/><text x="150.0" y="1642" font-size="20" text-anchor="middle">250</text>
+<line x1="285" y1="1650" x2="535" y2="1650"/><line x1="285" y1="1640" x2="285" y2="1660"/><line x1="535" y1="1640" x2="535" y2="1660"/><text x="410.0" y="1642" font-size="20" text-anchor="middle">250</text>
+<line x1="75" y1="1600" x2="75" y2="2150"/><line x1="65" y1="1600" x2="85" y2="1600"/><line x1="65" y1="2150" x2="85" y2="2150"/><text x="65" y="1875.0" font-size="20" text-anchor="middle" transform="rotate(-90 65 1875.0)">550</text>
+<line x1="550" y1="1155" x2="1045" y2="1155"/><line x1="550" y1="1145" x2="550" y2="1165"/><line x1="1045" y1="1145" x2="1045" y2="1165"/><text x="797.5" y="1147" font-size="20" text-anchor="middle">495</text>
+<line x1="600" y1="980" x2="600" y2="1590"/><line x1="590" y1="980" x2="610" y2="980"/><line x1="590" y1="1590" x2="610" y2="1590"/><text x="590" y="1285.0" font-size="20" text-anchor="middle" transform="rotate(-90 590 1285.0)">610</text>
+<line x1="550" y1="1650" x2="792" y2="1650"/><line x1="550" y1="1640" x2="550" y2="1660"/><line x1="792" y1="1640" x2="792" y2="1660"/><text x="671.0" y="1642" font-size="20" text-anchor="middle">242</text>
+<line x1="802" y1="1650" x2="1045" y2="1650"/><line x1="802" y1="1640" x2="802" y2="1660"/><line x1="1045" y1="1640" x2="1045" y2="1660"/><text x="923.5" y="1642" font-size="20" text-anchor="middle">243</text>
+<line x1="600" y1="1600" x2="600" y2="2150"/><line x1="590" y1="1600" x2="610" y2="1600"/><line x1="590" y1="2150" x2="610" y2="2150"/><text x="590" y="1875.0" font-size="20" text-anchor="middle" transform="rotate(-90 590 1875.0)">550</text>
+<line x1="245" y1="1040" x2="550" y2="1040"/><line x1="245" y1="1030" x2="245" y2="1050"/><line x1="550" y1="1030" x2="550" y2="1050"/><text x="397.5" y="1032" font-size="20" text-anchor="middle">305</text>
+<line x1="500" y1="980" x2="500" y2="1100"/><line x1="490" y1="980" x2="510" y2="980"/><line x1="490" y1="1100" x2="510" y2="1100"/><text x="490" y="1040.0" font-size="20" text-anchor="middle" transform="rotate(-90 490 1040.0)">120</text>
+<line x1="0" y1="2340" x2="1070" y2="2340"/><line x1="0" y1="2330" x2="0" y2="2350"/><line x1="1070" y1="2330" x2="1070" y2="2350"/><text x="535.0" y="2332" font-size="20" text-anchor="middle">1070</text>
+<line x1="25" y1="2280" x2="535" y2="2280"/><line x1="25" y1="2270" x2="25" y2="2290"/><line x1="535" y1="2270" x2="535" y2="2290"/><text x="280.0" y="2272" font-size="20" text-anchor="middle">510</text>
+<line x1="550" y1="2280" x2="1045" y2="2280"/><line x1="550" y1="2270" x2="550" y2="2290"/><line x1="1045" y1="2270" x2="1045" y2="2290"/><text x="797.5" y="2272" font-size="20" text-anchor="middle">495</text>
+<line x1="1210" y1="0" x2="1210" y2="2150"/><line x1="1200" y1="0" x2="1220" y2="0"/><line x1="1200" y1="2150" x2="1220" y2="2150"/><text x="1200" y="1075.0" font-size="20" text-anchor="middle" transform="rotate(-90 1200 1075.0)">2150</text>
+<line x1="1150" y1="0" x2="1150" y2="430"/><line x1="1140" y1="0" x2="1160" y2="0"/><line x1="1140" y1="430" x2="1160" y2="430"/><text x="1140" y="215.0" font-size="20" text-anchor="middle" transform="rotate(-90 1140 215.0)">430</text>
+<line x1="1150" y1="455" x2="1150" y2="965"/><line x1="1140" y1="455" x2="1160" y2="455"/><line x1="1140" y1="965" x2="1160" y2="965"/><text x="1140" y="710.0" font-size="20" text-anchor="middle" transform="rotate(-90 1140 710.0)">510</text>
+<line x1="1150" y1="980" x2="1150" y2="1100"/><line x1="1140" y1="980" x2="1160" y2="980"/><line x1="1140" y1="1100" x2="1160" y2="1100"/><text x="1140" y="1040.0" font-size="20" text-anchor="middle" transform="rotate(-90 1140 1040.0)">120</text>
+<line x1="1150" y1="1115" x2="1150" y2="2150"/><line x1="1140" y1="1115" x2="1160" y2="1115"/><line x1="1140" y1="2150" x2="1160" y2="2150"/><text x="1140" y="1632.5" font-size="20" text-anchor="middle" transform="rotate(-90 1140 1632.5)">1035</text>
 </g>
-<text x="535.0" y="2220" font-size="30" font-weight="500" text-anchor="middle" fill="#6f8590" letter-spacing="4">STREET · الشارع</text>
+<text x="535.0" y="2210" font-size="20" text-anchor="middle" fill="#555" letter-spacing="3">الشارع</text>
 </svg>

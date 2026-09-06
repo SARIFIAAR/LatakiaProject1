@@ -42,13 +42,31 @@ class Plan:
         self.L = {k: [] for k in LAYERS}
         self.furniture = True   # False: draw walls, doors, sanitary fixtures and landscape only
         self.door_swings = True # False: doors are plain openings, no leaf or arc
+        self.cad = False        # True: thin black double-line walls, jambs at openings, no colour
+        self.walls = []
 
     def add(self, layer, s):
         self.L[layer].append(s)
 
     # ---- walls -------------------------------------------------------------
     def wall(self, x0, y0, x1, y1):
+        self.walls.append((x0, y0, x1, y1))
         self.add("wall", f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}"/>')
+
+    def jamb_h(self, x0, x1, y0, y1):
+        """End lines across a horizontal wall at an opening (CAD mode only)."""
+        if self.cad:
+            self.add("door", f'<line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y1}"/><line x1="{x1}" y1="{y0}" x2="{x1}" y2="{y1}"/>')
+
+    def jamb_v(self, x0, x1, y0, y1):
+        if self.cad:
+            self.add("door", f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y0}"/><line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}"/>')
+
+    def axis_v(self, x, y0, y1):
+        self.add("fill", f'<line x1="{x}" y1="{y0}" x2="{x}" y2="{y1}" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>')
+
+    def axis_h(self, y, x0, x1):
+        self.add("fill", f'<line x1="{x0}" y1="{y}" x2="{x1}" y2="{y}" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="46 8 6 8"/>')
 
     def hwall(self, x0, x1, y, t):
         self.wall(x0, y, x1, y + t)
@@ -63,6 +81,7 @@ class Plan:
     def door_h(self, x, y0, y1, w=90, hinge="l", swing="d"):
         """Door in a horizontal wall occupying y0..y1. Opening x..x+w."""
         self.opening(x, y0 - 1, x + w, y1 + 1)
+        self.jamb_h(x, x + w, y0, y1)
         hx = x if hinge == "l" else x + w
         dx = 1 if hinge == "l" else -1
         ym = y1 if swing == "d" else y0
@@ -77,6 +96,7 @@ class Plan:
     def door_v(self, x0, x1, y, w=90, hinge="t", swing="r"):
         """Door in a vertical wall occupying x0..x1. Opening y..y+w."""
         self.opening(x0 - 1, y, x1 + 1, y + w)
+        self.jamb_v(x0, x1, y, y + w)
         hy = y if hinge == "t" else y + w
         dy = 1 if hinge == "t" else -1
         xm = x1 if swing == "r" else x0
@@ -91,6 +111,7 @@ class Plan:
     def door_slide_h(self, x, y0, y1, w=110):
         """Sliding glass door in a horizontal wall: two offset leaves, no swing."""
         self.opening(x, y0 - 1, x + w, y1 + 1)
+        self.jamb_h(x, x + w, y0, y1)
         h = w / 2 + 6
         self.add("glass", f'<line x1="{x}" y1="{y0+2}" x2="{x+h}" y2="{y0+2}" stroke-width="4"/>'
                           f'<line x1="{x+w-h}" y1="{y1-2}" x2="{x+w}" y2="{y1-2}" stroke-width="4"/>')
@@ -98,6 +119,7 @@ class Plan:
     # ---- glazing -----------------------------------------------------------
     def glass_h(self, x0, x1, y0, y1):
         self.opening(x0, y0 - 1, x1, y1 + 1)
+        self.jamb_h(x0, x1, y0, y1)
         ym = (y0 + y1) / 2
         self.add("glass", f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y0}"/>'
                           f'<line x1="{x0}" y1="{ym}" x2="{x1}" y2="{ym}"/>'
@@ -105,6 +127,7 @@ class Plan:
 
     def glass_v(self, x0, x1, y0, y1):
         self.opening(x0 - 1, y0, x1 + 1, y1)
+        self.jamb_v(x0, x1, y0, y1)
         xm = (x0 + x1) / 2
         self.add("glass", f'<line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y1}"/>'
                           f'<line x1="{xm}" y1="{y0}" x2="{xm}" y2="{y1}"/>'
@@ -272,11 +295,18 @@ class Plan:
 
     def room(self, x, y, ar, en=None, size=26):
         """Arabic name with a smaller English gloss underneath."""
+        if self.cad:
+            self.label(x, y, ar, size=min(size, 22), weight=400)
+            return
         self.label(x, y, ar, size=size, weight=500)
         if en:
             self.label(x, y + size * 0.85, en, size=size * 0.7, weight=400, color=FURN)
 
     def unit(self, x, y, ar, area, en=None):
+        if self.cad:
+            self.label(x, y, ar, size=26, weight=500)
+            self.label(x, y + 30, "area " + area.replace("²", "2"), size=22, weight=400)
+            return
         self.label(x, y, ar, size=34, weight=600)
         self.label(x, y + 36, area, size=30, weight=500)
         if en:
@@ -284,12 +314,14 @@ class Plan:
 
     # ---- dimensions --------------------------------------------------------
     def dim_h(self, x0, x1, y, text, size=24):
+        if self.cad: size = 20
         self.add("dim", f'<line x1="{x0}" y1="{y}" x2="{x1}" y2="{y}"/>'
                         f'<line x1="{x0}" y1="{y-10}" x2="{x0}" y2="{y+10}"/>'
                         f'<line x1="{x1}" y1="{y-10}" x2="{x1}" y2="{y+10}"/>'
                         f'<text x="{(x0+x1)/2}" y="{y-8}" font-size="{size}" text-anchor="middle">{esc(text)}</text>')
 
     def dim_v(self, x, y0, y1, text, size=24):
+        if self.cad: size = 20
         self.add("dim", f'<line x1="{x}" y1="{y0}" x2="{x}" y2="{y1}"/>'
                         f'<line x1="{x-10}" y1="{y0}" x2="{x+10}" y2="{y0}"/>'
                         f'<line x1="{x-10}" y1="{y1}" x2="{x+10}" y2="{y1}"/>'
@@ -320,14 +352,29 @@ class Plan:
             "text":  "",
             "dim":   f'fill="{DIM}" stroke="{DIM}" stroke-width="1.5"',
         }
+        if self.cad:
+            style.update({
+                "glass": 'fill="none" stroke="#000" stroke-width="1.4"',
+                "door":  'fill="none" stroke="#000" stroke-width="1.4"',
+                "furn":  'fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round"',
+                "dim":   'fill="#000" stroke="#000" stroke-width="1"',
+            })
+            e = 3   # the outline's thickness, in cm
+            self.L["wall"] = (
+                [f'<rect x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" fill="#000"/>' for x0, y0, x1, y1 in self.walls] +
+                [f'<rect x="{x0+e}" y="{y0+e}" width="{x1-x0-2*e}" height="{y1-y0-2*e}" fill="#fff"/>' for x0, y0, x1, y1 in self.walls])
+            style["wall"] = ""
         for k in LAYERS:
             if self.L[k]:
                 out.append(f'<g id="{k}" {style[k]}>')
                 out.extend(self.L[k])
                 out.append('</g>')
         # street label, as on the site's plans
-        out.append(f'<text x="{W/2}" y="{D+70}" font-size="30" font-weight="500" text-anchor="middle" '
-                   f'fill="{DIM}" letter-spacing="4">STREET · الشارع</text>')
+        if self.cad:
+            out.append(f'<text x="{W/2}" y="{D+60}" font-size="20" text-anchor="middle" fill="#555" letter-spacing="3">الشارع</text>')
+        else:
+            out.append(f'<text x="{W/2}" y="{D+70}" font-size="30" font-weight="500" text-anchor="middle" '
+                       f'fill="{DIM}" letter-spacing="4">STREET · الشارع</text>')
         out.append('</svg>')
         return "\n".join(out)
 
