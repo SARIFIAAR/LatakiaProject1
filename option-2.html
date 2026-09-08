@@ -194,6 +194,8 @@
   .out .val{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;}
   .block.costs .out .val{color:var(--cost);}
   .block.revenue .out .val{color:var(--rev);}
+  .out .val.netval{font-size:12.5px;font-weight:500;margin-bottom:7px;}
+  .block.revenue .out .val.netval{color:var(--ink-2);}
 
   /* ===== subtotal rows ===== */
 
@@ -508,13 +510,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u1">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u1">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u1" type="number" min="0" step="0.01" value="115.2" data-usable>
       </div>
       <div class="field">
         <label for="l1">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l1" type="number" min="0" step="0.01" value="131.48" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p1">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -533,13 +535,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u2">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u2">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u2" type="number" min="0" step="0.01" value="66" data-usable>
       </div>
       <div class="field">
         <label for="l2">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l2" type="number" min="0" step="0.01" value="75.33" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p2">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -563,13 +565,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u3">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u3">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u3" type="number" min="0" step="0.01" value="48" data-usable>
       </div>
       <div class="field">
         <label for="l3">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l3" type="number" min="0" step="0.01" value="53.54" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p3">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -588,13 +590,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u4">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u4">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u4" type="number" min="0" step="0.01" value="34" data-usable>
       </div>
       <div class="field">
         <label for="l4">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l4" type="number" min="0" step="0.01" value="37.92" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p4">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -613,13 +615,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u5">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u5">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u5" type="number" min="0" step="0.01" value="38" data-usable>
       </div>
       <div class="field">
         <label for="l5">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l5" type="number" min="0" step="0.01" value="42.39" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p5">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -638,13 +640,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u6">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u6">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u6" type="number" min="0" step="0.01" value="45" data-usable>
       </div>
       <div class="field">
         <label for="l6">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l6" type="number" min="0" step="0.01" value="50.19" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p6">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -668,13 +670,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u7">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u7">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u7" type="number" min="0" step="0.01" value="48" data-usable>
       </div>
       <div class="field">
         <label for="l7">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l7" type="number" min="0" step="0.01" value="53.54" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p7">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -693,13 +695,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u8">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u8">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u8" type="number" min="0" step="0.01" value="34" data-usable>
       </div>
       <div class="field">
         <label for="l8">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l8" type="number" min="0" step="0.01" value="37.92" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p8">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -718,13 +720,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u9">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u9">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u9" type="number" min="0" step="0.01" value="38" data-usable>
       </div>
       <div class="field">
         <label for="l9">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l9" type="number" min="0" step="0.01" value="42.39" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p9">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -743,13 +745,13 @@
         <span class="tag" data-load></span>
       </div>
       <div class="field">
-        <label for="u10">Usable area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+        <label for="u10">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
         <input id="u10" type="number" min="0" step="0.01" value="45" data-usable>
       </div>
       <div class="field">
         <label for="l10">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
         <input id="l10" type="number" min="0" step="0.01" value="50.19" data-loaded>
-        <span class="hint">= usable + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
       </div>
       <div class="field">
         <label for="p10">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
@@ -767,7 +769,7 @@
         <span class="n-ar ar">إجمالي المبيعات</span>
       </div>
       <div class="cell">
-        <span class="lab">Usable area<span class="ar">المساحة الصافية</span></span>
+        <span class="lab">Net area<span class="ar">المساحة الصافية</span></span>
         <span class="v" id="tUsable">—</span>
       </div>
       <div class="cell">
@@ -779,7 +781,7 @@
         <span class="v" id="tAvg">—</span>
       </div>
       <div class="cell big">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+        <span class="lab">Total sale price<span class="ar">إجمالي سعر البيع</span></span>
         <span class="v" id="tSales">—</span>
       </div>
     </div>
@@ -1106,8 +1108,9 @@
   </div>
 
   <p class="note">
-    Sales totals are saleable area × price per m². Cost totals are quantity × rate, plus contingency.
-    Usable area is the unit area written on the Option 2 plans. Saleable area shares each floor plate
+    Each sales line shows the net value (net area × price per m²) and the sale price (saleable area × price
+    per m²); the sale price is the total. Cost totals are quantity × rate, plus contingency.
+    Net area is the unit area written on the Option 2 plans. Saleable area shares each floor plate
     (walls, corridor and stair) between its units in proportion to their size: the ground floor plate is
     206.8 m² over 181.2 m² of units (+14.1%), a typical floor 184.0 m² over 165 m² (+11.5%).
     <strong>Rates and prices are copied from the Option 1 sheet so the two options compare like for like;
@@ -1157,6 +1160,23 @@
 
   var revRows  = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="rev"]'));
   var costRows = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="cost"]'));
+
+  // Each sales row shows two figures: the value on the net area (net area x price)
+  // above the headline sale price (saleable area x price). The net line is added
+  // here so the markup for every unit stays in one place.
+  revRows.forEach(function(row){
+    var out = row.querySelector(".out");
+    if (!out || out.querySelector("[data-net]")) return;
+    var lab = document.createElement("span");
+    lab.className = "lab";
+    lab.innerHTML = 'Net value<span class="ar">قيمة الصافي</span>';
+    var val = document.createElement("span");
+    val.className = "val netval";
+    val.setAttribute("data-net", "");
+    val.textContent = "—";
+    out.insertBefore(val, out.firstChild);
+    out.insertBefore(lab, val);
+  });
 
   var money = new Intl.NumberFormat("en-US", {
     style:"currency", currency:"USD", maximumFractionDigits:0
@@ -1269,7 +1289,10 @@
       var l = num(row.querySelector("[data-loaded]"));
       var p = num(row.querySelector("[data-price]"));
       var v = l * p;
+      var netV = u * p;
 
+      var netEl = row.querySelector("[data-net]");
+      if (netEl) netEl.textContent = money.format(netV);
       row.querySelector("[data-total]").textContent = money.format(v);
 
       var tag = row.querySelector("[data-load]");
