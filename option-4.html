@@ -469,6 +469,7 @@
   @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
 
   .print-cover{display:none;}
+  .print-sales{display:none;}
   @media print{
     @page{ size:A4 portrait; margin:14mm; }
     html,body{background:#fff !important;}
@@ -534,6 +535,19 @@
     #plans figcaption{font-size:8.5px;line-height:1.35;margin-top:5px;}
     #plans figcaption .ar{font-size:8px;}
     .plan-foot{font-size:8.5px;margin-top:8px;}
+
+    /* sales page: compact proposal table instead of the interactive input rows */
+    #revenue .grp,#revenue .row{display:none !important;}
+    .print-sales{display:table !important;width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;}
+    .print-sales th,.print-sales td{border-bottom:1px solid var(--rule-soft);padding:6px 9px;
+      text-align:right;font-variant-numeric:tabular-nums;}
+    .print-sales thead th{border-bottom:2px solid var(--ink-2);font-size:9px;color:var(--ink-2);
+      font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
+    .print-sales td:first-child,.print-sales th:first-child{text-align:left;}
+    .print-sales tbody tr:nth-child(even){background:#f6f8f8;}
+    .print-sales tfoot th{border-top:2px solid var(--ink-2);border-bottom:none;font-size:12.5px;
+      color:var(--ink);padding-top:9px;}
+    .print-sales tfoot th:last-child{color:var(--rev);}
   }
   /* ---- split-pricing rows on small screens: allow stacking ---- */
   @media (max-width:760px){
@@ -614,6 +628,15 @@
         <div class="h-ar ar">قيمة المبيعات</div>
       </div>
     </div>
+    <table class="print-sales" aria-hidden="true">
+      <thead>
+        <tr><th>Unit</th><th>Area m²</th><th>$ / m²</th><th>Sale price</th></tr>
+      </thead>
+      <tbody id="printSalesBody"></tbody>
+      <tfoot>
+        <tr><th>Total</th><th id="psArea">—</th><th></th><th id="psTotal">—</th></tr>
+      </tfoot>
+    </table>
 
     <div class="grp">
       Ground floor — shops and clinic
@@ -1681,6 +1704,23 @@
     document.getElementById("tAvg").textContent =
       sumL > 0 ? money.format(sumSales / sumL) + " / m\u00B2" : "\u2014";
     document.getElementById("tSales").textContent = money.format(sumSales);
+
+    // proposal print: fill the compact sales table
+    var psb = document.getElementById("printSalesBody");
+    if (psb) {
+      var rowsHtml = "";
+      revRows.forEach(function(row){
+        var nm = row.querySelector(".row-name .n").textContent;
+        var ta = row.querySelector("[data-tarea]").textContent;
+        var an = parseFloat(ta) || 0;
+        var tp = parseFloat(row.dataset.tprice) || 0;
+        rowsHtml += "<tr><td>" + nm + "</td><td>" + ta + "</td><td>" +
+                    (an > 0 ? money.format(tp / an) : "") + "</td><td>" + money.format(tp) + "</td></tr>";
+      });
+      psb.innerHTML = rowsHtml;
+      document.getElementById("psArea").textContent  = area.format(sumL) + " m\u00B2";
+      document.getElementById("psTotal").textContent = money.format(sumSales);
+    }
 
     // ----- costs -----
     var sumCosts = 0, construction = 0, fees = 0;
