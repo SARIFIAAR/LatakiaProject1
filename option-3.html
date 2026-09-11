@@ -194,8 +194,33 @@
   .out .val{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;}
   .block.costs .out .val{color:var(--cost);}
   .block.revenue .out .val{color:var(--rev);}
-  .out .val.netval{font-size:12.5px;font-weight:500;margin-bottom:7px;}
-  .block.revenue .out .val.netval{color:var(--ink-2);}
+  /* ---- split-pricing revenue rows: all 8 boxes on one compact line ---- */
+  .row[data-kind="rev"]{
+    grid-template-columns:minmax(58px,0.8fr) minmax(0,2.5fr) minmax(0,2.5fr) minmax(0,1.45fr);
+    gap:8px;align-items:stretch;padding:8px 12px 9px;
+  }
+  .grpbox{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,auto);
+    gap:7px;align-items:end;padding:7px 9px 8px;border-radius:7px;min-width:0;
+  }
+  .grpbox.g-net{background:var(--rev-soft);}
+  .grpbox.g-com{background:#eef1f4;}
+  .grpbox .field{min-width:0;margin:0;}
+  .grpbox .field label{font-size:10px;margin-bottom:2px;line-height:1.15;}
+  .grpbox .field label .u{color:var(--ink-3);}
+  .grpbox .field label .ar{font-size:9px;}
+  .grpbox .field input{min-width:0;padding:5px 6px;font-size:13px;}
+  .grpbox .cellout{text-align:right;align-self:end;padding-bottom:2px;min-width:0;}
+  .grpbox .cellout .lab{color:var(--ink-2);display:block;font-size:10px;margin-bottom:2px;line-height:1.1;}
+  .grpbox .cellout .lab .ar{color:var(--ink-3);font-size:9px;}
+  .grpbox .cellout .val{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--rev);white-space:nowrap;}
+  .grpbox.g-com .cellout .val{color:var(--ink);}
+  .out.totals{align-self:center;text-align:right;padding-bottom:1px;min-width:0;}
+  .out.totals .lab{color:var(--ink-2);display:block;font-size:10px;margin-bottom:2px;line-height:1.1;}
+  .out.totals .lab .ar{color:var(--ink-3);font-size:9px;}
+  .out.totals .val{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;display:block;white-space:nowrap;}
+  .out.totals .val.area{color:var(--ink-2);font-size:12.5px;margin-bottom:6px;}
+  .out.totals .val[data-total]{color:var(--rev);}
 
   /* ===== subtotal rows ===== */
 
@@ -451,6 +476,20 @@
     .net-item.main .v,.net-item.neg .v{color:var(--ink);}
     .net-grid{border-top-color:var(--rule);}
   }
+  /* ---- split-pricing rows on small screens: allow stacking ---- */
+  @media (max-width:760px){
+    .row[data-kind="rev"]{grid-template-columns:1fr;gap:8px;}
+    .out.totals{text-align:left;display:flex;gap:4px 22px;flex-wrap:wrap;align-items:baseline;
+                padding-top:8px;border-top:1px solid var(--rule-soft);}
+    .out.totals .lab,.out.totals .val,.out.totals .val.area{display:inline;margin:0 6px 0 0;}
+    .grpbox .field input{font-size:16px;}
+  }
+  @media (max-width:480px){
+    .grpbox{grid-template-columns:1fr 1fr;gap:8px 10px;}
+    .grpbox .cellout{grid-column:1 / 3;text-align:left;border-top:1px dashed rgba(0,0,0,.12);
+                     margin-top:2px;padding-top:7px;}
+    .grpbox .cellout .lab{display:inline;margin-right:8px;}
+  }
 </style>
 </head>
 <body>
@@ -509,21 +548,38 @@
         <span class="n-ar ar">المحلات على الشارع (٤٩٫٦ + ٥٥٫٤ م²)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u1">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u1" type="number" min="0" step="0.01" value="105" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u1">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u1" type="number" min="0" step="0.01" value="105" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn1">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn1" type="number" min="0" step="10" value="3500" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l1">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l1" type="number" min="0" step="0.01" value="113.92" data-loaded>
-        <span class="hint">= usable + the shop's walls only, no common area<span class="ar">= الصافية + جدران المحل فقط، بلا مشاع</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c1">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c1" type="number" min="0" step="0.01" value="8.92" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc1">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc1" type="number" min="0" step="10" value="3500" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p1">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p1" type="number" min="0" step="10" value="3500" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -534,21 +590,38 @@
         <span class="n-ar ar">ميزانين المحلات (٢ × ٢٠ م²)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u2">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u2" type="number" min="0" step="0.01" value="40" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u2">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u2" type="number" min="0" step="0.01" value="40" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn2">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn2" type="number" min="0" step="10" value="1750" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l2">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l2" type="number" min="0" step="0.01" value="40" data-loaded>
-        <span class="hint">under the 5.00 m ground floor; sold with the shop, priced at half the shop rate<span class="ar">تحت ارتفاع ٥٫٠٠ م؛ يُباع مع المحل بنصف سعر المحل</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c2">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c2" type="number" min="0" step="0.01" value="0" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc2">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc2" type="number" min="0" step="10" value="1750" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p2">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p2" type="number" min="0" step="10" value="1750" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -559,21 +632,38 @@
         <span class="n-ar ar">عيادة الأسنان الخلفية (٤٨ م²)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u3">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u3" type="number" min="0" step="0.01" value="48.4" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u3">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u3" type="number" min="0" step="0.01" value="48.4" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn3">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn3" type="number" min="0" step="10" value="2000" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l3">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l3" type="number" min="0" step="0.01" value="60.00" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c3">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c3" type="number" min="0" step="0.01" value="11.6" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc3">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc3" type="number" min="0" step="10" value="2000" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p3">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p3" type="number" min="0" step="10" value="2000" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -589,21 +679,38 @@
         <span class="n-ar ar">العيادة أ (٥٣ م²، عرض ٥٫١٠ م)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u4">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u4" type="number" min="0" step="0.01" value="52.8" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u4">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u4" type="number" min="0" step="0.01" value="52.8" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn4">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn4" type="number" min="0" step="10" value="750" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l4">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l4" type="number" min="0" step="0.01" value="68.00" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c4">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c4" type="number" min="0" step="0.01" value="15.2" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc4">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc4" type="number" min="0" step="10" value="750" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p4">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p4" type="number" min="0" step="10" value="750" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -614,21 +721,38 @@
         <span class="n-ar ar">العيادة ب (٥٨ م²، عرض ٤٫٩٥ م)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u5">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u5" type="number" min="0" step="0.01" value="57.9" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u5">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u5" type="number" min="0" step="0.01" value="57.9" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn5">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn5" type="number" min="0" step="10" value="750" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l5">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l5" type="number" min="0" step="0.01" value="74.57" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c5">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c5" type="number" min="0" step="0.01" value="16.67" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc5">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc5" type="number" min="0" step="10" value="750" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p5">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p5" type="number" min="0" step="10" value="750" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -639,21 +763,38 @@
         <span class="n-ar ar">العيادة الخلفية مع التراس (٤٥ م²)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u6">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u6" type="number" min="0" step="0.01" value="45" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u6">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u6" type="number" min="0" step="0.01" value="45" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn6">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn6" type="number" min="0" step="10" value="600" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l6">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l6" type="number" min="0" step="0.01" value="57.93" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c6">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c6" type="number" min="0" step="0.01" value="12.93" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc6">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc6" type="number" min="0" step="10" value="600" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p6">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p6" type="number" min="0" step="10" value="600" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -669,21 +810,38 @@
         <span class="n-ar ar">العيادة أ (٥٣ م²، عرض ٥٫١٠ م)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u7">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u7" type="number" min="0" step="0.01" value="52.8" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u7">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u7" type="number" min="0" step="0.01" value="52.8" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn7">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn7" type="number" min="0" step="10" value="750" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l7">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l7" type="number" min="0" step="0.01" value="68.00" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c7">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c7" type="number" min="0" step="0.01" value="15.2" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc7">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc7" type="number" min="0" step="10" value="750" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p7">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p7" type="number" min="0" step="10" value="750" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -694,21 +852,38 @@
         <span class="n-ar ar">العيادة ب (٥٨ م²، عرض ٤٫٩٥ م)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u8">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u8" type="number" min="0" step="0.01" value="57.9" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u8">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u8" type="number" min="0" step="0.01" value="57.9" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn8">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn8" type="number" min="0" step="10" value="750" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l8">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l8" type="number" min="0" step="0.01" value="74.57" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c8">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c8" type="number" min="0" step="0.01" value="16.67" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc8">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc8" type="number" min="0" step="10" value="750" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p8">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p8" type="number" min="0" step="10" value="750" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -719,21 +894,38 @@
         <span class="n-ar ar">العيادة الخلفية مع التراس (٤٥ م²)</span>
         <span class="tag" data-load></span>
       </div>
-      <div class="field">
-        <label for="u9">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-        <input id="u9" type="number" min="0" step="0.01" value="45" data-usable>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="u9">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
+          <input id="u9" type="number" min="0" step="0.01" value="45" data-usable>
+        </div>
+        <div class="field">
+          <label for="pn9">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
+          <input id="pn9" type="number" min="0" step="10" value="600" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="l9">Saleable area <span class="u">m²</span><span class="ar">المساحة البيعية</span></label>
-        <input id="l9" type="number" min="0" step="0.01" value="57.93" data-loaded>
-        <span class="hint">= net + share of common areas<span class="ar">= الصافية + حصة المشاع والجدران</span></span>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="c9">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
+          <input id="c9" type="number" min="0" step="0.01" value="12.93" data-carea>
+        </div>
+        <div class="field">
+          <label for="pc9">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
+          <input id="pc9" type="number" min="0" step="10" value="600" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="p9">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
-        <input id="p9" type="number" min="0" step="10" value="600" data-price>
-      </div>
-      <div class="out">
-        <span class="lab">Total<span class="ar">الإجمالي</span></span>
+      <div class="out totals">
+        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -1107,8 +1299,9 @@
   </div>
 
   <p class="note">
-    Each sales line shows the net value (net area × price per m²) and the sale price (saleable area × price
-    per m²); the sale price is the total. Cost totals are quantity × rate, plus contingency.
+    Each unit is priced in two parts: its net area at one rate, and its share of common area and walls
+    at another rate. The two areas add up to the total area, and the two amounts add up to the total sale
+    price. Cost totals are quantity × rate, plus contingency.
     Net area is the net area of each unit on the Option 3 plans. The shops have their own street doors,
     so their saleable area is the net area plus their walls only (the full outer wall and half of each
     shared wall): 53.9 + 60.1 m², no share of any common area. The passage, corridor and stair hall
@@ -1164,22 +1357,6 @@
   var revRows  = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="rev"]'));
   var costRows = Array.prototype.slice.call(document.querySelectorAll('.row[data-kind="cost"]'));
 
-  // Each sales row shows two figures: the value on the net area (net area x price)
-  // above the headline sale price (saleable area x price). The net line is added
-  // here so the markup for every unit stays in one place.
-  revRows.forEach(function(row){
-    var out = row.querySelector(".out");
-    if (!out || out.querySelector("[data-net]")) return;
-    var lab = document.createElement("span");
-    lab.className = "lab";
-    lab.innerHTML = 'Net value<span class="ar">قيمة الصافي</span>';
-    var val = document.createElement("span");
-    val.className = "val netval";
-    val.setAttribute("data-net", "");
-    val.textContent = "—";
-    out.insertBefore(val, out.firstChild);
-    out.insertBefore(lab, val);
-  });
 
   var money = new Intl.NumberFormat("en-US", {
     style:"currency", currency:"USD", maximumFractionDigits:0
@@ -1287,23 +1464,28 @@
     var lines = [];
 
     revRows.forEach(function(row){
-      var u = num(row.querySelector("[data-usable]"));
-      var l = num(row.querySelector("[data-loaded]"));
-      var p = num(row.querySelector("[data-price]"));
-      var v = l * p;
-      var netV = u * p;
+      var u  = num(row.querySelector("[data-usable]"));   // net area
+      var pn = num(row.querySelector("[data-price]"));    // net price / m2
+      var ca = num(row.querySelector("[data-carea]"));    // common + walls area
+      var pc = num(row.querySelector("[data-cprice]"));   // common price / m2
 
-      var netEl = row.querySelector("[data-net]");
-      if (netEl) netEl.textContent = money.format(netV);
-      row.querySelector("[data-total]").textContent = money.format(v);
+      var netTotal = u * pn;
+      var comTotal = ca * pc;
+      var tArea    = u + ca;
+      var tPrice   = netTotal + comTotal;
+
+      row.querySelector("[data-nettotal]").textContent = money.format(netTotal);
+      row.querySelector("[data-ctotal]").textContent   = money.format(comTotal);
+      row.querySelector("[data-tarea]").textContent    = area.format(tArea) + " m\u00B2";
+      row.querySelector("[data-total]").textContent    = money.format(tPrice);
 
       var tag = row.querySelector("[data-load]");
-      tag.textContent = (u > 0 && l > 0)
-        ? "loading " + (((l / u) - 1) * 100).toFixed(1) + "%"
+      tag.textContent = (u > 0 && ca > 0)
+        ? "loading " + ((ca / u) * 100).toFixed(1) + "%"
         : "";
 
-      lines.push({sale:v, area:l});
-      sumU += u; sumL += l; sumSales += v;
+      lines.push({sale:tPrice, area:tArea});
+      sumU += u; sumL += tArea; sumSales += tPrice;
     });
 
     allocate(lines);
@@ -1369,7 +1551,7 @@
      they are ignored rather than misapplied. v2: shop 2 deepened to the clinic
      door line, the clinic reduced to 48 m², and saleable areas re-based so the
      shops carry their walls only. */
-  var SCHEMA = 2;
+  var SCHEMA = 3;
 
   var lastSaved = null;   // last state known to be in the store
   var dirty     = false;
