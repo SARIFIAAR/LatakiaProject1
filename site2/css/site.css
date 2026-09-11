@@ -485,7 +485,3 @@ a{color:inherit;}
 .tiles{grid-template-columns:repeat(5,1fr);}
 @media (max-width:900px){ .tiles{grid-template-columns:repeat(3,1fr);} }
 @media (max-width:560px){ .tiles{grid-template-columns:repeat(2,1fr);} }
-
-
-/* ---- site2: show the full shopfront row (not a cropped panel) ---- */
-.shop-media img{height:auto !important;}
