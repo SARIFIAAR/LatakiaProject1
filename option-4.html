@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Latakia Building — Feasibility Calculator · Option 2</title>
+<title>Latakia Building — Feasibility Calculator · Option 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
@@ -496,8 +496,8 @@
 
 <div id="gate">
   <div class="gate-box">
-    <h1>Latakia building — feasibility calculator · Option 2</h1>
-    <div class="h-ar ar">مبنى اللاذقية — دراسة الجدوى · الخيار الثاني</div>
+    <h1>Latakia building — feasibility calculator · Option 4</h1>
+    <div class="h-ar ar">مبنى اللاذقية — دراسة الجدوى · الخيار الرابع</div>
     <p>
       Enter the access code to open the sheet.
       <span class="ar">أدخل رمز الدخول لفتح الملف</span>
@@ -515,16 +515,16 @@
   <header>
     <nav class="opt-switch" aria-label="Design option">
       <a href="index.html">Option 1<span class="ar">الخيار الأول</span></a>
-      <a href="option-2.html" aria-current="page">Option 2<span class="ar">الخيار الثاني</span></a>
+      <a href="option-2.html">Option 2<span class="ar">الخيار الثاني</span></a>
       <a href="option-3.html">Option 3 · recommended<span class="ar">الخيار الثالث · المقترح</span></a>
-      <a href="option-4.html">Option 4<span class="ar">الخيار الرابع</span></a>
+      <a href="option-4.html" aria-current="page">Option 4<span class="ar">الخيار الرابع</span></a>
     </nav>
-    <h1>Latakia building — feasibility calculator · Option 2</h1>
-    <div class="h-ar ar">مبنى اللاذقية — حاسبة دراسة الجدوى · الخيار الثاني</div>
+    <h1>Latakia building — feasibility calculator · Option 4</h1>
+    <div class="h-ar ar">مبنى اللاذقية — حاسبة دراسة الجدوى · الخيار الرابع</div>
     <p class="sub">
-      Areas are taken from the Option 2 plans below: three shops and a clinic on the ground floor, four clinic suites on each floor above.
-      Every figure is editable and all totals recalculate as you type. This sheet saves separately from Option 1.
-      <span class="ar">المساحات مأخوذة من مخططات الخيار الثاني أدناه: ثلاثة محلات وعيادة في الطابق الأرضي، وأربع عيادات في كل طابق علوي. جميع القيم قابلة للتعديل ويعاد الحساب تلقائياً. يُحفظ هذا الملف بشكل مستقل عن الخيار الأول</span>
+      Option 4 uses the Option 2 layout, with a mezzanine over each ground-floor shop equal to 50% of the shop area, priced at the shop rate.
+      Every figure is editable and all totals recalculate as you type. The landowner and developer shares are set per unit in the allocation section below. Figures are saved in this browser.
+      <span class="ar">يعتمد الخيار الرابع على مخططات الخيار الثاني، مع إضافة ميزانين فوق كل محل في الطابق الأرضي يعادل ٥٠٪ من مساحة المحل وبسعر المحل. جميع القيم قابلة للتعديل ويعاد الحساب تلقائياً. تُحدَّد حصة المالك والمتعهد لكل وحدة في قسم توزيع الوحدات أدناه. تُحفظ القيم في هذا المتصفح.</span>
     </p>
   </header>
 
@@ -545,42 +545,124 @@
 
     <div class="row" data-kind="rev">
       <div class="row-name">
-        <span class="n">Street shops (3 × 38.4 m²)</span>
-        <span class="n-ar ar">المحلات على الشارع (٣ محلات × ٣٨٫٤ م²)</span>
+        <span class="n">Shop 1 (38.4 m²)</span>
+        <span class="n-ar ar">محل ١ (٣٨٫٤ م²)</span>
         <span class="tag" data-load></span>
       </div>
       <div class="grpbox g-net">
         <div class="field">
-          <label for="u1">Net area <span class="u">m²</span><span class="ar">المساحة الصافية</span></label>
-          <input id="u1" type="number" min="0" step="0.01" value="115.2" data-usable>
+          <label for="sh1a">Shop area <span class="u">m²</span><span class="ar">مساحة المحل</span></label>
+          <input id="sh1a" type="number" min="0" step="0.01" value="38.4" data-usable>
         </div>
         <div class="field">
-          <label for="pn1">Net price <span class="u">$ / m²</span><span class="ar">سعر متر الصافي</span></label>
-          <input id="pn1" type="number" min="0" step="10" value="3500" data-price>
+          <label for="sh1p">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+          <input id="sh1p" type="number" min="0" step="10" value="3500" data-price>
         </div>
         <div class="cellout">
-          <span class="lab">Net area total<span class="ar">إجمالي الصافي</span></span>
+          <span class="lab">Shop value<span class="ar">قيمة المحل</span></span>
           <span class="val" data-nettotal>—</span>
         </div>
       </div>
       <div class="grpbox g-com">
         <div class="field">
-          <label for="c1">Common + walls <span class="u">m²</span><span class="ar">المشاع والجدران</span></label>
-          <input id="c1" type="number" min="0" step="0.01" value="16.28" data-carea>
+          <label for="sh1m">Mezzanine (50%) <span class="u">m²</span><span class="ar">ميزانين (٥٠٪)</span></label>
+          <input id="sh1m" type="number" min="0" step="0.01" value="19.2" data-carea data-mezz="0.5" readonly>
         </div>
         <div class="field">
-          <label for="pc1">Common price <span class="u">$ / m²</span><span class="ar">سعر متر المشاع</span></label>
-          <input id="pc1" type="number" min="0" step="10" value="3500" data-cprice>
+          <label for="sh1mp">Mezzanine price <span class="u">$ / m²</span><span class="ar">سعر متر الميزانين</span></label>
+          <input id="sh1mp" type="number" min="0" step="10" value="3500" data-cprice>
         </div>
         <div class="cellout">
-          <span class="lab">Common total<span class="ar">إجمالي المشاع</span></span>
+          <span class="lab">Mezzanine value<span class="ar">قيمة الميزانين</span></span>
           <span class="val" data-ctotal>—</span>
         </div>
       </div>
       <div class="out totals">
-        <span class="lab">Total area<span class="ar">إجمالي المساحة</span></span>
+        <span class="lab">Total space<span class="ar">إجمالي المساحة</span></span>
         <span class="val area" data-tarea>—</span>
-        <span class="lab">Total price<span class="ar">إجمالي السعر</span></span>
+        <span class="lab">Total sell price<span class="ar">سعر البيع الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Shop 2 (38.4 m²)</span>
+        <span class="n-ar ar">محل ٢ (٣٨٫٤ م²)</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="sh2a">Shop area <span class="u">m²</span><span class="ar">مساحة المحل</span></label>
+          <input id="sh2a" type="number" min="0" step="0.01" value="38.4" data-usable>
+        </div>
+        <div class="field">
+          <label for="sh2p">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+          <input id="sh2p" type="number" min="0" step="10" value="3500" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Shop value<span class="ar">قيمة المحل</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
+      </div>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="sh2m">Mezzanine (50%) <span class="u">m²</span><span class="ar">ميزانين (٥٠٪)</span></label>
+          <input id="sh2m" type="number" min="0" step="0.01" value="19.2" data-carea data-mezz="0.5" readonly>
+        </div>
+        <div class="field">
+          <label for="sh2mp">Mezzanine price <span class="u">$ / m²</span><span class="ar">سعر متر الميزانين</span></label>
+          <input id="sh2mp" type="number" min="0" step="10" value="3500" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Mezzanine value<span class="ar">قيمة الميزانين</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
+      </div>
+      <div class="out totals">
+        <span class="lab">Total space<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total sell price<span class="ar">سعر البيع الإجمالي</span></span>
+        <span class="val" data-total>—</span>
+      </div>
+    </div>
+    <div class="row" data-kind="rev">
+      <div class="row-name">
+        <span class="n">Shop 3 (38.4 m²)</span>
+        <span class="n-ar ar">محل ٣ (٣٨٫٤ م²)</span>
+        <span class="tag" data-load></span>
+      </div>
+      <div class="grpbox g-net">
+        <div class="field">
+          <label for="sh3a">Shop area <span class="u">m²</span><span class="ar">مساحة المحل</span></label>
+          <input id="sh3a" type="number" min="0" step="0.01" value="38.4" data-usable>
+        </div>
+        <div class="field">
+          <label for="sh3p">Price <span class="u">$ / m²</span><span class="ar">سعر المتر</span></label>
+          <input id="sh3p" type="number" min="0" step="10" value="3500" data-price>
+        </div>
+        <div class="cellout">
+          <span class="lab">Shop value<span class="ar">قيمة المحل</span></span>
+          <span class="val" data-nettotal>—</span>
+        </div>
+      </div>
+      <div class="grpbox g-com">
+        <div class="field">
+          <label for="sh3m">Mezzanine (50%) <span class="u">m²</span><span class="ar">ميزانين (٥٠٪)</span></label>
+          <input id="sh3m" type="number" min="0" step="0.01" value="19.2" data-carea data-mezz="0.5" readonly>
+        </div>
+        <div class="field">
+          <label for="sh3mp">Mezzanine price <span class="u">$ / m²</span><span class="ar">سعر متر الميزانين</span></label>
+          <input id="sh3mp" type="number" min="0" step="10" value="3500" data-cprice>
+        </div>
+        <div class="cellout">
+          <span class="lab">Mezzanine value<span class="ar">قيمة الميزانين</span></span>
+          <span class="val" data-ctotal>—</span>
+        </div>
+      </div>
+      <div class="out totals">
+        <span class="lab">Total space<span class="ar">إجمالي المساحة</span></span>
+        <span class="val area" data-tarea>—</span>
+        <span class="lab">Total sell price<span class="ar">سعر البيع الإجمالي</span></span>
         <span class="val" data-total>—</span>
       </div>
     </div>
@@ -1389,18 +1471,18 @@
 
   // ---- unit list: src = index of the sales line, w = weight within that line ----
   var UNITS = [
-    {src:0, w:1, en:"Shop 1 (38.4 m²)", ar:"محل ١", def:"dev"},
-    {src:0, w:1, en:"Shop 2 (38.4 m²)", ar:"محل ٢", def:"dev"},
-    {src:0, w:1, en:"Shop 3 (38.4 m²)", ar:"محل ٣", def:"dev"},
-    {src:1, w:1, en:"Dental clinic (66 m²)", ar:"عيادة الأسنان", def:"dev"},
-    {src:2, w:1, en:"Floor 1 — clinic A (48 m²)", ar:"الطابق الأول — عيادة أ", def:"land"},
-    {src:3, w:1, en:"Floor 1 — clinic B (34 m²)", ar:"الطابق الأول — عيادة ب", def:"land"},
-    {src:4, w:1, en:"Floor 1 — clinic C (38 m²)", ar:"الطابق الأول — عيادة ج", def:"land"},
-    {src:5, w:1, en:"Floor 1 — rear clinic (45 m²)", ar:"الطابق الأول — العيادة الخلفية", def:"land"},
-    {src:6, w:1, en:"Floor 2 — clinic A (48 m²)", ar:"الطابق الثاني — عيادة أ", def:"land"},
-    {src:7, w:1, en:"Floor 2 — clinic B (34 m²)", ar:"الطابق الثاني — عيادة ب", def:"land"},
-    {src:8, w:1, en:"Floor 2 — clinic C (38 m²)", ar:"الطابق الثاني — عيادة ج", def:"land"},
-    {src:9, w:1, en:"Floor 2 — rear clinic (45 m²)", ar:"الطابق الثاني — العيادة الخلفية", def:"land"}
+    {src:0,  w:1, en:"Shop 1 (38.4 m²)", ar:"محل ١", def:"dev"},
+    {src:1,  w:1, en:"Shop 2 (38.4 m²)", ar:"محل ٢", def:"dev"},
+    {src:2,  w:1, en:"Shop 3 (38.4 m²)", ar:"محل ٣", def:"dev"},
+    {src:3,  w:1, en:"Dental clinic (66 m²)", ar:"عيادة الأسنان", def:"dev"},
+    {src:4,  w:1, en:"Floor 1 — clinic A (48 m²)", ar:"الطابق الأول — عيادة أ", def:"land"},
+    {src:5,  w:1, en:"Floor 1 — clinic B (34 m²)", ar:"الطابق الأول — عيادة ب", def:"land"},
+    {src:6,  w:1, en:"Floor 1 — clinic C (38 m²)", ar:"الطابق الأول — عيادة ج", def:"land"},
+    {src:7,  w:1, en:"Floor 1 — rear clinic (45 m²)", ar:"الطابق الأول — العيادة الخلفية", def:"land"},
+    {src:8,  w:1, en:"Floor 2 — clinic A (48 m²)", ar:"الطابق الثاني — عيادة أ", def:"land"},
+    {src:9,  w:1, en:"Floor 2 — clinic B (34 m²)", ar:"الطابق الثاني — عيادة ب", def:"land"},
+    {src:10, w:1, en:"Floor 2 — clinic C (38 m²)", ar:"الطابق الثاني — عيادة ج", def:"land"},
+    {src:11, w:1, en:"Floor 2 — rear clinic (45 m²)", ar:"الطابق الثاني — العيادة الخلفية", def:"land"}
   ];
 
   function buildAlloc(){
@@ -1480,10 +1562,16 @@
     var lines = [];
 
     revRows.forEach(function(row){
-      var u  = num(row.querySelector("[data-usable]"));   // net area
-      var pn = num(row.querySelector("[data-price]"));    // net price / m2
-      var ca = num(row.querySelector("[data-carea]"));    // common + walls area
-      var pc = num(row.querySelector("[data-cprice]"));   // common price / m2
+      var u  = num(row.querySelector("[data-usable]"));   // net / shop area
+      var pn = num(row.querySelector("[data-price]"));    // net / shop price per m2
+
+      // shops carry a mezzanine equal to a fixed share of the shop area
+      var mezzEl = row.querySelector("[data-mezz]");
+      var mezzF  = mezzEl ? (parseFloat(mezzEl.getAttribute("data-mezz")) || 0) : 0;
+      if (mezzEl) mezzEl.value = (u * mezzF).toFixed(2);
+
+      var ca = num(row.querySelector("[data-carea]"));    // common+walls, or mezzanine
+      var pc = num(row.querySelector("[data-cprice]"));
 
       var netTotal = u * pn;
       var comTotal = ca * pc;
@@ -1494,11 +1582,16 @@
       row.querySelector("[data-ctotal]").textContent   = money.format(comTotal);
       row.querySelector("[data-tarea]").textContent    = area.format(tArea) + " m\u00B2";
       row.querySelector("[data-total]").textContent    = money.format(tPrice);
+      row.dataset.tprice = tPrice;
 
       var tag = row.querySelector("[data-load]");
-      tag.textContent = (u > 0 && ca > 0)
-        ? "loading " + ((ca / u) * 100).toFixed(1) + "%"
-        : "";
+      if (mezzEl) {
+        tag.textContent = "+ mezzanine " + (mezzF * 100).toFixed(0) + "%";
+      } else {
+        tag.textContent = (u > 0 && ca > 0)
+          ? "loading " + ((ca / u) * 100).toFixed(1) + "%"
+          : "";
+      }
 
       lines.push({sale:tPrice, area:tArea});
       sumU += u; sumL += tArea; sumSales += tPrice;
@@ -1726,84 +1819,28 @@
   });
 })();
 </script>
-<!-- ============ shared storage (Firebase Firestore) ============ -->
-<script type="module">
-  /* Filled in from the Firebase console. The apiKey is a public client
-     identifier, not a secret — what may be read or written is decided by the
-     Firestore security rules, not by this file. */
-  const FIREBASE_CONFIG = {
-    apiKey:            "AIzaSyDkInIswbFWuvtOBXx1oKlO_ymsBIvObgA",
-    authDomain:        "latakia-feasibility.firebaseapp.com",
-    projectId:         "latakia-feasibility",
-    storageBucket:     "latakia-feasibility.firebasestorage.app",
-    messagingSenderId: "1089852015737",
-    appId:             "1:1089852015737:web:eb874e03bf2cf2cf94c0a8"
-  };
-
-  const SHEET_ID        = "latakia-option-2";
-  const LOAD_TIMEOUT_MS = 8000;
-  const SAVE_TIMEOUT_MS = 15000;
-
-  /* Firestore retries indefinitely when it cannot reach the server rather than
-     rejecting, so every call is raced against a timeout — otherwise the page
-     would wait forever and the Save button would never become usable. */
-  const withTimeout = (promise, ms, what) => Promise.race([
-    promise,
-    new Promise((_, rej) =>
-      setTimeout(() => rej(Object.assign(new Error(what + " timed out"), { timeout:true })), ms))
-  ]);
-
-  try {
-    const { initializeApp } =
-      await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js");
-    const { getFirestore, doc, getDoc, setDoc, collection, addDoc, serverTimestamp } =
-      await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js");
-
-    const db      = getFirestore(initializeApp(FIREBASE_CONFIG));
-    const sheet   = doc(db, "sheets", SHEET_ID);
-    const history = collection(db, "sheets", SHEET_ID, "revisions");
-
-    const when = d => (d && typeof d.toDate === "function") ? d.toDate() : null;
-
+<!-- ============ storage: this browser (localStorage) ============ -->
+<script>
+  (function(){
+    var KEY = "latakia-option-4";
     window.__sheetStoreResolve({
-      async load(){
-        const snap = await withTimeout(getDoc(sheet), LOAD_TIMEOUT_MS, "load");
-        if (!snap.exists()) return null;
-        const data = snap.data();
-        return { state: { v: data.v, inputs: data.inputs, alloc: data.alloc },
-                 at: when(data.updatedAt) };
+      load: function(){
+        return Promise.resolve().then(function(){
+          var raw=null; try{ raw=localStorage.getItem(KEY); }catch(e){}
+          if(!raw) return null;
+          var o=JSON.parse(raw);
+          return { state:o.state, at:o.at?new Date(o.at):null };
+        });
       },
-
-      async save(state){
-        /* archive the current version first; revisions are immutable, so a
-           bad overwrite can always be undone from the console */
-        try {
-          const prev = await withTimeout(getDoc(sheet), SAVE_TIMEOUT_MS, "archive read");
-          if (prev.exists()) {
-            await withTimeout(
-              addDoc(history, { ...prev.data(), archivedAt: serverTimestamp() }),
-              SAVE_TIMEOUT_MS, "archive write");
-          }
-        } catch (e) {
-          console.warn("[sheet] could not archive previous version", e);
-        }
-
-        await withTimeout(
-          setDoc(sheet, { ...state, updatedAt: serverTimestamp() }),
-          SAVE_TIMEOUT_MS, "save");
-
-        try {
-          const saved = await withTimeout(getDoc(sheet), SAVE_TIMEOUT_MS, "confirm");
-          return when(saved.data()?.updatedAt) || new Date();
-        } catch (e) {
-          return new Date();
-        }
+      save: function(state){
+        return Promise.resolve().then(function(){
+          var at=new Date();
+          try{ localStorage.setItem(KEY, JSON.stringify({state:state,at:at.toISOString()})); }catch(e){}
+          return at;
+        });
       }
     });
-  } catch (err) {
-    console.error("[sheet] storage unavailable", err);
-    window.__sheetStoreResolve(null);
-  }
+  })();
 </script>
 
 </body>
