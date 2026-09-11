@@ -468,14 +468,72 @@
 
   @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
 
+  .print-cover{display:none;}
   @media print{
-    /* client proposal: hide internal costs, profit, and all controls */
-    #gate,.actions,.opt-switch,.save-state,#costs,.net{display:none !important;}
-    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .wrap{max-width:none;padding:14px 6px 24px;}
-    .block{break-inside:auto;margin-bottom:16px;}
-    .row,.grp,.block-head,.splitline,.arow,.net-item,.sumbox{break-inside:avoid;}
-    .grpbox .field input{border-color:var(--rule);}
+    @page{ size:A4 portrait; margin:14mm; }
+    html,body{background:#fff !important;}
+    body{-webkit-print-color-adjust:exact;print-color-adjust:exact;color:var(--ink);}
+    /* hide everything interactive and internal */
+    #gate,header,.opt-switch,.actions,.save-state,#costs,.net{display:none !important;}
+    .wrap{max-width:none;margin:0;padding:0;}
+
+    /* ---------- cover page ---------- */
+    .print-cover{
+      display:flex !important;flex-direction:column;justify-content:space-between;
+      box-sizing:border-box;min-height:250mm;padding:6mm 2mm;page-break-after:always;
+    }
+    .print-cover .pc-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--rev);font-weight:600;}
+    .print-cover .pc-kicker.ar{letter-spacing:0;text-transform:none;color:var(--ink-3);font-weight:500;margin-top:2px;}
+    .print-cover .pc-mid{border-top:3px solid var(--rev);padding-top:22px;}
+    .print-cover .pc-title{font-size:46px;line-height:1.03;font-weight:700;margin:0;}
+    .print-cover .pc-title.ar{font-size:30px;font-weight:600;color:var(--ink-2);margin-top:4px;}
+    .print-cover .pc-sub{font-size:15px;color:var(--ink-2);margin-top:20px;max-width:75%;}
+    .print-cover .pc-sub.ar{font-size:13px;color:var(--ink-3);margin-top:5px;max-width:80%;}
+    .print-cover .pc-foot{display:flex;justify-content:space-between;align-items:baseline;
+      border-top:1px solid var(--rule);padding-top:10px;font-size:12px;color:var(--ink-3);}
+    .print-cover .pc-date{font-weight:600;color:var(--ink-2);}
+
+    /* ---------- one section per page ---------- */
+    #revenue,#alloc,#plans{break-before:page;page-break-before:always;}
+    .block{border:none;margin:0;box-shadow:none;}
+    .block-head{border:none;padding:0 0 10px;break-after:avoid;}
+    .block-head h2{font-size:19px;}
+    .block-head .h-ar{font-size:14px;}
+    .grp{background:#f1f5f4;border:none;font-size:11px;padding:6px 8px 3px;margin-top:6px;break-after:avoid;}
+    .row,.arow,.sumbox,figure,.row.sub{break-inside:avoid;}
+
+    /* compact sales rows to fit one page */
+    .row[data-kind="rev"]{padding:5px 8px;gap:6px;border:1px solid var(--rule-soft);border-top:none;}
+    .grpbox{padding:5px 7px;gap:6px 8px;}
+    .grpbox .field input{padding:3px 5px;font-size:11px;background:#fff;border:1px solid var(--rule);}
+    .grpbox .field label,.grpbox .cellout .lab,.out.totals .lab{font-size:8px;margin-bottom:1px;}
+    .grpbox .field label .ar,.grpbox .cellout .lab .ar,.out.totals .lab .ar{font-size:7px;}
+    .grpbox .cellout .val,.out.totals .val{font-size:11px;}
+    .out.totals .val.area{font-size:10px;margin-bottom:3px;}
+    .row-name .n{font-size:12px;}
+    .row-name .n-ar{font-size:9.5px;}
+    .row-name .tag{font-size:8px;}
+    .row.sub{padding:8px;}
+    .row.sub .cell .lab{font-size:9px;}
+    .row.sub .cell .v{font-size:12px;}
+
+    /* allocation page */
+    .arow{padding:5px 8px;}
+    .arow .an .n{font-size:11px;} .arow .an .n-ar{font-size:9px;}
+    .arow .am,.arow .av{font-size:10px;}
+    .seg .opt span{font-size:9px;}
+    .alloc-sum{gap:10px;margin-top:12px;}
+    .sumbox{padding:12px 14px;} .sumbox .v{font-size:18px;} .sumbox .k{font-size:11px;}
+
+    /* floor-plans page */
+    #plans .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #plans figure{margin:0;}
+    #plans figure img{width:100%;height:auto;max-height:225mm;object-fit:contain;
+      border:1px solid var(--rule-soft);}
+    #plans figcaption{font-size:8.5px;line-height:1.35;margin-top:5px;}
+    #plans figcaption .ar{font-size:8px;}
+    .plan-foot{font-size:8.5px;margin-top:8px;}
   }
   /* ---- split-pricing rows on small screens: allow stacking ---- */
   @media (max-width:760px){
@@ -512,6 +570,24 @@
 </div>
 
 <div class="wrap" id="app" hidden>
+
+  <div class="print-cover" aria-hidden="true">
+    <div class="pc-head">
+      <div class="pc-kicker">Feasibility &amp; Sales Proposal</div>
+      <div class="pc-kicker ar">دراسة الجدوى وعرض المبيعات</div>
+    </div>
+    <div class="pc-mid">
+      <h1 class="pc-title">Latakia Building</h1>
+      <div class="pc-title ar">مبنى اللاذقية</div>
+      <div class="pc-sub">Option 4 — ground-floor shops with mezzanine, and clinic suites on the floors above.</div>
+      <div class="pc-sub ar">الخيار الرابع — محلات في الطابق الأرضي مع ميزانين، وعيادات في الطوابق العلوية.</div>
+    </div>
+    <div class="pc-foot">
+      <span class="pc-date" id="pcDate"></span>
+      <span class="pc-conf">Confidential — for the intended recipient only<span class="ar"> · سري — للمرسل إليه فقط</span></span>
+    </div>
+  </div>
+
 
   <header>
     <nav class="opt-switch" aria-label="Design option">
@@ -1844,5 +1920,6 @@
   })();
 </script>
 
+<script>try{document.getElementById("pcDate").textContent=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});}catch(e){}</script>
 </body>
 </html>
