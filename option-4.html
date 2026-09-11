@@ -537,11 +537,11 @@
     .arow .seg .opt input{display:none;}
     .arow .seg .opt{border:none;background:none;padding:0;margin:0;}
     .arow .seg .opt:not(:has(input:checked)){display:none;}
-    .arow .seg .opt span{display:inline-block;padding:4px 12px;border-radius:4px;font-size:9.5px;font-weight:600;}
+    .arow .seg .opt span{display:inline-block !important;padding:4px 13px !important;border-radius:4px;font-size:9.5px;font-weight:600;color:#fff !important;letter-spacing:.02em;}
     .arow .seg .opt span .ar{display:none;}
-    .arow .seg .opt.land span{background:var(--cost-soft);color:var(--cost);}
-    .arow .seg .opt.dev  span{background:var(--rev-soft); color:var(--rev);}
-    .arow .seg .opt.eng  span{background:var(--eng-soft); color:var(--eng);}
+    .arow .seg .opt.land span{background:var(--cost) !important;}
+    .arow .seg .opt.dev  span{background:var(--rev)  !important;}
+    .arow .seg .opt.eng  span{background:var(--eng)  !important;}
     .alloc-sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px;}
     .sumbox{padding:14px 16px;border-radius:6px;} .sumbox .k{font-size:10.5px;} .sumbox .v{font-size:19px;} .sumbox .pct{font-size:12px;} .sumbox .u{font-size:10px;}
 
