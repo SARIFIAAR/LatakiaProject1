@@ -469,12 +469,13 @@
   @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
 
   @media print{
-    #gate,.actions{display:none !important;}
-    body{background:#fff;}
-    .net{background:#fff;color:var(--ink);border:2px solid var(--ink);}
-    .net .h-ar,.net-item .k{color:var(--ink-2);}
-    .net-item.main .v,.net-item.neg .v{color:var(--ink);}
-    .net-grid{border-top-color:var(--rule);}
+    /* client proposal: hide internal costs, profit, and all controls */
+    #gate,.actions,.opt-switch,.save-state,#costs,.net{display:none !important;}
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .wrap{max-width:none;padding:14px 6px 24px;}
+    .block{break-inside:auto;margin-bottom:16px;}
+    .row,.grp,.block-head,.splitline,.arow,.net-item,.sumbox{break-inside:avoid;}
+    .grpbox .field input{border-color:var(--rule);}
   }
   /* ---- split-pricing rows on small screens: allow stacking ---- */
   @media (max-width:760px){
