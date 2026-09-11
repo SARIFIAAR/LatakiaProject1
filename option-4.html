@@ -544,7 +544,11 @@
     .print-sales thead th{border-bottom:2px solid var(--ink-2);font-size:9px;color:var(--ink-2);
       font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
     .print-sales td:first-child,.print-sales th:first-child{text-align:left;}
-    .print-sales tbody tr:nth-child(even){background:#f6f8f8;}
+    .print-sales tbody tr.sub td{color:var(--ink-2);font-size:10px;border-bottom:none;padding-top:4px;padding-bottom:2px;}
+    .print-sales tbody tr.sub td:first-child{padding-left:24px;}
+    .print-sales tbody tr.sub + tr.tot td,.print-sales tbody tr.tot td{font-weight:600;}
+    .print-sales tbody tr.tot td:first-child{padding-left:24px;}
+    .print-sales tbody tr.tot td:last-child{color:var(--rev);}
     .print-sales tfoot th{border-top:2px solid var(--ink-2);border-bottom:none;font-size:12.5px;
       color:var(--ink);padding-top:9px;}
     .print-sales tfoot th:last-child{color:var(--rev);}
@@ -1714,8 +1718,22 @@
         var ta = row.querySelector("[data-tarea]").textContent;
         var an = parseFloat(ta) || 0;
         var tp = parseFloat(row.dataset.tprice) || 0;
-        rowsHtml += "<tr><td>" + nm + "</td><td>" + ta + "</td><td>" +
-                    (an > 0 ? money.format(tp / an) : "") + "</td><td>" + money.format(tp) + "</td></tr>";
+        var mezz = row.querySelector("[data-mezz]");
+        if (mezz) {
+          // shops: three lines — shop, mezzanine (both sub), then the total
+          var na = row.querySelector("[data-usable]").value;
+          var np = parseFloat(row.querySelector("[data-price]").value) || 0;
+          var nv = row.querySelector("[data-nettotal]").textContent;
+          var ca = row.querySelector("[data-carea]").value;
+          var cp = parseFloat(row.querySelector("[data-cprice]").value) || 0;
+          var cv = row.querySelector("[data-ctotal]").textContent;
+          rowsHtml += "<tr class='sub'><td>" + nm + "</td><td>" + na + " m\u00B2</td><td>" + money.format(np) + "</td><td>" + nv + "</td></tr>";
+          rowsHtml += "<tr class='sub'><td>Mezzanine (50%)</td><td>" + ca + " m\u00B2</td><td>" + money.format(cp) + "</td><td>" + cv + "</td></tr>";
+          rowsHtml += "<tr class='tot'><td>Total</td><td>" + ta + "</td><td></td><td>" + money.format(tp) + "</td></tr>";
+        } else {
+          rowsHtml += "<tr><td>" + nm + "</td><td>" + ta + "</td><td>" +
+                      (an > 0 ? money.format(tp / an) : "") + "</td><td>" + money.format(tp) + "</td></tr>";
+        }
       });
       psb.innerHTML = rowsHtml;
       document.getElementById("psArea").textContent  = area.format(sumL) + " m\u00B2";
