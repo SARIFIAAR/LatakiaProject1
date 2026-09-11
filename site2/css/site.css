@@ -478,3 +478,10 @@ a{color:inherit;}
 /* ---- site2: portrait facade renders in the hero ---- */
 .hero-frame{top:clamp(34px,5vh,64px);bottom:16%;}
 .hero-img{object-fit:contain;object-position:center bottom;}
+
+
+/* ---- site2: detail tiles — uniform photos, one aligned row ---- */
+.tile img{height:auto !important;aspect-ratio:1/1.12;}
+.tiles{grid-template-columns:repeat(5,1fr);}
+@media (max-width:900px){ .tiles{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:560px){ .tiles{grid-template-columns:repeat(2,1fr);} }
